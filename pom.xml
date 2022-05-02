@@ -114,6 +114,7 @@
       <version>${jme3_v}</version>
     </dependency>
 
+    <!-- Lombok for boilerplate -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -126,6 +127,22 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.13.2.2</version>
     </dependency>
+
+    <!-- Websocket tyrus client -->
+    <dependency>
+      <groupId>org.glassfish.tyrus.bundles</groupId>
+      <artifactId>tyrus-standalone-client</artifactId>
+      <version>2.0.2</version>
+    </dependency>
+
+    <!-- SLF4J Logger using simple logger in JDK -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.0-alpha7</version>
+    </dependency>
+
+
 
   </dependencies>
   
