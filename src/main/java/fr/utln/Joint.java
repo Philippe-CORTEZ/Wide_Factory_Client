@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Setter
 public class Joint {
-    private String joints;
+    private String name;
     private float w;
     private float wx;
     private float wy;

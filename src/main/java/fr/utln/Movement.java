@@ -6,7 +6,6 @@ import lombok.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 @Builder
@@ -21,7 +20,7 @@ public class Movement {
 
     public Movement(String nameFileJson, String nameMovement) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        skeletons = objectMapper.readValue(new File(nameFileJson), List.class);
+        skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<List<Skeleton>>(){});
         name = nameMovement;
     }
 }
