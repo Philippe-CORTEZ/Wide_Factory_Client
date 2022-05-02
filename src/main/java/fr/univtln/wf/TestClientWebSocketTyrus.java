@@ -7,28 +7,47 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.net.URI;
 
+/**
+ * The WebSocket client using Tyrus
+ * @author Wide Factory Team
+ */
 @Slf4j
 @ClientEndpoint
 public class TestClientWebSocketTyrus
 {
+    /**
+     * Methode called when the client receive a websocket message
+     * @param message the message received
+     * @param session describe the websocket connection
+     */
     @OnMessage
     public void onMessage(String message, Session session)
     {
         log.info("msg " + message);
     }
 
+
+
+    /**
+     * Launch the websocket client
+     * @param args program arguments
+     */
     public static void main(String[] args)
     {
-        log.info("Lancement client");
+        log.info("Client launched");
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 
-        try {
-            Session session = container.connectToServer(TestClientWebSocketTyrus.class, URI.create("ws://localhost:9001/monTest"));
-            session.getBasicRemote().sendText("message depuis Tyrus");
-        } catch (DeploymentException | IOException ex)
+        try
         {
-            log.error("Impossible de se connecter au serveur", ex);
+            Session session = container.connectToServer(TestClientWebSocketTyrus.class, URI.create("ws://localhost:9001/monTest"));
+            session.getBasicRemote().sendText("Message from Tyrus");
         }
+        catch (DeploymentException | IOException ex)
+        {
+            log.error("Error, cannot connect to the server ", ex);
+        }
+
+        while(true){}
     }
 
 }
