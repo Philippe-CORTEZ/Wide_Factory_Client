@@ -1,12 +1,8 @@
 package fr.utln;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 
-@Builder
-@NoArgsConstructor
 public class Skeleton {
+    private int frame;
     private List<Joint> joints;
 }
