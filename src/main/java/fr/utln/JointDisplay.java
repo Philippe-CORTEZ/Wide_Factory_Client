@@ -9,9 +9,18 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Sphere;
 
+/**
+ * class that Display a joint by a geometry in attribute
+ */
 public class JointDisplay extends Node {
     Geometry geometry;
 
+    /**
+     * constructor
+     * set to the attribute the default value of the geometry and attach it to this
+     * default: blue sphere with a radius of 0.010f
+     * @param assetManager
+     */
     public JointDisplay(AssetManager assetManager)
     {
         Sphere s = new Sphere(16, 16, 0.010f);
@@ -21,7 +30,11 @@ public class JointDisplay extends Node {
         geometry.setMaterial(mat);
         this.attachChild(geometry);
     }
-    
+
+    /**
+     * place the geometry attribute to the position of the joint
+     * @param joint the joint to display
+     */
     public void place(Joint joint)
     {
         if (joint != null)

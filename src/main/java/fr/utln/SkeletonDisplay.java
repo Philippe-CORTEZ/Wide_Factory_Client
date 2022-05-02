@@ -14,6 +14,9 @@ import java.util.Map;
 @Getter
 @ToString(exclude = "map")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+/**
+ * class that display a skeleton
+ */
 public class SkeletonDisplay extends Node {
     private Map<JointEnum, Joint> map;
     JointDisplay pelvis;
@@ -50,18 +53,30 @@ public class SkeletonDisplay extends Node {
     JointDisplay earRight;
 
 
+    /**
+     * constructor
+     * initialise the map with the joints of the skeleton,
+     * initialise the tree of joints for the skeleton,
+     * place joints,
+     * attach the root of joints to this
+     * @param skeleton skeleton to display
+     * @param assetManager
+     */
     public SkeletonDisplay(Skeleton skeleton, AssetManager assetManager){
         map = new HashMap<>();
-        initJoints(skeleton, assetManager);
+        mappingJoint(skeleton.getJoints());
+        initJoints(assetManager);
         refreshJoints(skeleton);
         this.attachChild(pelvis);
         initTree();
     }
 
-    public void initJoints(Skeleton skeleton, AssetManager assetManager)
+    /**
+     * initialise all joints to the default value
+     * @param assetManager
+     */
+    public void initJoints(AssetManager assetManager)
     {
-        mappingJoint(skeleton.getJoints());
-
         pelvis = new JointDisplay(assetManager);
         navel = new JointDisplay(assetManager);
         spineChest = new JointDisplay(assetManager);
@@ -96,6 +111,9 @@ public class SkeletonDisplay extends Node {
         earRight = new JointDisplay(assetManager);
     }
 
+    /**
+     * initialise the tree of joints, the root of the tree is the pelvis
+     */
     private void initTree(){
         pelvis.getChildren().add(hipLeft);
         pelvis.getChildren().add(hipRight);
@@ -134,6 +152,10 @@ public class SkeletonDisplay extends Node {
         ankleRight.getChildren().add(footRight);
     }
 
+    /**
+     * refresh all the joints with the ones of the skeletons put on parameter
+     * @param skeleton skeleton to display
+     */
     public void refreshJoints(Skeleton skeleton)
     {
         mappingJoint(skeleton.getJoints());
@@ -172,6 +194,10 @@ public class SkeletonDisplay extends Node {
 
     }
 
+    /**
+     * mapping between the enum of JointEnum and the Joint that correspond
+     * @param joints List of joint to map
+     */
     public void mappingJoint(List<Joint> joints)
     {
         for (Joint j : joints) {

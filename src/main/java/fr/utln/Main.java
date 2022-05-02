@@ -22,15 +22,19 @@ public class Main extends SimpleApplication {
      */
     public static void main(String[] args) throws IOException {
         Main t = new Main();
-        movement = new Movement("src/main/resources/data.json", "Test");
+        movement = new Movement("src/main/resources/data.json", "Test"); // json to read and convert
         t.start();
     }
 
+
     @Override
+    /**
+     * init of Jmonkey display
+     */
     public void simpleInitApp(){
         cam.setLocation(new Vector3f(0,0, 3));
+        // display the first skeleton of the movement
         sk = new SkeletonDisplay(movement.getSkeletons().get(0), assetManager);
-        System.out.println(sk);
         rootNode.attachChild(sk);
 //        Bone[] bones = new Bone[7];
 //
@@ -59,12 +63,12 @@ public class Main extends SimpleApplication {
     @SneakyThrows
     @Override
     public void simpleUpdate(float tpf) {
-        sleep(33);
+        sleep(33); // to slow down the frame rate
         if (count < movement.getSkeletons().size())
         {
-            sk.refreshJoints(movement.getSkeletons().get(count));
+            sk.refreshJoints(movement.getSkeletons().get(count)); // refresh the skeleton with the following one
             count++;
         }
-        else count = 0;
+        else count = 0; // restart the animation to the start 
     }
 }

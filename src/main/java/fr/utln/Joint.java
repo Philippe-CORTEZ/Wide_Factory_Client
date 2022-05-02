@@ -8,6 +8,13 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
+/**
+ * class that represent a joint of a skeleton
+ * caracterise by:
+ * name of the joint
+ * 4 float for the quaternion
+ * 3 float for the coordinate
+ */
 public class Joint {
     private String name;
     private float w;

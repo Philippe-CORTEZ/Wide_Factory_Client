@@ -1,5 +1,8 @@
 package fr.utln;
 
+/**
+ * enum of joints for a skeleton
+ */
 public enum JointEnum {
     K4ABT_JOINT_PELVIS,
     K4ABT_JOINT_SPINE_NAVEL,
