@@ -1,24 +1,38 @@
 package fr.univtln.wf;
 
-
 import com.jme3.app.SimpleApplication;
+import com.jme3.math.Vector3f;
+import lombok.SneakyThrows;
+
 import java.io.IOException;
 
-public class Main extends SimpleApplication
-{
+import static java.lang.Thread.sleep;
+
+public class Main extends SimpleApplication {
+
+    private static Movement movement;
+    private static SkeletonDisplay sk;
+    private static int count = 0;
     /**
      * @param args
      */
     public static void main(String[] args) throws IOException {
-//        Main t = new Main();
-        Movement movement = new Movement("src/main/resources/data.json", "Test");
-        System.out.println(movement);
-
-//        t.start();
+        Main t = new Main();
+        movement = new Movement("src/main/resources/data.json", "Test"); // json to read and convert
+        t.start();
     }
 
+
     @Override
-    public void simpleInitApp() {
+    /**
+     * init of Jmonkey display
+     */
+    public void simpleInitApp(){
+        cam.setLocation(new Vector3f(0,0, 3));
+        // display the first skeleton of the movement
+        sk = new SkeletonDisplay(movement.getSkeletons().get(0), assetManager);
+        System.out.println(sk.getAnkleLeft().geometry);
+        rootNode.attachChild(sk);
 //        Bone[] bones = new Bone[7];
 //
 //        com.jme3.animation.Skeleton skeleton = new com.jme3.animation.Skeleton(bones);
@@ -43,9 +57,15 @@ public class Main extends SimpleApplication
 //        node.attachChild(skeletonDebug);
     }
 
+    @SneakyThrows
     @Override
     public void simpleUpdate(float tpf) {
-//        jointureJambeD.test.rotate(FastMath.QUARTER_PI/15, 0, 0);
-//        jointureJambeG.test.rotate(FastMath.QUARTER_PI/15, 0, 0);
+        sleep(33); // to slow down the frame rate
+        if (count < movement.getSkeletons().size())
+        {
+            sk.refreshJoints(movement.getSkeletons().get(count)); // refresh the skeleton with the following one
+            count++;
+        }
+        else count = 0; // restart the animation to the start
     }
 }
