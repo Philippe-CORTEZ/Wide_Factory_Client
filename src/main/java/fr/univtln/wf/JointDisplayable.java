@@ -8,12 +8,14 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Sphere;
+import lombok.Getter;
 
 /**
  * class that Display a joint by a geometry in attribute
  */
-public class JointDisplay extends Node {
-    Geometry geometry;
+@Getter
+public class JointDisplayable extends Node {
+    private Geometry geometry;
 
     /**
      * constructor
@@ -21,7 +23,7 @@ public class JointDisplay extends Node {
      * default: blue sphere with a radius of 0.010f
      * @param assetManager
      */
-    public JointDisplay(AssetManager assetManager, String name)
+    public JointDisplayable(String name, AssetManager assetManager)
     {
         super(name);
         Sphere s = new Sphere(16, 16, 0.010f);
