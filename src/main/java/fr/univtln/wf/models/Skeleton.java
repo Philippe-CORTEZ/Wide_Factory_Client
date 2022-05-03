@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Slf4j
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 
 @ToString
 @EqualsAndHashCode(of = {"frame", "joints"})

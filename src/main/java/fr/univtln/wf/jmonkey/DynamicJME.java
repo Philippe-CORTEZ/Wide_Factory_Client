@@ -12,6 +12,7 @@ public class DynamicJME extends SimpleApplication
 {
 
     private SkeletonDisplayable sk = new SkeletonDisplayable();
+    private Skeleton skeleton = new Skeleton();
 
     /**
      * init of Jmonkey display
@@ -25,11 +26,10 @@ public class DynamicJME extends SimpleApplication
     }
 
 
-    public void updateSkeletonDisplay(Skeleton skeleton)
+    @Override
+    public void simpleUpdate(float tpf)
     {
-//        rootNode.detachAllChildren();
         sk.displaySkeleton(skeleton, assetManager);
-//        rootNode.attachChild(skeletonDisplay);
     }
 
 }

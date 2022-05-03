@@ -3,7 +3,6 @@ package fr.univtln.wf.ws_clients;
 
 import com.jme3.system.AppSettings;
 import fr.univtln.wf.jmonkey.DynamicJME;
-import fr.univtln.wf.jmonkey.JME;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ import java.util.List;
 @ClientEndpoint
 public class WSClient
 {
-    private DynamicJME dynamicJME = new DynamicJME();
+    private final DynamicJME dynamicJME = new DynamicJME();
 
 
     /**
@@ -72,7 +71,7 @@ public class WSClient
 
         if(!skeletons.isEmpty())
         {
-            dynamicJME.updateSkeletonDisplay(skeletons.get(0));
+            dynamicJME.setSkeleton(skeletons.get(0));
         }
     }
 }
