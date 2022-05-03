@@ -11,7 +11,7 @@ import lombok.Setter;
 public class DynamicJME extends SimpleApplication
 {
 
-    private SkeletonDisplay skeletonDisplay;
+    private SkeletonDisplayable sk = new SkeletonDisplayable();
 
     /**
      * init of Jmonkey display
@@ -21,15 +21,15 @@ public class DynamicJME extends SimpleApplication
     {
         cam.setLocation(new Vector3f(0,0, 3));
         // display the first skeleton of the movement
-        rootNode.attachChild(skeletonDisplay);
+        rootNode.attachChild(sk);
     }
 
 
     public void updateSkeletonDisplay(Skeleton skeleton)
     {
-        rootNode.detachAllChildren();
-        skeletonDisplay = new SkeletonDisplay(skeleton, assetManager);
-        rootNode.attachChild(skeletonDisplay);
+//        rootNode.detachAllChildren();
+        sk.displaySkeleton(skeleton, assetManager);
+//        rootNode.attachChild(skeletonDisplay);
     }
 
 }
