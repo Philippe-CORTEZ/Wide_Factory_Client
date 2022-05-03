@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 @Getter
 public class JointDisplayable extends Node {
-    private Geometry geometry;
+    private final Geometry geometry;
 
     /**
      * constructor

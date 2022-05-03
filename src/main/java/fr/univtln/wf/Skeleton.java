@@ -6,12 +6,12 @@ import lombok.ToString;
 
 import java.util.*;
 
-@Getter
-@Setter
-@ToString
 /**
  * class that represent a skeleton
  */
+@Getter
+@Setter
+@ToString
 public class Skeleton {
     private int frame;
     private List<Joint> joints;
@@ -19,8 +19,13 @@ public class Skeleton {
     @Getter
     private static final Map<JointEnum, List<JointEnum>> mapBones = new EnumMap<>(JointEnum.class);
 
+    /**
+     * setter of joints
+     * @param joints
+     */
     public void setJoints(List<Joint> joints) {
         this.joints = joints;
+        // update the mapping of joints
         mappingJoint();
     }
 
@@ -36,7 +41,7 @@ public class Skeleton {
     }
 
     /**
-     * mapping of bones
+     * mapping of bones hierarchy
      */
     static
     {

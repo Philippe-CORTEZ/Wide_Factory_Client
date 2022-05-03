@@ -2,12 +2,6 @@ package fr.univtln.wf;
 
 import lombok.*;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Builder
-@Getter
-@Setter
 /**
  * class that represent a joint of a skeleton
  * caracterise by:
@@ -15,6 +9,12 @@ import lombok.*;
  * 4 float for the quaternion
  * 3 float for the coordinate
  */
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
+@Getter
+@Setter
 public class Joint {
     private String name;
     private float w;

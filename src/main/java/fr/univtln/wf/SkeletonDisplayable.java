@@ -5,9 +5,7 @@ import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
 import com.jme3.scene.Node;
-import com.jme3.scene.VertexBuffer;
 import com.jme3.scene.shape.Cylinder;
 import lombok.Getter;
 
@@ -23,19 +21,24 @@ public class SkeletonDisplayable extends Node {
 
 
     /**
-     * set values of JointDisplayMap with a list of joint
-     * @param skeleton skeleton to set at the map
+     * display the joints of a skeleton
+     * @param skeleton skeleton to display joints
      * @param assetManager
      */
     private void displayJoints(Skeleton skeleton, AssetManager assetManager)
     {
         JointDisplayable jointDisplayable;
+        // iterate all joint from the EnumJoint
         for(JointEnum j : JointEnum.values())
         {
-            jointDisplayable = new JointDisplayable(j.name(), assetManager);
-            jointDisplayable.place(skeleton.getMap().get(j));
-            this.attachChild(jointDisplayable);
-            jointDisplayableMap.put(j, jointDisplayable);
+            // if the joint exist diplay it
+            if (skeleton.getMap().get(j) != null)
+            {
+                jointDisplayable = new JointDisplayable(j.name(), assetManager);
+                jointDisplayable.place(skeleton.getMap().get(j));
+                this.attachChild(jointDisplayable);
+                jointDisplayableMap.put(j, jointDisplayable);
+            }
         }
     }
 
@@ -45,29 +48,44 @@ public class SkeletonDisplayable extends Node {
      */
     private void displayBones(Skeleton skeleton, AssetManager assetManager)
     {
-//        Geometry bone;
+        Geometry bone;
 
+        // iterate all key from the mapping of bones of skeleton, the key is the parent joint
         for(JointEnum j1 : Skeleton.getMapBones().keySet())
         {
+            // if exist
             if (skeleton.getMap().get(j1) != null)
             {
                 JointDisplayable joint1 = jointDisplayableMap.get(j1);
+                // iterate all children joints
                 for (JointEnum j2 : Skeleton.getMapBones().get(j1))
                 {
+                    // if exist
                     if (skeleton.getMap().get(j2) != null)
                     {
                         JointDisplayable joint2 = jointDisplayableMap.get(j2);
-                        generateBone(joint1, joint2, assetManager);
+                        // generate a bone and display it
+                        bone = generateBone(joint1, joint2, assetManager);
+                        this.attachChild(bone);
                     }
                 }
             }
         }
     }
 
+    /**
+     * generate a geometry that represent a bone between 2 joint
+     * @param joint1 the first joint
+     * @param joint2 the second joint
+     * @param assetManager
+     * @return the bone geometry
+     */
     private Geometry generateBone(JointDisplayable joint1, JointDisplayable joint2, AssetManager assetManager)
     {
+        // use for the length of the bone
         float distance = joint1.getGeometry().getLocalTranslation().distance(joint2.getGeometry().getLocalTranslation());
-        Cylinder t = new Cylinder(20, 50, 0.01f, distance, true);
+
+        Cylinder t = new Cylinder(20, 50, 0.005f, distance, true);
         Geometry geom = new Geometry("Cylinder", t);
 
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -75,13 +93,14 @@ public class SkeletonDisplayable extends Node {
 
         geom.setMaterial(mat);
 
-        Vector3f position = new Vector3f();
+        // put the bone to the center between joint1 and joint2
+         Vector3f position = new Vector3f();
         joint1.getGeometry().getLocalTranslation().add(joint2.getGeometry().getLocalTranslation(), position);
         position.divideLocal(2);
-        geom.setLocalTranslation(position);
-//        geom.lookAt(geom.getLocalTranslation(), new Vector3f(100, 10, 0));
-        this.attachChild(geom);
 
+        geom.setLocalTranslation(position);
+        // orient the bone up to the joint
+        geom.lookAt(joint1.getGeometry().getLocalTranslation(), joint2.getGeometry().getLocalTranslation());
         return geom;
     }
 
@@ -91,6 +110,7 @@ public class SkeletonDisplayable extends Node {
      */
     public void displaySkeleton(Skeleton skeleton, AssetManager assetManager)
     {
+        // clear olds value and put the new ones
         this.detachAllChildren();
         jointDisplayableMap.clear();
         displayJoints(skeleton, assetManager);
