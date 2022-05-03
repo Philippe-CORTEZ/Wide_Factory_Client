@@ -13,7 +13,7 @@ import java.net.URI;
  */
 @Slf4j
 @ClientEndpoint
-public class TestClientWebSocketTyrus
+public class WSClient
 {
     /**
      * Methode called when the client receive a websocket message
@@ -27,7 +27,6 @@ public class TestClientWebSocketTyrus
     }
 
 
-
     /**
      * Launch the websocket client
      * @param args program arguments
@@ -39,7 +38,7 @@ public class TestClientWebSocketTyrus
 
         try
         {
-            Session session = container.connectToServer(TestClientWebSocketTyrus.class, URI.create("ws://localhost:9001/monTest"));
+            Session session = container.connectToServer(WSClient.class, URI.create("ws://localhost:9001/monTest"));
             session.getBasicRemote().sendText("Message from Tyrus");
         }
         catch (DeploymentException | IOException ex)
