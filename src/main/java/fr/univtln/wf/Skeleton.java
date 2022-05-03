@@ -2,6 +2,7 @@ package fr.univtln.wf;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -33,24 +34,25 @@ public class Skeleton
 
 
     /**
-     * Create a Skeleton object with a JSON format in string
-     * @param stringJSON the string formated in JSON that represent the data of one skeleton
-     * @return a Skeleton object that correspond with the JSON
+     * Create a list of Skeleton objects with a JSON array format from string
+     * The list can contain juste one skeleton or more
+     * @param stringJSONArray the string formatted in JSON that represent the data of the skeletons
+     * @return a list of Skeleton objects that correspond with the JSON array
      */
-    public static Skeleton newInstance(String stringJSON)
+    public static List<Skeleton> newInstance(String stringJSONArray)
     {
         ObjectMapper objectMapper = new ObjectMapper();
-        Skeleton skeleton = null;
+        List<Skeleton> skeletons = null;
 
         try
         {
-            skeleton = objectMapper.readValue(stringJSON, Skeleton.class);
+            skeletons = objectMapper.readValue(stringJSONArray, new TypeReference<>(){});
         }
         catch (JsonProcessingException error)
         {
-            log.error("Error when parsing JSON for creating skeleton object ", error);
+            log.error("Error when parsing JSON for creating list of skeleton objects ", error);
         }
-        return skeleton;
+        return skeletons;
     }
 
 }
