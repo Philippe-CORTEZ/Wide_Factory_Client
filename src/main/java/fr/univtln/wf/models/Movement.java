@@ -1,7 +1,8 @@
-package fr.univtln.wf;
+package fr.univtln.wf.models;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.univtln.wf.models.Skeleton;
 import lombok.*;
 
 import java.io.File;

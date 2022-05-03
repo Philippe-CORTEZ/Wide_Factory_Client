@@ -1,6 +1,8 @@
-package fr.univtln.wf;
+package fr.univtln.wf.ws_clients;
 
 
+import fr.univtln.wf.jmonkey.JME;
+import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +33,10 @@ public class WSClient
         {
             log.error("Error in onOpen : ", error);
         }
+
+        // Create the Jmonkey app for visualisation
+        JME jme = new JME();
+        jme.start();
     }
 
 
@@ -49,9 +55,7 @@ public class WSClient
         List<Skeleton> skeletons = Skeleton.newInstance(message);
 
         // Display the movement
-        JME t = new JME();
         JME.movement.setName("Test");
         JME.movement.setSkeletons(skeletons);
-        t.start();
     }
 }

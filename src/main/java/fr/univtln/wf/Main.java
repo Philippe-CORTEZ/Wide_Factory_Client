@@ -1,5 +1,6 @@
 package fr.univtln.wf;
 
+import fr.univtln.wf.ws_clients.WSClient;
 import jakarta.websocket.ContainerProvider;
 import jakarta.websocket.DeploymentException;
 import jakarta.websocket.WebSocketContainer;

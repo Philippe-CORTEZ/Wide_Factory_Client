@@ -1,4 +1,4 @@
-package fr.univtln.wf;
+package fr.univtln.wf.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;

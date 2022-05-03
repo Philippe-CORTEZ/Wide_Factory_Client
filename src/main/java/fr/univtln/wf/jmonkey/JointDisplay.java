@@ -1,4 +1,4 @@
-package fr.univtln.wf;
+package fr.univtln.wf.jmonkey;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
@@ -8,6 +8,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Sphere;
+import fr.univtln.wf.models.Joint;
 
 /**
  * class that Display a joint by a geometry in attribute

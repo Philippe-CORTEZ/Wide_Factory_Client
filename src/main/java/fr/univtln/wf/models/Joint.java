@@ -1,4 +1,4 @@
-package fr.univtln.wf;
+package fr.univtln.wf.models;
 
 import lombok.*;
 

@@ -1,7 +1,8 @@
-package fr.univtln.wf;
+package fr.univtln.wf.jmonkey;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
+import fr.univtln.wf.models.Movement;
 import lombok.SneakyThrows;
 
 
@@ -23,30 +24,7 @@ public class JME extends SimpleApplication {
         cam.setLocation(new Vector3f(0,0, 3));
         // display the first skeleton of the movement
         sk = new SkeletonDisplay(movement.getSkeletons().get(0), assetManager);
-        System.out.println(sk.getAnkleLeft().geometry);
         rootNode.attachChild(sk);
-//        Bone[] bones = new Bone[7];
-//
-//        com.jme3.animation.Skeleton skeleton = new com.jme3.animation.Skeleton(bones);
-//        skeleton.updateWorldVectors();
-//        skeleton.setBindingPose();
-//
-//        AnimControl control = new AnimControl(skeleton);
-//
-//        Node node = new Node();
-//        node.addControl(control);
-//
-//        rootNode.attachChild(node);
-//        cam.setLocation(new Vector3f(0,0, 2));
-//
-//        SkeletonDebugger skeletonDebug = new SkeletonDebugger("skeleton",
-//                control.getSkeleton());
-//        Material mat2 = new Material(assetManager,
-//                "Common/MatDefs/Misc/Unshaded.j3md");
-//        mat2.setColor("Color", ColorRGBA.Red);
-//        mat2.getAdditionalRenderState().setDepthTest(false);
-//        skeletonDebug.setMaterial(mat2);
-//        node.attachChild(skeletonDebug);
     }
 
     @SneakyThrows

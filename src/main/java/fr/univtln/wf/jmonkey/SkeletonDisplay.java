@@ -1,7 +1,11 @@
-package fr.univtln.wf;
+package fr.univtln.wf.jmonkey;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
+import fr.univtln.wf.jmonkey.JointDisplay;
+import fr.univtln.wf.models.Joint;
+import fr.univtln.wf.models.JointEnum;
+import fr.univtln.wf.models.Skeleton;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.ToString;
