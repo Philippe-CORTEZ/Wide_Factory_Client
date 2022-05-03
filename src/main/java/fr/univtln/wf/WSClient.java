@@ -5,7 +5,6 @@ import jakarta.websocket.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public class WSClient
     {
         try
         {
-            // For the moment send just a message to communicate with the server
+            // For the moment it send just a message to communicate with the server
             session.getBasicRemote().sendText("start");
         }
         catch (IOException error)
@@ -43,38 +42,16 @@ public class WSClient
     @OnMessage
     public void onMessage(String message, Session session)
     {
+        // Currently it display only skeleton there isn't processing before
         log.info("msg " + message);
 
         // Transform the string message (JSON formated) into Skeleton list
         List<Skeleton> skeletons = Skeleton.newInstance(message);
 
         // Display the movement
-        Main t = new Main();
-        Main.movement.setName("Test");
-        Main.movement.setSkeletons(skeletons);
+        JME t = new JME();
+        JME.movement.setName("Test");
+        JME.movement.setSkeletons(skeletons);
         t.start();
     }
-
-
-    /**
-     * Launch the websocket client
-     * @param args program arguments
-     */
-    public static void main(String[] args)
-    {
-        log.info("Client launched");
-        WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-
-        try
-        {
-            Session session = container.connectToServer(WSClient.class, URI.create("ws://localhost:9001/monTest"));
-        }
-        catch (DeploymentException | IOException ex)
-        {
-            log.error("Error, cannot connect to the server ", ex);
-        }
-
-        while(true){}
-    }
-
 }
