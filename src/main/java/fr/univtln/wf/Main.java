@@ -1,14 +1,10 @@
-package fr.utln;
+package fr.univtln.wf;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
 import lombok.SneakyThrows;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import static java.lang.Thread.sleep;
 

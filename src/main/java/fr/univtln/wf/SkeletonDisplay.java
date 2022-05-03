@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;

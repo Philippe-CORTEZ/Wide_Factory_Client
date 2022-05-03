@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import lombok.*;
 
