@@ -21,8 +21,9 @@ public class JointDisplay extends Node {
      * default: blue sphere with a radius of 0.010f
      * @param assetManager
      */
-    public JointDisplay(AssetManager assetManager)
+    public JointDisplay(AssetManager assetManager, String name)
     {
+        super(name);
         Sphere s = new Sphere(16, 16, 0.010f);
         geometry = new Geometry("Jointure", s);
         Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
@@ -39,8 +40,13 @@ public class JointDisplay extends Node {
     {
         if (joint != null)
         {
+            geometry.setName(joint.getName());
             geometry.setLocalTranslation(new Vector3f(-joint.getX(), -joint.getY(), joint.getZ()).normalize());
             geometry.setLocalRotation(new Quaternion(joint.getW(), -joint.getWx(), -joint.getWy(), joint.getWz()));
+        }
+        else
+        {
+            geometry.setName("null");
         }
     }
 }

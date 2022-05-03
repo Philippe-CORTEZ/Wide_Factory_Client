@@ -77,38 +77,38 @@ public class SkeletonDisplay extends Node {
      */
     public void initJoints(AssetManager assetManager)
     {
-        pelvis = new JointDisplay(assetManager);
-        navel = new JointDisplay(assetManager);
-        spineChest = new JointDisplay(assetManager);
-        neck = new JointDisplay(assetManager);
-        clavicleLeft = new JointDisplay(assetManager);
-        shoulderLeft = new JointDisplay(assetManager);
-        elbowLeft = new JointDisplay(assetManager);
-        wristLeft = new JointDisplay(assetManager);
-        handLeft = new JointDisplay(assetManager);
-        handTipLeft = new JointDisplay(assetManager);
-        thumbLeft = new JointDisplay(assetManager);
-        clavicleRight = new JointDisplay(assetManager);
-        shoulderRight = new JointDisplay(assetManager);
-        elbowRight = new JointDisplay(assetManager);
-        wristRight = new JointDisplay(assetManager);
-        handRight = new JointDisplay(assetManager);
-        handTipRight = new JointDisplay(assetManager);
-        thumbRight = new JointDisplay(assetManager);
-        hipLeft = new JointDisplay(assetManager);
-        kneeLeft = new JointDisplay(assetManager);
-        ankleLeft = new JointDisplay(assetManager);
-        footLeft = new JointDisplay(assetManager);
-        hipRight = new JointDisplay(assetManager);
-        kneeRight = new JointDisplay(assetManager);
-        ankleRight = new JointDisplay(assetManager);
-        footRight = new JointDisplay(assetManager);
-        head = new JointDisplay(assetManager);
-        nose = new JointDisplay(assetManager);
-        eyeLeft = new JointDisplay(assetManager);
-        earLeft = new JointDisplay(assetManager);
-        eyeRight = new JointDisplay(assetManager);
-        earRight = new JointDisplay(assetManager);
+        pelvis = new JointDisplay(assetManager, "pelvis");
+        navel = new JointDisplay(assetManager, "navel");
+        spineChest = new JointDisplay(assetManager, "spineChest");
+        neck = new JointDisplay(assetManager, "neck");
+        clavicleLeft = new JointDisplay(assetManager, "clavicleLeft");
+        shoulderLeft = new JointDisplay(assetManager, "shoulderLeft");
+        elbowLeft = new JointDisplay(assetManager, "elbowLeft");
+        wristLeft = new JointDisplay(assetManager, "wristLeft");
+        handLeft = new JointDisplay(assetManager, "handLeft");
+        handTipLeft = new JointDisplay(assetManager, "handTipLeft");
+        thumbLeft = new JointDisplay(assetManager, "thumbLeft");
+        clavicleRight = new JointDisplay(assetManager, "clavicleRight");
+        shoulderRight = new JointDisplay(assetManager, "shoulderRight");
+        elbowRight = new JointDisplay(assetManager, "elbowRight");
+        wristRight = new JointDisplay(assetManager, "wristRight");
+        handRight = new JointDisplay(assetManager, "handRight");
+        handTipRight = new JointDisplay(assetManager, "handTipRight");
+        thumbRight = new JointDisplay(assetManager, "thumbRight");
+        hipLeft = new JointDisplay(assetManager, "hipLeft");
+        kneeLeft = new JointDisplay(assetManager, "kneeLeft");
+        ankleLeft = new JointDisplay(assetManager, "ankleLeft");
+        footLeft = new JointDisplay(assetManager, "footLeft");
+        hipRight = new JointDisplay(assetManager, "hipRight");
+        kneeRight = new JointDisplay(assetManager, "kneeRight");
+        ankleRight = new JointDisplay(assetManager, "ankleRight");
+        footRight = new JointDisplay(assetManager, "footRight");
+        head = new JointDisplay(assetManager, "head");
+        nose = new JointDisplay(assetManager, "nose");
+        eyeLeft = new JointDisplay(assetManager, "eyeLeft");
+        earLeft = new JointDisplay(assetManager, "earLeft");
+        eyeRight = new JointDisplay(assetManager, "eyeRight");
+        earRight = new JointDisplay(assetManager, "earRight");
     }
 
     /**

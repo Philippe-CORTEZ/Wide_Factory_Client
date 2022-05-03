@@ -35,6 +35,7 @@ public class Main extends SimpleApplication {
         cam.setLocation(new Vector3f(0,0, 3));
         // display the first skeleton of the movement
         sk = new SkeletonDisplay(movement.getSkeletons().get(0), assetManager);
+        System.out.println(sk.getAnkleLeft().geometry);
         rootNode.attachChild(sk);
 //        Bone[] bones = new Bone[7];
 //
@@ -69,6 +70,6 @@ public class Main extends SimpleApplication {
             sk.refreshJoints(movement.getSkeletons().get(count)); // refresh the skeleton with the following one
             count++;
         }
-        else count = 0; // restart the animation to the start 
+        else count = 0; // restart the animation to the start
     }
 }
