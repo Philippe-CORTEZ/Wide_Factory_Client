@@ -1,6 +1,8 @@
 package fr.univtln.wf.ws_clients;
 
 
+import com.jme3.system.AppSettings;
+import fr.univtln.wf.jmonkey.DynamicJME;
 import fr.univtln.wf.jmonkey.JME;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
@@ -17,6 +19,9 @@ import java.util.List;
 @ClientEndpoint
 public class WSClient
 {
+    private DynamicJME dynamicJME = new DynamicJME();
+
+
     /**
      * Methode called when the client open a websocket connection with a server
      * @param session describe the websocket connection
@@ -35,8 +40,15 @@ public class WSClient
         }
 
         // Create the Jmonkey app for visualisation
-        JME jme = new JME();
-        jme.start();
+        dynamicJME.setShowSettings(false);
+        AppSettings settings = new AppSettings(true);
+        settings.put("Width", 1280);
+        settings.put("Height", 720);
+        settings.put("Title", "My awesome Game");
+        settings.put("VSync", true);
+        settings.put("Samples", 4);
+        dynamicJME.setSettings(settings);
+        dynamicJME.start();
     }
 
 
@@ -55,7 +67,9 @@ public class WSClient
         List<Skeleton> skeletons = Skeleton.newInstance(message);
 
         // Display the movement
-        JME.movement.setName("Test");
-        JME.movement.setSkeletons(skeletons);
+//        JME.movement.setName("Test");
+//        JME.movement.setSkeletons(skeletons);
+
+        dynamicJME.updateSkeletonDisplay(skeletons.get(0));
     }
 }
