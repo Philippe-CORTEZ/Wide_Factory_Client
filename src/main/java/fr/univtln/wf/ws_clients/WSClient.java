@@ -70,7 +70,7 @@ public class WSClient
 //        JME.movement.setName("Test");
 //        JME.movement.setSkeletons(skeletons);
 
-        if(skeletons.size() > 0)
+        if(!skeletons.isEmpty())
         {
             dynamicJME.updateSkeletonDisplay(skeletons.get(0));
         }
