@@ -9,13 +9,16 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * class that represent a movement
+ * Class that represent a movement
  * @author Wide Factory Team
  */
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 @ToString
+@EqualsAndHashCode(of = {"name"})
+
 @Getter
 @Setter
 public class Movement
@@ -26,20 +29,20 @@ public class Movement
     private List<Skeleton> skeletons;
 
     /**
-     * constructor
-     * convert un json file to an object movement
+     * Constructor
+     * Convert un json file to an object movement
      * @param nameFileJson name of the json file
      * @param nameMovement name of the movement
      * @throws IOException during the opening of the JSON file
      */
     public Movement(String nameFileJson, String nameMovement) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<List<Skeleton>>(){});
+        skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
     }
 
     /**
-     * Constructor
+     * Constructor with a list of skeletons
      * @param skeletons list of Skeletons
      * @param name the movement name
      */

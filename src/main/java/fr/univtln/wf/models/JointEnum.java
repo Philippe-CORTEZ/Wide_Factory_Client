@@ -1,9 +1,11 @@
 package fr.univtln.wf.models;
 
 /**
- * enum of joints for a skeleton
+ * Enum of joint names for a skeleton
+ * @author Wide Factory Team
  */
-public enum JointEnum {
+public enum JointEnum
+{
     K4ABT_JOINT_PELVIS,
     K4ABT_JOINT_SPINE_NAVEL,
     K4ABT_JOINT_SPINE_CHEST,

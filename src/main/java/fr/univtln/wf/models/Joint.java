@@ -3,19 +3,24 @@ package fr.univtln.wf.models;
 import lombok.*;
 
 /**
- * class that represent a joint of a skeleton
- * caracterise by:
- * name of the joint
- * 4 float for the quaternion
- * 3 float for the coordinate
+ * Class that represent a joint of a skeleton
+ * A joint is represented by:
+ * His name
+ * 4 floats for the quaternion
+ * 3 floats for the coordinates
+ * @author Wide Factory Team
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
+
+@ToString
+@EqualsAndHashCode(of = {"name", "w", "wx", "wy", "wz", "x", "y", "z"})
+
 @Getter
 @Setter
-public class Joint {
+public class Joint
+{
     private String name;
     private float w;
     private float wx;
