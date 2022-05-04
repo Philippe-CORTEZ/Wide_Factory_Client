@@ -18,6 +18,7 @@ import java.util.List;
 @ClientEndpoint
 public class WSClient
 {
+    /** Instance of Jmonkey app to display skeletons */
     private final DynamicJME dynamicJME = new DynamicJME();
 
 
@@ -38,7 +39,7 @@ public class WSClient
             log.error("Error in onOpen : ", error);
         }
 
-        // Create the Jmonkey app for visualisation
+        // Create the Jmonkey app for visualisation and set the window
         dynamicJME.setShowSettings(false);
         AppSettings settings = new AppSettings(true);
         settings.put("Width", 1280);
@@ -59,19 +60,19 @@ public class WSClient
     @OnMessage
     public void onMessage(String message, Session session)
     {
-        // Currently it display only skeleton there isn't processing before
+        // Currently it display only skeletons there isn't processing before to check another message
         log.info("msg " + message);
 
-        // Transform the string message (JSON formated) into Skeleton list
+        // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
         List<Skeleton> skeletons = Skeleton.newInstance(message);
 
-        // Display the movement
-//        JME.movement.setName("Test");
-//        JME.movement.setSkeletons(skeletons);
 
         if(!skeletons.isEmpty())
         {
+            // Set the skeleton displayable in the Jmonkey app to make an animation
+            // If it's a continuous displaying, in the list there is only one skeleton
             dynamicJME.setSkeleton(skeletons.get(0));
         }
     }
+
 }
