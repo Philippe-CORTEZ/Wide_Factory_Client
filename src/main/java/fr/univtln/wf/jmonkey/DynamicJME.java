@@ -6,26 +6,43 @@ import fr.univtln.wf.models.Skeleton;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Jmonkey application that enable to display a continus skeleton recorded by the Kinect
+ * @author Wide Factory Team
+ */
 @Getter
 @Setter
 public class DynamicJME extends SimpleApplication
 {
+    /** Jmonkey structure for representing the skeleton in 3D environment */
+    private SkeletonDisplayable sk;
+    /** The skeleton get by the WS client, used to update the SkeletonDisplayable */
+    private Skeleton skeleton;
 
-    private SkeletonDisplayable sk = new SkeletonDisplayable();
-    private Skeleton skeleton = new Skeleton();
 
-    /**
-     * init of Jmonkey display
-     */
+    /** Default constructor */
+    public DynamicJME()
+    {
+        this.sk = new SkeletonDisplayable();
+        this.skeleton = new Skeleton();
+    }
+
+
+    /** Initialize the Jmonkey components */
     @Override
     public void simpleInitApp()
     {
+        // Move camera rearward
         cam.setLocation(new Vector3f(0,0, 3));
-        // display the first skeleton of the movement
+        // Display the first skeleton
         rootNode.attachChild(sk);
     }
 
 
+    /**
+     * Update the Jmonkey components when is possible
+     * @param tpf float that represent the time elapsed during one frame
+     */
     @Override
     public void simpleUpdate(float tpf)
     {

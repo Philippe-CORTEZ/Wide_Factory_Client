@@ -7,7 +7,6 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.shape.Cylinder;
-import fr.univtln.wf.jmonkey.JointDisplayable;
 import fr.univtln.wf.models.JointEnum;
 import fr.univtln.wf.models.Skeleton;
 import lombok.Getter;
@@ -15,18 +14,29 @@ import lombok.Getter;
 import java.util.EnumMap;
 import java.util.Map;
 
+
 /**
- * class that display a skeleton
+ * Class that display a skeleton
+ * @author Wide Factory Team
  */
 @Getter
-public class SkeletonDisplayable extends Node {
-    Map<JointEnum, JointDisplayable> jointDisplayableMap = new EnumMap<>(JointEnum.class);
+public class SkeletonDisplayable extends Node
+{
+    /** Use to get the displayable joint by it's name */
+    Map<JointEnum, JointDisplayable> jointDisplayableMap;
+
+
+    /** Default constructor */
+    public SkeletonDisplayable()
+    {
+        this.jointDisplayableMap = new EnumMap<>(JointEnum.class);
+    }
 
 
     /**
-     * display the joints of a skeleton
+     * Display the joints of a skeleton
      * @param skeleton skeleton to display joints
-     * @param assetManager
+     * @param assetManager assetManager of Jmonkey
      */
     private void displayJoints(Skeleton skeleton, AssetManager assetManager)
     {
@@ -34,7 +44,7 @@ public class SkeletonDisplayable extends Node {
         // iterate all joint from the EnumJoint
         for(JointEnum j : JointEnum.values())
         {
-            // if the joint exist diplay it
+            // if the joint exist display it
             if (skeleton.getMap().get(j) != null)
             {
                 jointDisplayable = new JointDisplayable(j.name(), assetManager);
@@ -47,7 +57,7 @@ public class SkeletonDisplayable extends Node {
 
     /**
      * display all the bones of the skeleton
-     * @param skeleton the skeleton to diplay the bones
+     * @param skeleton the skeleton to display the bones
      */
     private void displayBones(Skeleton skeleton, AssetManager assetManager)
     {
@@ -77,10 +87,10 @@ public class SkeletonDisplayable extends Node {
     }
 
     /**
-     * generate a geometry that represent a bone between 2 joint
+     * Generate a geometry that represent a bone between 2 joint
      * @param joint1 the first joint
      * @param joint2 the second joint
-     * @param assetManager
+     * @param assetManager assetManager of Jmonkey
      * @return the bone geometry
      */
     private Geometry generateBone(JointDisplayable joint1, JointDisplayable joint2, AssetManager assetManager)
@@ -108,7 +118,7 @@ public class SkeletonDisplayable extends Node {
     }
 
     /**
-     * display a skeleton
+     * Display a skeleton (his joints and bones)
      * @param skeleton the skeleton to display
      */
     public void displaySkeleton(Skeleton skeleton, AssetManager assetManager)

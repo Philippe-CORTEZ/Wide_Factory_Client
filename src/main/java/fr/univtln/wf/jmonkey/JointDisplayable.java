@@ -12,17 +12,20 @@ import fr.univtln.wf.models.Joint;
 import lombok.Getter;
 
 /**
- * class that Display a joint by a geometry in attribute
+ * Class that display a joint object with a Jmonkey geometry in attribute
+ * @author Wide Factory Team
  */
 @Getter
-public class JointDisplayable extends Node {
+public class JointDisplayable extends Node
+{
     private final Geometry geometry;
 
+
     /**
-     * constructor
+     * Constructor
      * set to the attribute the default value of the geometry and attach it to this
      * default: blue sphere with a radius of 0.010f
-     * @param assetManager
+     * @param assetManager the Jmonkey asset manager for set material
      */
     public JointDisplayable(String name, AssetManager assetManager)
     {
@@ -35,12 +38,14 @@ public class JointDisplayable extends Node {
         this.attachChild(geometry);
     }
 
+
     /**
-     * place the geometry attribute to the position of the joint
+     * Place the geometry object to the position described by the joint object attributes
      * @param joint the joint to display
      */
     public void place(Joint joint)
     {
+        // TODO : check if it possible to delete the else block
         if (joint != null)
         {
             geometry.setName(joint.getName());
@@ -52,4 +57,5 @@ public class JointDisplayable extends Node {
             geometry.setName("null");
         }
     }
+
 }
