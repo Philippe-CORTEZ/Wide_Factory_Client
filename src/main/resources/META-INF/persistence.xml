@@ -13,18 +13,18 @@
 
         <properties>
             <!-- Les paramètres de connexions -->
-            <property name="javax.persistence.target-database" value="PostgreSQL"/>
-            <property name="javax.persistence.jdbc.driver" value="org.postgreSQL.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
-            <property name="javax.persistence.jdbc.user" value="test"/>
-            <property name="javax.persistence.jdbc.password" value="test"/>
+            <property name="jakarta.persistence.target-database" value="PostgreSQL"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/wf"/>
+            <property name="jakarta.persistence.jdbc.user" value="test"/>
+            <property name="jakarta.persistence.jdbc.password" value="test"/>
 
             <!-- Les options de générations des tables -->
-<!--            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
-<!--            <property name="javax.persistence.schema-generation.scripts.action" value="create"/>-->
-            <property name="javax.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/>
-            <property name="javax.persistence.schema-generation.scripts.drop-target" value="sampleDrop.ddl"/>
-<!--            <property name="javax.persistence.sql-load-script-source" value="insert.sql"/>-->
+<!--            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>-->
+<!--            <property name="jakarta.persistence.schema-generation.scripts.action" value="create"/>-->
+            <property name="jakarta.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/>
+            <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="sampleDrop.ddl"/>
+<!--            <property name="jakarta.persistence.sql-load-script-source" value="insert.sql"/>-->
 
         </properties>
     </persistence-unit>
