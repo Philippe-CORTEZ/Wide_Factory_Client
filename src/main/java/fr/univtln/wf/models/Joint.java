@@ -2,6 +2,9 @@ package fr.univtln.wf.models;
 
 import lombok.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
 /**
  * Class that represent a joint of a skeleton
  * A joint is represented by:
@@ -19,9 +22,10 @@ import lombok.*;
 
 @Getter
 @Setter
-
+@Entity
 public class Joint
 {
+    @Transient
     private String name;
     private float w;
     private float wx;
