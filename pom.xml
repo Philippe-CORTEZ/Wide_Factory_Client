@@ -142,13 +142,20 @@
       <version>2.0.0-alpha7</version>
     </dependency>
 
+    <!-- JPA implement -->
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>eclipselink</artifactId>
       <version>3.1.0-M1</version>
     </dependency>
 
-
+    <!-- postgreSQL driver -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.3.3</version>
+    </dependency>
+    
   </dependencies>
   
   <build>
