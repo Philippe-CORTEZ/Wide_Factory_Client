@@ -5,9 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -20,16 +18,18 @@ import java.util.*;
 @Slf4j
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 
 @Getter
 @Setter
 
+
 @Entity
-@Table(name = "SKELETON", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"frame", "movement" })
-})
+@Table(name = "SKELETON", uniqueConstraints = { @UniqueConstraint(columnNames = {"frame", "name_movement" }) })
 public class Skeleton
 {
+    /** ID in database */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -40,17 +40,19 @@ public class Skeleton
 
     /** List of join objects that represent 3D skeleton */
     @JsonProperty("joints")
-    @OneToMany(mappedBy = "skeleton")
+    @OneToMany(mappedBy = "skeleton", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Joint> joints;
 
     /** movement that the skeleton refer */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(referencedColumnName = "NAME", name = "NAME_MOVEMENT")
     private Movement movement;
 
+    /** Mapping joint */
     @Transient
     private Map<JointEnum, Joint> map = new EnumMap<>(JointEnum.class);
 
+    /** Mapping bones */
     @Getter
     @Transient
     private static final Map<JointEnum, List<JointEnum>> mapBones = new EnumMap<>(JointEnum.class);
@@ -83,7 +85,7 @@ public class Skeleton
 
     /**
      * setter of joints
-     * @param joints
+     * @param joints list o joint for mapping with it's Skeleton
      */
     public void setJoints(List<Joint> joints) {
         this.joints = joints;
@@ -182,16 +184,39 @@ public class Skeleton
         mapBones.put(JointEnum.K4ABT_JOINT_NECK, neckHeredity);
     }
 
+
+    /** Overriding equals */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Skeleton)) return false;
+
         Skeleton skeleton = (Skeleton) o;
-        return id != 0 && Objects.equals(id, skeleton.id);
+
+        if (frame != skeleton.frame) return false;
+        return Objects.equals(movement, skeleton.movement);
     }
 
+    /** Overriding hashCode */
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public int hashCode()
+    {
+        int result = frame;
+        result = 31 * result + (movement != null ? movement.hashCode() : 0);
+        return result;
     }
+
+    /** Overriding toString */
+    @Override
+    public String toString()
+    {
+        return "Skeleton{" +
+                "id=" + id +
+                ", frame=" + frame +
+                ", joints=" + joints +
+                ", map=" + map +
+                '}';
+    }
+
 }

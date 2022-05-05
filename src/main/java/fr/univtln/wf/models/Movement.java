@@ -2,9 +2,7 @@ package fr.univtln.wf.models;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.File;
@@ -23,6 +21,8 @@ import java.util.Objects;
 @Getter
 @Setter
 
+@ToString
+
 @Entity
 public class Movement
 {
@@ -31,7 +31,8 @@ public class Movement
     private String name;
 
     /** List of skeletons that represent the movement */
-    @OneToMany(mappedBy = "movement")
+    @OneToMany(mappedBy = "movement", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OrderBy("frame ASC")
     private List<Skeleton> skeletons;
 
     /** Description of a movement*/
@@ -48,6 +49,17 @@ public class Movement
         ObjectMapper objectMapper = new ObjectMapper();
         skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
+
+        // To bind skeleton to movement and joint to skeleton (for JPA)
+        for(Skeleton skeleton : skeletons)
+        {
+            skeleton.setMovement(this);
+
+            for(Joint joint : skeleton.getJoints())
+            {
+                joint.setSkeleton(skeleton);
+            }
+        }
     }
 
     /**
@@ -61,16 +73,24 @@ public class Movement
         this.skeletons = skeletons;
     }
 
+
+    /** Overriding equals */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Movement)) return false;
+
         Movement movement = (Movement) o;
-        return name != null && Objects.equals(name, movement.name);
+
+        return Objects.equals(name, movement.name);
     }
 
+    /** Overriding hashCode */
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public int hashCode()
+    {
+        return name != null ? name.hashCode() : 0;
     }
+
 }

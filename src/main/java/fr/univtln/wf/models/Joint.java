@@ -22,21 +22,20 @@ import java.util.Objects;
 @Setter
 
 @Entity
-@Table(name = "JOINT", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"name", "skeleton" })
-})
+@Table(name = "JOINT", uniqueConstraints = { @UniqueConstraint(columnNames = {"name", "id_skeleton" }) })
 public class Joint
 {
-
+    /** ID in database */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /** skeleton that the joint belong to */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(referencedColumnName = "ID", name = "ID_SKELETON")
     private Skeleton skeleton;
 
+    /** Name of joint describe a part of body */
     private String name;
     private float w;
     private float wx;
@@ -46,16 +45,44 @@ public class Joint
     private float y;
     private float z;
 
+
+    /** Overriding equals */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Joint)) return false;
+
         Joint joint = (Joint) o;
-        return id != 0 && Objects.equals(id, joint.id);
+
+        if (!Objects.equals(skeleton, joint.skeleton)) return false;
+        return Objects.equals(name, joint.name);
     }
 
+    /** Overriding hashCode */
     @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public int hashCode()
+    {
+        int result = skeleton != null ? skeleton.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
+
+    /** Overriding toString */
+    @Override
+    public String toString()
+    {
+        return "Joint{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", w=" + w +
+                ", wx=" + wx +
+                ", wy=" + wy +
+                ", wz=" + wz +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
+
 }
