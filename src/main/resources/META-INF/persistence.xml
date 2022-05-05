@@ -16,7 +16,7 @@
             <property name="jakarta.persistence.target-database" value="PostgreSQL"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/wf"/>
-            <property name="jakarta.persistence.jdbc.user" value="test"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="test"/>
 
             <!-- Les options de générations des tables -->
