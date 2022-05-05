@@ -2,11 +2,15 @@ package fr.univtln.wf.models;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class that represent a movement
@@ -16,17 +20,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@ToString
-@EqualsAndHashCode(of = {"name"})
-
 @Getter
 @Setter
+
+@Entity
 public class Movement
 {
     /** The movement name */
+    @Id
     private String name;
+
     /** List of skeletons that represent the movement */
+    @OneToMany(mappedBy = "movement")
     private List<Skeleton> skeletons;
+
+    /** Description of a movement*/
+    private String description;
 
     /**
      * Constructor
@@ -52,4 +61,16 @@ public class Movement
         this.skeletons = skeletons;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movement movement = (Movement) o;
+        return name != null && Objects.equals(name, movement.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

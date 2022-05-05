@@ -1,9 +1,10 @@
 package fr.univtln.wf.models;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import java.util.Objects;
+
 
 /**
  * Class that represent a joint of a skeleton
@@ -17,15 +18,25 @@ import javax.persistence.Transient;
 @AllArgsConstructor
 @Builder
 
-@ToString
-@EqualsAndHashCode(of = {"name", "w", "wx", "wy", "wz", "x", "y", "z"})
-
 @Getter
 @Setter
+
 @Entity
+@Table(name = "JOINT", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name", "skeleton" })
+})
 public class Joint
 {
-    @Transient
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    /** skeleton that the joint belong to */
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "ID", name = "ID_SKELETON")
+    private Skeleton skeleton;
+
     private String name;
     private float w;
     private float wx;
@@ -34,4 +45,17 @@ public class Joint
     private float x;
     private float y;
     private float z;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joint joint = (Joint) o;
+        return id != 0 && Objects.equals(id, joint.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

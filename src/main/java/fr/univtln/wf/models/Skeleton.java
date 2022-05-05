@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -21,21 +21,38 @@ import java.util.Map;
 
 @NoArgsConstructor
 
-@ToString
-@EqualsAndHashCode(of = {"frame", "joints"})
 @Getter
 @Setter
+
+@Entity
+@Table(name = "SKELETON", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"frame", "movement" })
+})
 public class Skeleton
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     /** The frame number 1 is the first frame */
     @JsonProperty("frame")
     private int frame;
+
     /** List of join objects that represent 3D skeleton */
     @JsonProperty("joints")
+    @OneToMany(mappedBy = "skeleton")
     private List<Joint> joints;
 
+    /** movement that the skeleton refer */
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "NAME", name = "NAME_MOVEMENT")
+    private Movement movement;
+
+    @Transient
     private Map<JointEnum, Joint> map = new EnumMap<>(JointEnum.class);
+
     @Getter
+    @Transient
     private static final Map<JointEnum, List<JointEnum>> mapBones = new EnumMap<>(JointEnum.class);
 
 
@@ -163,5 +180,18 @@ public class Skeleton
         mapBones.put(JointEnum.K4ABT_JOINT_HAND_LEFT, handLeftHeredity);
         mapBones.put(JointEnum.K4ABT_JOINT_HAND_RIGHT, handRightHeredity);
         mapBones.put(JointEnum.K4ABT_JOINT_NECK, neckHeredity);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Skeleton skeleton = (Skeleton) o;
+        return id != 0 && Objects.equals(id, skeleton.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
