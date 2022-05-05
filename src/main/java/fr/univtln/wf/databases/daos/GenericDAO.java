@@ -14,7 +14,7 @@ import java.util.List;
  * @param <E> generic type for entity
  * @author Wide Factory Team
  */
-public abstract class DAOGenerique<E> implements DAO<E>
+public abstract class GenericDAO<E> implements DAO<E>
 {
     /** The nale of persist unit (described in persistence.xml) */
     // This way to do is correct if all DAO work in the same persist unit
@@ -33,7 +33,7 @@ public abstract class DAOGenerique<E> implements DAO<E>
 
 
     /** Constructor */
-    protected DAOGenerique()
+    protected GenericDAO()
     {
         // Define entity manager and transaction
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
