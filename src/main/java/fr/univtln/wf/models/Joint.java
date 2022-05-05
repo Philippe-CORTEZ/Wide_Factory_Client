@@ -19,6 +19,7 @@ import lombok.*;
 
 @Getter
 @Setter
+
 public class Joint
 {
     private String name;
