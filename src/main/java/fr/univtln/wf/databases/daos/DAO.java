@@ -36,8 +36,7 @@ public interface DAO<E>
     /**
      * Delete an entity from the database
      * Equal to remove of entity manager
-     * Equivalent au remove de l'entity manager
-     * @param entity l'entité à supprimer
+     * @param entity entity to remove
      */
     void remove(E entity);
 

@@ -16,12 +16,12 @@ import java.util.List;
  */
 public abstract class GenericDAO<E> implements DAO<E>
 {
-    /** The nale of persist unit (described in persistence.xml) */
+    /** The name of persist unit (described in persistence.xml) */
     // This way to do is correct if all DAO work in the same persist unit
     private static final String PERSISTENCE_UNIT_NAME = "wf";
 
 
-    /** L'entity manager to manage entities with the database */
+    /** The entity manager to manage entities with the database */
     protected final EntityManager entityManager;
 
     /** Transaction manager */
@@ -93,8 +93,7 @@ public abstract class GenericDAO<E> implements DAO<E>
     /**
      * Delete an entity from the database
      * Equal to remove of entity manager
-     * Equivalent au remove de l'entity manager
-     * @param entity l'entité à supprimer
+     * @param entity entity to remove
      */
     @Override
     public void remove(E entity)
