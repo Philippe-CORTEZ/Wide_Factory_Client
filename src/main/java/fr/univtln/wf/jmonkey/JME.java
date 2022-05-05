@@ -40,6 +40,9 @@ public class JME extends SimpleApplication
         cam.setLocation(new Vector3f(0,0, 3));
         // Display the first skeleton of the movement
         rootNode.attachChild(sk);
+        
+        // Set frame rate to 30 fps to synchronize with kinect
+        settings.setFrameRate(30);
     }
 
     /**
@@ -47,8 +50,8 @@ public class JME extends SimpleApplication
      * @param tpf float that represent the time elapsed during one frame
      */
     @Override
-    public void simpleUpdate(float tpf) {
-//        sleep(1000); // to slow down the frame rate , NOTE CHANGE THIS WITH A JMONKEY METHOD TO SLOW DOWN THE ANIMATION
+    public void simpleUpdate(float tpf)
+    {
         if (count < movement.getSkeletons().size())
         {
             // refresh the skeleton with the following one
