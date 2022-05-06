@@ -1,13 +1,11 @@
 package fr.univtln.wf.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * An exercise is a set of movements like squat --> push up
@@ -31,7 +29,16 @@ public class Exercise
 
     /** The people that done this exercise */
     @ManyToMany(mappedBy = "exercices", cascade = CascadeType.PERSIST)
-    List<Person> persons;
+    private List<Person> persons;
+
+    /** The coach that created this exercise */
+    @ManyToOne
+    @JoinColumn(name = "PSEUDO_EDITOR")
+    private Person creator;
+
+    /** Mapping many to many with movement */
+    @OneToMany(mappedBy = "exercise")
+    private Set<MovementsExercises> exercises;
 
 
     /** Overriding equals */

@@ -28,6 +28,7 @@ public class Person
     private String lastname;
     private String firstname;
     /** role of the person, simple user or coach at this time */
+    @Column(name = "ROLE")
     private RoleEnum roleEnum;
 
     /** List of exercises that represented the exercises already done by the person */

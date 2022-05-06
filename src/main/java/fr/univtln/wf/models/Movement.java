@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class that represent a movement
@@ -20,8 +21,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-
-@ToString
 
 @Entity
 public class Movement
@@ -37,6 +36,10 @@ public class Movement
 
     /** Description of a movement*/
     private String description;
+
+    /** Mapping many to many with exercise */
+    @OneToMany(mappedBy = "movement")
+    Set<MovementsExercises> movements;
 
     /**
      * Constructor
