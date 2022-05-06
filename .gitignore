@@ -13,6 +13,7 @@ Thumbs.db
 
 # Java class files
 *.class
+*.ddl
 
 # generated files
 bin/
