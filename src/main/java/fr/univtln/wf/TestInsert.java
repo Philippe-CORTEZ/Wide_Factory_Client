@@ -10,7 +10,7 @@ public class TestInsert
     public static void main(String[] args) throws IOException
     {
         // Used to persist a movement
-        Movement m = new Movement("src/main/resources/movement_coucou.json", "pompe");
+        Movement m = new Movement("src/main/resources/movement_coucou.json", "coucou");
         MovementDAO movementDAO = new MovementDAO();
         movementDAO.persist(m);
     }
