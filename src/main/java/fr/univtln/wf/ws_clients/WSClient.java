@@ -61,7 +61,7 @@ public class WSClient
     public void onMessage(String message, Session session)
     {
         // Currently it display only skeletons there isn't processing before to check another message
-        log.info("msg " + message);
+       // log.info("msg " + message);
 
         // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
         List<Skeleton> skeletons = Skeleton.newInstance(message);
