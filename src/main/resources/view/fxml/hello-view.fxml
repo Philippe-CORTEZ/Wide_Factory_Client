@@ -12,6 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.wf.controllers.LoginController">
    <left>
       <AnchorPane style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
@@ -52,13 +53,13 @@
       </AnchorPane>
    </left>
    <center>
-      <StackPane fx:id="loginstackpane" BorderPane.alignment="CENTER">
+      <StackPane fx:id="loginStackPane" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="loginpage" style="-fx-background-color: white;">
+            <AnchorPane fx:id="loginPage" style="-fx-background-color: white;">
                <children>
                   <Button layoutX="109.0" layoutY="252.0" mnemonicParsing="false" onAction="#login" prefHeight="24.0" prefWidth="158.0" stylesheets="@styes.css" text="Login" textFill="WHITE" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="108.0" />
                   <TextField fx:id="username" layoutX="101.0" layoutY="129.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="101.0" />
-                  <TextField fx:id="password" layoutX="103.0" layoutY="188.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="99.0" />
+                  <PasswordField fx:id="password" layoutX="103.0" layoutY="188.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="99.0" />
                   <ImageView fitHeight="68.0" fitWidth="76.0" layoutX="150.0" layoutY="42.0">
                      <image>
                         <Image url="@../images/2.png" />
@@ -74,7 +75,7 @@
                         <Image url="@../images/6.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="cancelbutton" layoutX="108.0" layoutY="290.0" mnemonicParsing="false" onAction="#close" prefHeight="24.0" prefWidth="158.0" stylesheets="@styes.css" text="Cancel" textFill="WHITE" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="108.0" />
+                  <Button fx:id="cancelButton" layoutX="108.0" layoutY="290.0" mnemonicParsing="false" onAction="#close" prefHeight="24.0" prefWidth="158.0" stylesheets="@styes.css" text="Exit" textFill="WHITE" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="108.0" />
                </children>
             </AnchorPane>
          </children>
