@@ -64,10 +64,7 @@ public class Exercise
     @Override
     public String toString()
     {
-        return "Exercise{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return name;
     }
 
 }
