@@ -74,7 +74,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <ListView layoutX="44.0" layoutY="240.0" prefHeight="472.0" prefWidth="906.0" />
+                  <ListView fx:id="listofexercises" layoutX="44.0" layoutY="240.0" prefHeight="472.0" prefWidth="906.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="recordstack" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">

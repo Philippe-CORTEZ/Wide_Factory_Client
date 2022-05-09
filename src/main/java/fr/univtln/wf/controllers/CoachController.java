@@ -1,21 +1,47 @@
 package fr.univtln.wf.controllers;
 
+import fr.univtln.wf.App;
 import fr.univtln.wf.Main;
+import fr.univtln.wf.databases.daos.ExerciseDAO;
+import fr.univtln.wf.models.Exercise;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class CoachController extends Application {
+import javax.swing.event.ChangeEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+public class CoachController extends Application  implements Initializable {
     @FXML
     private AnchorPane exercisesstack;
 
     @FXML
     private TextField exercicename;
+
+
+    static  Stage   popupstage = new Stage();
+
+
+    @FXML
+    private ListView<String> listofexercises;
 
     @FXML
     private Button exercicebutton;
@@ -51,7 +77,7 @@ public class CoachController extends Application {
 */
         //TODO insert thes valuse in the data base and tell the c++ server when tob start recording and when to end it
 
-        //Main.main(null); uncomment if you want to start recording when clicking start
+       // Main.main(null); //uncomment if you want to start recording when clicking start
 
     }
 
@@ -87,9 +113,72 @@ public class CoachController extends Application {
     }
 
 
+    public ObservableList<String> shoexercises() {
+        ObservableList<String> etudiants = null;
+        ExerciseDAO d = new ExerciseDAO();
+
+
+        etudiants = FXCollections.observableArrayList(d.getalexercises());
+
+
+
+        return etudiants;
+    }
+    public void initlistofexercises(){
+
+
+        ObservableList<String> list = shoexercises();
+
+        listofexercises.setItems(list);
+        /*
+        listofexercises.setCellFactory(stringListView -> {
+            ListCell c = new ListCell();
+            c.setOnMouseClicked(mouseEvent -> {
+                if (! c.isEmpty() && mouseEvent.getButton()== MouseButton.PRIMARY
+                        && mouseEvent.getClickCount() == 2) {
+
+                    System.out.println("hahahaha");
+                }
+            });
+            return c;
+        });
+*/
+        listofexercises.getSelectionModel().selectedItemProperty().addListener((ChangeListener<? super String>) (observable, oldValue, newValue) -> {
+            // Your action here
+            System.out.println("Selected item: " + newValue);
+            switchtopopupscene();
+        });
+
+
+
+    }
+
+
+    public void switchtopopupscene(){
+        try {
+            Parent root = FXMLLoader.load(App.class.getClassLoader().getResource("view/fxml/popupscreen.fxml"));
+
+            Scene scene = new Scene(root, 521, 240);
+            //popupstage.initStyle(StageStyle.UNDECORATED);
+            popupstage.setScene(scene);
+            popupstage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+
+    }
+
+
     @Override
     public void start(Stage stage) throws Exception {
 
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initlistofexercises();
     }
 }
