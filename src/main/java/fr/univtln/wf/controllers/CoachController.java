@@ -1,68 +1,44 @@
 package fr.univtln.wf.controllers;
 
-import fr.univtln.wf.App;
 import fr.univtln.wf.databases.daos.ExerciseDAO;
-import javafx.application.Application;
+import fr.univtln.wf.models.Exercise;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Controller that manage the main view of a coach user
  * @author Wide Factory Team
  */
-public class CoachController extends Application  implements Initializable
+@Slf4j
+public class CoachController extends GenericController
 {
-    static  Stage   popupstage = new Stage();
+    @FXML
+    private AnchorPane exercisesStack;
 
     @FXML
-    private AnchorPane exercisesstack;
+    private ListView<Exercise> listOfExercises;
 
     @FXML
-    private TextField exercicename;
+    private AnchorPane recordStack;
 
+
+    /** Initialize the widgets wanted */
     @FXML
-    private ListView<String> listofexercises;
-
-    @FXML
-    private Button exercicebutton;
-
-    @FXML
-    private TextArea exercisedescription;
-
-    @FXML
-    private Button logoutbutton;
-
-    @FXML
-    private Button recordbutton;
-
-    @FXML
-    private AnchorPane recordstack;
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
+    public void initialize()
     {
-        initlistofexercises();
+        initListOfExercises();
     }
 
     /** this function is called when clicking on start recording button */
     @FXML
-    public void startrecording() {
-
+    public void startRecording()
+    {
         /*String name = exercicename.textProperty().getValue(); //this gets the exercise name written by the user
         String description = exercisedescription.textProperty().getValue();//this gets the exercise description written by the user
         System.out.println(name);
@@ -71,52 +47,43 @@ public class CoachController extends Application  implements Initializable
         //TODO insert these values in the data base and tell the c++ server when tob start recording and when to end it
 
        // Main.main(null); //uncomment if you want to start recording when clicking start
-
     }
 
-    /**
-     *  This function is used to navigate
-     *  when clicking record (recordbutton) we get sent to the record scene (recordstack)
-     *  when we click exercises list (exercicebutton) we get sent to the exercises list scene (exercisesstack)
-     *  when we click Logout we close the stage
-     * @param event
-     */
-    @FXML
-    void handleclicks(ActionEvent event)
-    {
-        if (event.getSource()==recordbutton)
-        {
-            exercisesstack.toBack();
-            recordstack.toFront();
 
-        }
-        if (event.getSource()==exercicebutton)
-        {
-            exercisesstack.toFront();
-            recordstack.toBack();
-        }
-        if (event.getSource()==logoutbutton)
-        {
-                Stage stage = (Stage) logoutbutton.getScene().getWindow();
-                stage.close();
-        }
+    /** Method called when the user click on logout button */
+    public void logout()
+    {
+        changeFXML("view/fxml/hello-view.fxml");
     }
 
-    public ObservableList<String> shoexercises()
+    /** Display the exercises list and hide recording screen */
+    public void displayExercisesList()
     {
-        ObservableList<String> etudiants = null;
-        ExerciseDAO d = new ExerciseDAO();
-
-        etudiants = FXCollections.observableArrayList(d.getalexercises());
-
-        return etudiants;
+        exercisesStack.toFront();
+        recordStack.toBack();
     }
 
-    public void initlistofexercises()
+    /** Display the recording screen and hide the exercises list view */
+    public void displayRecordView()
     {
-        ObservableList<String> list = shoexercises();
+        exercisesStack.toBack();
+        recordStack.toFront();
+    }
 
-        listofexercises.setItems(list);
+    /** Get all exercises from database */
+    public ObservableList<Exercise> getAllExercises()
+    {
+        ExerciseDAO exerciseDAO = new ExerciseDAO();
+
+        return FXCollections.observableArrayList(exerciseDAO.findAll());
+    }
+
+    /** Initialize the list view exercise with the exercises in database */
+    public void initListOfExercises()
+    {
+        ObservableList<Exercise> list = getAllExercises();
+
+        listOfExercises.setItems(list);
         /*
         listofexercises.setCellFactory(stringListView -> {
             ListCell c = new ListCell();
@@ -129,33 +96,18 @@ public class CoachController extends Application  implements Initializable
             });
             return c;
         });
-*/
-        listofexercises.getSelectionModel().selectedItemProperty().addListener((ChangeListener<? super String>) (observable, oldValue, newValue) -> {
+        */
+
+        // Add biding
+        listOfExercises.getSelectionModel().selectedItemProperty().addListener((ChangeListener<? super Exercise>) (observable, oldValue, newValue) -> {
             // Your action here
-            System.out.println("Selected item: " + newValue);
-            switchtopopupscene();
+            switchToPopupScene();
         });
     }
 
-    public void switchtopopupscene()
+    public void switchToPopupScene()
     {
-        try {
-            Parent root = FXMLLoader.load(App.class.getClassLoader().getResource("view/fxml/popupscreen.fxml"));
-
-            Scene scene = new Scene(root, 521, 240);
-            //popupstage.initStyle(StageStyle.UNDECORATED);
-            popupstage.setScene(scene);
-            popupstage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception
-    {
+       createPopup("/view/fxml/popupscreen.fxml");
     }
 
 }

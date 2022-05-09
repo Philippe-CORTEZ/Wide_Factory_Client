@@ -45,7 +45,7 @@ public class LoginController extends GenericController
     /** Change the element in the stage (login to main view) */
     public void switchToCoachScene()
     {
-       loadFxml("view/fxml/coachscreen.fxml");
+       changeFXML("view/fxml/coachscreen.fxml");
     }
 
 }
