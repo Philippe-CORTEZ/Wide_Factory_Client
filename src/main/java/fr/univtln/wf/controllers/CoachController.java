@@ -53,7 +53,7 @@ public class CoachController extends GenericController
     /** Method called when the user click on logout button */
     public void logout()
     {
-        changeFXML("view/fxml/hello-view.fxml");
+        changeFXML("view/fxml/login.fxml");
     }
 
     /** Display the exercises list and hide recording screen */
@@ -82,21 +82,7 @@ public class CoachController extends GenericController
     public void initListOfExercises()
     {
         ObservableList<Exercise> exercises = getAllExercises();
-
         listOfExercises.setItems(exercises);
-        /*
-        listofexercises.setCellFactory(stringListView -> {
-            ListCell c = new ListCell();
-            c.setOnMouseClicked(mouseEvent -> {
-                if (! c.isEmpty() && mouseEvent.getButton()== MouseButton.PRIMARY
-                        && mouseEvent.getClickCount() == 2) {
-
-                    System.out.println("hahahaha");
-                }
-            });
-            return c;
-        });
-        */
 
         // Add biding
         listOfExercises.getSelectionModel().selectedItemProperty().addListener((ChangeListener<? super Exercise>) (observable, oldValue, newValue) -> {
