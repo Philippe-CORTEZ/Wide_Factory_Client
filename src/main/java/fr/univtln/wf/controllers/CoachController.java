@@ -170,7 +170,6 @@ public class CoachController extends Application  implements Initializable {
 
     }
 
-
     @Override
     public void start(Stage stage) throws Exception {
 

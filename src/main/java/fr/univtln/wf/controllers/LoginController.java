@@ -48,12 +48,6 @@ public class LoginController extends Application {
     private Button cancelbutton;
 
 
-
-
-
-
-
-
     @Override
     public void start(Stage stage) throws Exception {
     }
