@@ -81,9 +81,9 @@ public class CoachController extends GenericController
     /** Initialize the list view exercise with the exercises in database */
     public void initListOfExercises()
     {
-        ObservableList<Exercise> list = getAllExercises();
+        ObservableList<Exercise> exercises = getAllExercises();
 
-        listOfExercises.setItems(list);
+        listOfExercises.setItems(exercises);
         /*
         listofexercises.setCellFactory(stringListView -> {
             ListCell c = new ListCell();
@@ -100,7 +100,7 @@ public class CoachController extends GenericController
 
         // Add biding
         listOfExercises.getSelectionModel().selectedItemProperty().addListener((ChangeListener<? super Exercise>) (observable, oldValue, newValue) -> {
-            // Your action here
+            DataGUI.setExerciseSelected(listOfExercises.getSelectionModel().selectedItemProperty().getValue());
             switchToPopupScene();
         });
     }
