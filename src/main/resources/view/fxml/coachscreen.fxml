@@ -19,17 +19,17 @@
    <left>
       <AnchorPane prefHeight="782.0" prefWidth="311.0" style="-fx-background-color: grey;" stylesheets="@styes.css" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="98.0" fitWidth="97.0" AnchorPane.leftAnchor="0.0">
+            <ImageView fitHeight="98.0" fitWidth="97.0" layoutX="107.0" AnchorPane.leftAnchor="107.0">
                <image>
                   <Image url="@../images/2.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="49.0" layoutY="86.0" prefHeight="76.0" prefWidth="130.0" text="Gym " textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="49.0" AnchorPane.rightAnchor="132.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="86.0" prefHeight="76.0" prefWidth="130.0" text="Wide" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="175.0">
                <font>
                   <Font name="Yrsa SemiBold" size="52.0" />
                </font>
             </Label>
-            <Label layoutX="156.0" layoutY="86.0" prefHeight="76.0" prefWidth="130.0" text=" Gold" textAlignment="CENTER" textFill="GOLD" AnchorPane.leftAnchor="156.0" AnchorPane.rightAnchor="26.0">
+            <Label layoutX="130.0" layoutY="85.0" prefHeight="78.0" prefWidth="158.0" text="Factory" textAlignment="CENTER" textFill="GOLD" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="24.0">
                <font>
                   <Font name="Yrsa SemiBold" size="52.0" />
                </font>

@@ -12,12 +12,12 @@
    <left>
       <AnchorPane prefHeight="282.0" prefWidth="169.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="32.0" prefHeight="30.0" prefWidth="62.0" text="Gym " textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="31.0" prefHeight="30.0" prefWidth="62.0" text="Wide" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Yrsa SemiBold" size="26.0" />
                </font>
             </Label>
-            <Label layoutX="76.0" layoutY="32.0" prefHeight="29.0" prefWidth="55.0" text=" Gold" textAlignment="CENTER" textFill="GOLD">
+            <Label layoutX="76.0" layoutY="32.0" prefHeight="37.0" prefWidth="72.0" text="Factory" textAlignment="CENTER" textFill="GOLD">
                <font>
                   <Font name="Yrsa SemiBold" size="24.0" />
                </font>
