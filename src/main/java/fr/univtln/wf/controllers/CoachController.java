@@ -3,6 +3,7 @@ package fr.univtln.wf.controllers;
 import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.models.Exercise;
 import fr.univtln.wf.ws_clients.WSClient;
+import fr.univtln.wf.ws_clients.WSState;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,7 @@ public class CoachController extends GenericController
         {
             log.error("Error while sending message to server with WS client", error);
         }
+        WSClient.setState(WSState.RECORDING);
     }
 
 

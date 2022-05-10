@@ -2,6 +2,7 @@ package fr.univtln.wf.ws_clients;
 
 
 import fr.univtln.wf.jmonkey.DynamicJME;
+import fr.univtln.wf.jmonkey.JME;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
 import lombok.Getter;
@@ -25,10 +26,18 @@ public class WSClient
     private static Session session;
 
 
-    /** Instance of Jmonkey app to display skeletons */
-    private final DynamicJME dynamicJME = new DynamicJME();
+    /** Instance of Jmonkey app to display skeletons in real time */
+    @Getter
+    private static final DynamicJME DYNAMIC_JME = new DynamicJME();
+
+    /** Instance of Jmonkey app to display skeletons of a movement (not real time) */
+    @Getter
+    private static final JME STATIC_JME = new JME();
+
     /** Describe state of the client (recording, real time) */
-    private String state;
+    @Getter
+    @Setter
+    private static WSState state;
 
 
     /**
@@ -77,9 +86,14 @@ public class WSClient
 
         if(!skeletons.isEmpty())
         {
+            if(state.equals(WSState.RECORDING))
+            {
+
+            }
+
             // Set the skeleton displayable in the Jmonkey app to make an animation
             // If it's a continuous displaying, in the list there is only one skeleton
-            dynamicJME.setSkeleton(skeletons.get(0));
+//            DYNAMIC_JME.setSkeleton(skeletons.get(0));
         }
     }
 
