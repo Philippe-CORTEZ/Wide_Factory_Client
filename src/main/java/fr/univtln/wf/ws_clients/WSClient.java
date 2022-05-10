@@ -1,10 +1,11 @@
 package fr.univtln.wf.ws_clients;
 
 
-import com.jme3.system.AppSettings;
 import fr.univtln.wf.jmonkey.DynamicJME;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -18,8 +19,16 @@ import java.util.List;
 @ClientEndpoint
 public class WSClient
 {
+    /** Used ta send data from controllers */
+    @Getter
+    @Setter
+    private static Session session;
+
+
     /** Instance of Jmonkey app to display skeletons */
     private final DynamicJME dynamicJME = new DynamicJME();
+    /** Describe state of the client (recording, real time) */
+    private String state;
 
 
     /**
@@ -40,15 +49,15 @@ public class WSClient
         }
 
         // Create the Jmonkey app for visualisation and set the window
-        dynamicJME.setShowSettings(false);
-        AppSettings settings = new AppSettings(true);
-        settings.put("Width", 1280);
-        settings.put("Height", 720);
-        settings.put("Title", "My awesome Game");
-        settings.put("VSync", true);
-        settings.put("Samples", 4);
-        dynamicJME.setSettings(settings);
-        dynamicJME.start();
+//        dynamicJME.setShowSettings(false);
+//        AppSettings settings = new AppSettings(true);
+//        settings.put("Width", 1280);
+//        settings.put("Height", 720);
+//        settings.put("Title", "My awesome Game");
+//        settings.put("VSync", true);
+//        settings.put("Samples", 4);
+//        dynamicJME.setSettings(settings);
+//        dynamicJME.start();
     }
 
 
@@ -61,7 +70,6 @@ public class WSClient
     public void onMessage(String message, Session session)
     {
         // Currently it display only skeletons there isn't processing before to check another message
-       // log.info("msg " + message);
 
         // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
         List<Skeleton> skeletons = Skeleton.newInstance(message);

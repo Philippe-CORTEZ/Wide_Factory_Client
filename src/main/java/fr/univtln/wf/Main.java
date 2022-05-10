@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.net.URI;
 
+// TODO : Suppress this useless class
+
 /**
  * This is the main class of client app, it launch the WS client
  * And communicate with the WS server to process the Kinect data
@@ -29,7 +31,7 @@ public class Main
         try
         {
             // Try to connect on port 9001
-            container.connectToServer(WSClient.class, URI.create("ws://localhost:9001/monTest"));
+            WSClient.setSession(container.connectToServer(WSClient.class, URI.create("ws://localhost:9001/monTest")));
         }
         catch (DeploymentException | IOException ex)
         {
