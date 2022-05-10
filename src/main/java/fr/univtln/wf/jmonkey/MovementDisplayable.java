@@ -4,7 +4,6 @@ import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import fr.univtln.wf.models.Movement;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**

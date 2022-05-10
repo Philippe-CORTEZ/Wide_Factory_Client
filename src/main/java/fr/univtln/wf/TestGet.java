@@ -17,7 +17,6 @@ public class TestGet
 
         for(Skeleton skeleton : m.getSkeletons())
         {
-            System.out.println(skeleton.getFrame());
             skeleton.mappingJoint();
         }
 

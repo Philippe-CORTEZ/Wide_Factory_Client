@@ -28,9 +28,6 @@ public class LoginController extends GenericController
     public void login()
     {
         //TODO send user to the right screen (check if its a coach or a regular user)
-
-        //String user = username.textProperty().getValue();
-        //String passwordd = password.textProperty().getValue();
         switchToCoachScene();
     }
 
