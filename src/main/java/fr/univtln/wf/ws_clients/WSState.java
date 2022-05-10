@@ -7,5 +7,6 @@ package fr.univtln.wf.ws_clients;
 public enum WSState
 {
    RECORDING,
-   REAL_TIME
+   REAL_TIME,
+   STANDBY
 }

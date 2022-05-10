@@ -35,10 +35,10 @@ public class WSClient
     @Getter
     private static final JME STATIC_JME = new JME();
 
-    /** Describe state of the client (recording, real time) */
+    /** Describe state of the client */
     @Getter
     @Setter
-    private static WSState state;
+    private static WSState state = WSState.STANDBY;
 
 
     /**
