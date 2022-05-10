@@ -14,11 +14,18 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@NoArgsConstructor
 public class MovementDisplayable extends Node
 {
     /** movement to display */
     private Movement movement;
+
+
+    /** Default constructor that initialize a default movement */
+    public MovementDisplayable()
+    {
+        this.movement = new Movement();
+    }
+
 
     /** number of the frame to display */
     private int count = 0;
