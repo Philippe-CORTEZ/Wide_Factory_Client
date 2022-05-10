@@ -60,6 +60,8 @@ public class CoachController extends GenericController
             log.error("Error while sending message to server with WS client", error);
         }
         WSClient.setState(WSState.RECORDING);
+
+        createPopup("/view/fxml/recordpopup.fxml");
     }
 
 
