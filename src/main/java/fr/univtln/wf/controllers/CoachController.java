@@ -43,7 +43,10 @@ public class CoachController extends GenericController
         String description = exercisedescription.textProperty().getValue();//this gets the exercise description written by the user
         System.out.println(name);
         System.out.println(description);
+
 */
+
+        createPopup("/view/fxml/recordpopup.fxml");
         //TODO insert these values in the data base and tell the c++ server when tob start recording and when to end it
 
        // Main.main(null); //uncomment if you want to start recording when clicking start
