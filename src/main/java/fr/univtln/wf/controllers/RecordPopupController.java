@@ -4,7 +4,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class RecordPopupController {
 
     @FXML
@@ -29,8 +31,9 @@ public class RecordPopupController {
         loading();
     }
 
-    public void cancelRecording() {
-
+    public void cancelRecording()
+    {
+//        cancelBtn.getParent().get
     }
 
     public void restartRecording() {
@@ -47,29 +50,32 @@ public class RecordPopupController {
 
     public void loading() {
         new Thread() {
+            @Override
             public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        restartBtn.setDisable(true);
-                        cancelBtn.setDisable(true);
-                        validateBtn.setDisable(true);
-                        visualizeBtn.setDisable(true);
-                    }
-                });
+                Platform.runLater( () ->
+                        {
+                            restartBtn.setDisable(true);
+                            cancelBtn.setDisable(true);
+                            validateBtn.setDisable(true);
+                            visualizeBtn.setDisable(true);
+                        }
+                );
                 try {
-                    Thread.sleep(3000); //5 seconds, obviously replace with your chosen time
+                    Thread.sleep(3000); // 3 seconds, obviously replace with your chosen time
                 }
                 catch(InterruptedException ex) {
+                    log.error("Interruption error", ex);
+                    Thread.currentThread().interrupt();
                 }
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        restartBtn.setDisable(false);
-                        cancelBtn.setDisable(false);
-                        visualizeBtn.setDisable(false);
-                        validateBtn.setDisable(false);
-                        recordingLabel.setText("");
-                    }
-                });
+                Platform.runLater( () ->
+                        {
+                            restartBtn.setDisable(false);
+                            cancelBtn.setDisable(false);
+                            visualizeBtn.setDisable(false);
+                            validateBtn.setDisable(false);
+                            recordingLabel.setText("");
+                        }
+                );
             }
         }.start();
     }

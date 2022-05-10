@@ -46,7 +46,7 @@ public abstract class GenericController
     {
         try
         {
-            // This is a po up, so, a stage is created
+            // This is a popup, so, a stage is created
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
