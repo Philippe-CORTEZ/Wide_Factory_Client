@@ -49,35 +49,32 @@ public class RecordPopupController {
     }
 
     public void loading() {
-        new Thread() {
-            @Override
-            public void run() {
-                Platform.runLater( () ->
-                        {
-                            restartBtn.setDisable(true);
-                            cancelBtn.setDisable(true);
-                            validateBtn.setDisable(true);
-                            visualizeBtn.setDisable(true);
-                        }
-                );
-                try {
-                    Thread.sleep(3000); // 3 seconds, obviously replace with your chosen time
-                }
-                catch(InterruptedException ex) {
-                    log.error("Interruption error", ex);
-                    Thread.currentThread().interrupt();
-                }
-                Platform.runLater( () ->
-                        {
-                            restartBtn.setDisable(false);
-                            cancelBtn.setDisable(false);
-                            visualizeBtn.setDisable(false);
-                            validateBtn.setDisable(false);
-                            recordingLabel.setText("");
-                        }
-                );
+        new Thread(() -> {
+            Platform.runLater( () ->
+                    {
+                        restartBtn.setDisable(true);
+                        cancelBtn.setDisable(true);
+                        validateBtn.setDisable(true);
+                        visualizeBtn.setDisable(true);
+                    }
+            );
+            try {
+                Thread.sleep(3000); // 3 seconds, obviously replace with your chosen time
             }
-        }.start();
+            catch(InterruptedException ex) {
+                log.error("Interruption error", ex);
+                Thread.currentThread().interrupt();
+            }
+            Platform.runLater( () ->
+                    {
+                        restartBtn.setDisable(false);
+                        cancelBtn.setDisable(false);
+                        visualizeBtn.setDisable(false);
+                        validateBtn.setDisable(false);
+                        recordingLabel.setText("");
+                    }
+            );
+        }).start();
     }
 
 }
