@@ -38,6 +38,16 @@ public class Movement
     @OneToMany(mappedBy = "movement")
     Set<MovementsExercises> movements;
 
+
+    /** Default constructor initialize attributes with default value (not null) */
+    public Movement()
+    {
+        this.name = "";
+        this.skeletons = new ArrayList<>();
+        this.description = "";
+        this.movements = new HashSet<>();
+    }
+
     /**
      * Constructor
      * Convert un json file to an object movement
@@ -64,13 +74,6 @@ public class Movement
         }
     }
 
-    public Movement() {
-        name = "";
-        skeletons = new ArrayList<>();
-        description = "";
-        movements = new HashSet<>();
-    }
-
     /**
      * Constructor with a list of skeletons
      * @param skeletons list of Skeletons
@@ -81,6 +84,7 @@ public class Movement
         this.name = name;
         this.skeletons = skeletons;
     }
+
 
     /**
      * clear all attribute of this movement
