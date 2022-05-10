@@ -47,24 +47,24 @@ public class CoachController extends GenericController
     {
         initListOfExercises();
 
-        // Initialize spinner timer (10 to 120, initial 10, and change value 10 by 10)
-        timeRecordingSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 120, 10, 10));
+        // Initialize spinner timer (2 to 10, initial 2, and change value 1 by 1)
+        timeRecordingSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(2, 10, 2, 1));
     }
 
 
     /** this function is called when clicking on start recording button */
     public void startRecording()
     {
-        // TODO : finish
         try
         {
-            // Sending record message to server
+            // Sending record message to server with time to record
             WSClient.getSession().getBasicRemote().sendText("r " + timeRecordingSpinner.getValue());
         }
         catch (IOException error)
         {
             log.error("Error while sending message to server with WS client", error);
         }
+        // Set the state of client websocket to recording, to record movement
         WSClient.setState(WSState.RECORDING);
 
         // Set name and description to the movement
@@ -109,7 +109,7 @@ public class CoachController extends GenericController
         ObservableList<Exercise> exercises = getAllExercises();
         listOfExercises.setItems(exercises);
 
-        // Add biding
+        // Add biding for each exercise when clicking on
         listOfExercises.getSelectionModel().selectedItemProperty().addListener((ChangeListener<? super Exercise>) (observable, oldValue, newValue) -> {
             DataGUI.setExerciseSelected(listOfExercises.getSelectionModel().selectedItemProperty().getValue());
             switchToPopupScene();
