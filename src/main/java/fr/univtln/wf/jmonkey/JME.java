@@ -16,19 +16,13 @@ import lombok.Setter;
 public class JME extends SimpleApplication
 {
     /** A set of skeleton objects that represent the whole movement */
-    private Movement movement;
-    /** Jmonkey structure for representing the skeleton in 3D environment */
-    private SkeletonDisplayable sk;
-    /** Count the frame of the movement to reset the movement animation when it finish */
-    private int count;
+    private MovementDisplayable mv;
 
 
     /** Default constructor */
     public JME()
     {
-        this.movement = new Movement();
-        this.sk = new SkeletonDisplayable();
-        this.count = 0;
+        this.mv = new MovementDisplayable();
     }
 
 
@@ -39,7 +33,7 @@ public class JME extends SimpleApplication
         // Move camera rearward
         cam.setLocation(new Vector3f(0,0, 3));
         // Display the first skeleton of the movement
-        rootNode.attachChild(sk);
+        rootNode.attachChild(mv);
 
         // Set frame rate to 30 fps to synchronize with kinect
         settings.setFrameRate(30);
@@ -52,14 +46,7 @@ public class JME extends SimpleApplication
     @Override
     public void simpleUpdate(float tpf)
     {
-        if (count < movement.getSkeletons().size())
-        {
-            // refresh the skeleton with the following one
-            sk.displaySkeleton(movement.getSkeletons().get(count), assetManager);
-            count++;
-        }
-        // restart the animation
-        else count = 0;
+        mv.displayNextFrame(assetManager);
     }
 
 }

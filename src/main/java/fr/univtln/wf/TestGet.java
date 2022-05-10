@@ -22,7 +22,7 @@ public class TestGet
         }
 
         JME jme = new JME();
-        jme.setMovement(m);
+        jme.getMv().setMovement(m);
         jme.start();
     }
 
