@@ -1,10 +1,18 @@
 package fr.univtln.wf.controllers;
 
+import fr.univtln.wf.TestInsert;
+import fr.univtln.wf.databases.daos.MovementDAO;
+import fr.univtln.wf.jmonkey.JME;
+import fr.univtln.wf.models.Movement;
+import fr.univtln.wf.ws_clients.WSClient;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 
 @Slf4j
 public class RecordPopupController {
@@ -33,45 +41,31 @@ public class RecordPopupController {
 
     public void cancelRecording()
     {
-//        cancelBtn.getParent().get
+        ((Stage)(cancelBtn.getScene().getWindow())).close();
+        WSClient.getSTATIC_JME().getMv().clear();
     }
 
     public void restartRecording() {
-
+        WSClient.getSTATIC_JME().getMv().clear();
     }
 
-     public void validateRecording() {
-
+     public void uploadRecording() {
+         new MovementDAO().persist(WSClient.getSTATIC_JME().getMv().getMovement());
+         WSClient.getSTATIC_JME().getMv().clear();
     }
 
     public void visualizeRecording() {
-
+        WSClient.getSTATIC_JME().start();
     }
 
     public void loading() {
         new Thread(() -> {
             Platform.runLater( () ->
                     {
-                        restartBtn.setDisable(true);
-                        cancelBtn.setDisable(true);
-                        validateBtn.setDisable(true);
-                        visualizeBtn.setDisable(true);
-                    }
-            );
-            try {
-                Thread.sleep(3000); // 3 seconds, obviously replace with your chosen time
-            }
-            catch(InterruptedException ex) {
-                log.error("Interruption error", ex);
-                Thread.currentThread().interrupt();
-            }
-            Platform.runLater( () ->
-                    {
                         restartBtn.setDisable(false);
                         cancelBtn.setDisable(false);
-                        visualizeBtn.setDisable(false);
                         validateBtn.setDisable(false);
-                        recordingLabel.setText("");
+                        visualizeBtn.setDisable(false);
                     }
             );
         }).start();

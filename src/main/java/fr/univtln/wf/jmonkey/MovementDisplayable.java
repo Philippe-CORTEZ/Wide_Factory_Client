@@ -30,6 +30,8 @@ public class MovementDisplayable extends Node
     /** number of the frame to display */
     private int count = 0;
 
+    private boolean loop = true;
+
     /** display the skeleton and put the count to the next frame */
     public void displayNextFrame(AssetManager assetManager)
     {
@@ -41,11 +43,22 @@ public class MovementDisplayable extends Node
             this.attachChild(sk);
             count++;
         }
+        else if (loop)
+        {
+            count = 0;
+        }
     }
 
     public MovementDisplayable(Movement movement)
     {
         this.movement = movement;
+    }
+
+    public void clear()
+    {
+        movement.clear();
+        detachAllChildren();
+        count = 0;
     }
 
     public void setMovement(Movement movement)

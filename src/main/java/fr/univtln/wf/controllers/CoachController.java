@@ -56,16 +56,16 @@ public class CoachController extends GenericController
     public void startRecording()
     {
         // TODO : finish
-        try
-        {
-            // Sending record message to server
-            WSClient.getSession().getBasicRemote().sendText("r " + timeRecordingSpinner.getValue());
-        }
-        catch (IOException error)
-        {
-            log.error("Error while sending message to server with WS client", error);
-        }
-        WSClient.setState(WSState.RECORDING);
+//        try
+//        {
+//            // Sending record message to server
+//            WSClient.getSession().getBasicRemote().sendText("r " + timeRecordingSpinner.getValue());
+//        }
+//        catch (IOException error)
+//        {
+//            log.error("Error while sending message to server with WS client", error);
+//        }
+//        WSClient.setState(WSState.RECORDING);
 
         // Set name and description to the movement
         WSClient.getSTATIC_JME().getMv().getMovement().setName(exerciseName.getText());

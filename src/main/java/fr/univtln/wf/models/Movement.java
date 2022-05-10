@@ -7,16 +7,13 @@ import lombok.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class that represent a movement
  * @author Wide Factory Team
  */
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 
 @Getter
@@ -52,6 +49,8 @@ public class Movement
         ObjectMapper objectMapper = new ObjectMapper();
         skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
+        description = "";
+        movements = new HashSet<>();
 
         // To bind skeleton to movement and joint to skeleton (for JPA)
         for(Skeleton skeleton : skeletons)
@@ -65,6 +64,13 @@ public class Movement
         }
     }
 
+    public Movement() {
+        name = "";
+        skeletons = new ArrayList<>();
+        description = "";
+        movements = new HashSet<>();
+    }
+
     /**
      * Constructor with a list of skeletons
      * @param skeletons list of Skeletons
@@ -74,6 +80,17 @@ public class Movement
     {
         this.name = name;
         this.skeletons = skeletons;
+    }
+
+    /**
+     * clear all attribute of this movement
+     */
+    public void clear()
+    {
+        name = "";
+        description = "";
+        skeletons.clear();
+        movements.clear();
     }
 
 
