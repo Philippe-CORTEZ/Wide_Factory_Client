@@ -12,28 +12,43 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-
 public class MovementDisplayable extends Node
 {
     /** movement to display */
     private Movement movement;
+    /** number of the frame to display */
+    private int count;
+    /** Used to loop animation movement */
+    private boolean loop;
 
 
     /** Default constructor that initialize a default movement */
     public MovementDisplayable()
     {
         this.movement = new Movement();
+        this.count = 0;
+        this.loop = true;
+    }
+
+    /**
+     * Constructor that create a displayable movement with an object movement
+     * @param movement movement object
+     */
+    public MovementDisplayable(Movement movement)
+    {
+        this.movement = movement;
+        this.count = 0;
+        this.loop = true;
     }
 
 
-    /** number of the frame to display */
-    private int count = 0;
-
-    private boolean loop = true;
-
-    /** display the skeleton and put the count to the next frame */
+    /**
+     * display the skeleton and put the count to the next frame
+     * @param assetManager assetManager of Jmonkey application
+     */
     public void displayNextFrame(AssetManager assetManager)
     {
+        // Animation not finished
         if (count < movement.getSkeletons().size())
         {
             this.detachAllChildren();
@@ -42,17 +57,14 @@ public class MovementDisplayable extends Node
             this.attachChild(sk);
             count++;
         }
+        // Animation finished and loop is activate, replay animation
         else if (loop)
         {
             count = 0;
         }
     }
 
-    public MovementDisplayable(Movement movement)
-    {
-        this.movement = movement;
-    }
-
+    /** Erase all data that was in before */
     public void clear()
     {
         movement.clear();
@@ -60,6 +72,10 @@ public class MovementDisplayable extends Node
         count = 0;
     }
 
+    /**
+     * Special setter that change movement and reset the animation
+     * @param movement movement object
+     */
     public void setMovement(Movement movement)
     {
         this.movement = movement;
