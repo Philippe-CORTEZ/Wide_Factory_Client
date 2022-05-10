@@ -3,8 +3,11 @@ package fr.univtln.wf.ws_clients;
 
 import com.jme3.system.AppSettings;
 import fr.univtln.wf.jmonkey.DynamicJME;
+import fr.univtln.wf.jmonkey.JME;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -18,8 +21,24 @@ import java.util.List;
 @ClientEndpoint
 public class WSClient
 {
-    /** Instance of Jmonkey app to display skeletons */
-    private final DynamicJME dynamicJME = new DynamicJME();
+    /** Used ta send data from controllers */
+    @Getter
+    @Setter
+    private static Session session;
+
+
+    /** Instance of Jmonkey app to display skeletons in real time */
+    @Getter
+    private static final DynamicJME DYNAMIC_JME = new DynamicJME();
+
+    /** Instance of Jmonkey app to display skeletons of a movement (not real time) */
+    @Getter
+    private static final JME STATIC_JME = new JME();
+
+    /** Describe state of the client (recording, real time) */
+    @Getter
+    @Setter
+    private static WSState state;
 
 
     /**
@@ -39,16 +58,19 @@ public class WSClient
             log.error("Error in onOpen : ", error);
         }
 
-        // Create the Jmonkey app for visualisation and set the window
-        dynamicJME.setShowSettings(false);
+        // Initialize Jmonkey apps for visualisation dynamic and non dynamic
+        DYNAMIC_JME.setShowSettings(false);
+        STATIC_JME.setShowSettings(false);
+
         AppSettings settings = new AppSettings(true);
         settings.put("Width", 1280);
         settings.put("Height", 720);
         settings.put("Title", "My awesome Game");
         settings.put("VSync", true);
         settings.put("Samples", 4);
-        dynamicJME.setSettings(settings);
-        dynamicJME.start();
+
+        DYNAMIC_JME.setSettings(settings);
+        STATIC_JME.setSettings(settings);
     }
 
 
@@ -61,7 +83,6 @@ public class WSClient
     public void onMessage(String message, Session session)
     {
         // Currently it display only skeletons there isn't processing before to check another message
-       // log.info("msg " + message);
 
         // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
         List<Skeleton> skeletons = Skeleton.newInstance(message);
@@ -69,9 +90,21 @@ public class WSClient
 
         if(!skeletons.isEmpty())
         {
+            // When recording, skeletons are send one by one
+            if(state.equals(WSState.RECORDING))
+            {
+                // Just add skeleton in the final movement in JME class
+                STATIC_JME.getMv().getMovement().getSkeletons().add(skeletons.get(0));
+            }
+
+            else
+            {
+                log.info("");
+            }
+
             // Set the skeleton displayable in the Jmonkey app to make an animation
             // If it's a continuous displaying, in the list there is only one skeleton
-            dynamicJME.setSkeleton(skeletons.get(0));
+//            DYNAMIC_JME.setSkeleton(skeletons.get(0));
         }
     }
 

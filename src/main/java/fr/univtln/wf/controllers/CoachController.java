@@ -2,6 +2,8 @@ package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.models.Exercise;
+import fr.univtln.wf.ws_clients.WSClient;
+import fr.univtln.wf.ws_clients.WSState;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 
 
 /**
@@ -27,29 +31,35 @@ public class CoachController extends GenericController
     @FXML
     private AnchorPane recordStack;
 
+    @FXML
+    private Spinner<Integer> timeRecordingSpinner;
+
 
     /** Initialize the widgets wanted */
     @FXML
     public void initialize()
     {
         initListOfExercises();
+
+        // Initialize spinner timer (10 to 120, initial 10, and change value 10 by 10)
+        timeRecordingSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(10, 120, 10, 10));
     }
 
+
     /** this function is called when clicking on start recording button */
-    @FXML
     public void startRecording()
     {
-        /*String name = exercicename.textProperty().getValue(); //this gets the exercise name written by the user
-        String description = exercisedescription.textProperty().getValue();//this gets the exercise description written by the user
-        System.out.println(name);
-        System.out.println(description);
-
-*/
-
-        createPopup("/view/fxml/recordpopup.fxml");
-        //TODO insert these values in the data base and tell the c++ server when tob start recording and when to end it
-
-       // Main.main(null); //uncomment if you want to start recording when clicking start
+        // TODO : finish
+        try
+        {
+            // Sending record message to server
+            WSClient.getSession().getBasicRemote().sendText("r " + timeRecordingSpinner.getValue());
+        }
+        catch (IOException error)
+        {
+            log.error("Error while sending message to server with WS client", error);
+        }
+        WSClient.setState(WSState.RECORDING);
     }
 
 
