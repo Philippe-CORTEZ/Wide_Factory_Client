@@ -1,6 +1,7 @@
 package fr.univtln.wf.ws_clients;
 
 
+import com.jme3.system.AppSettings;
 import fr.univtln.wf.jmonkey.DynamicJME;
 import fr.univtln.wf.jmonkey.JME;
 import fr.univtln.wf.models.Skeleton;
@@ -57,16 +58,19 @@ public class WSClient
             log.error("Error in onOpen : ", error);
         }
 
-        // Create the Jmonkey app for visualisation and set the window
-//        dynamicJME.setShowSettings(false);
-//        AppSettings settings = new AppSettings(true);
-//        settings.put("Width", 1280);
-//        settings.put("Height", 720);
-//        settings.put("Title", "My awesome Game");
-//        settings.put("VSync", true);
-//        settings.put("Samples", 4);
-//        dynamicJME.setSettings(settings);
-//        dynamicJME.start();
+        // Initialize Jmonkey apps for visualisation dynamic and non dynamic
+        DYNAMIC_JME.setShowSettings(false);
+        STATIC_JME.setShowSettings(false);
+
+        AppSettings settings = new AppSettings(true);
+        settings.put("Width", 1280);
+        settings.put("Height", 720);
+        settings.put("Title", "My awesome Game");
+        settings.put("VSync", true);
+        settings.put("Samples", 4);
+
+        DYNAMIC_JME.setSettings(settings);
+        STATIC_JME.setSettings(settings);
     }
 
 
@@ -86,9 +90,16 @@ public class WSClient
 
         if(!skeletons.isEmpty())
         {
+            // When recording, skeletons are send one by one
             if(state.equals(WSState.RECORDING))
             {
+                // Just add skeleton in the final movement in JME class
+                STATIC_JME.getMv().getMovement().getSkeletons().add(skeletons.get(0));
+            }
 
+            else
+            {
+                log.info("");
             }
 
             // Set the skeleton displayable in the Jmonkey app to make an animation

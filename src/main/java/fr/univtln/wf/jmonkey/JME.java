@@ -2,7 +2,6 @@ package fr.univtln.wf.jmonkey;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
-import fr.univtln.wf.models.Movement;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class JME extends SimpleApplication
 {
-    /** A set of skeleton objects that represent the whole movement */
+    /** A movement with skeletons that can be displayed */
     private MovementDisplayable mv;
 
 

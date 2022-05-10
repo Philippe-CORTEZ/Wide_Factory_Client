@@ -9,12 +9,14 @@ import lombok.Setter;
 
 /**
  * class that display a movement
+ * @author Wide Factory Team
  */
 @Getter
 @Setter
 
 @NoArgsConstructor
-public class MovementDisplayable extends Node {
+public class MovementDisplayable extends Node
+{
     /** movement to display */
     private Movement movement;
 
@@ -34,12 +36,15 @@ public class MovementDisplayable extends Node {
         }
     }
 
-    public MovementDisplayable(Movement movement) {
+    public MovementDisplayable(Movement movement)
+    {
         this.movement = movement;
     }
 
-    public void setMovement(Movement movement) {
+    public void setMovement(Movement movement)
+    {
         this.movement = movement;
         this.count = 0;
     }
+
 }
