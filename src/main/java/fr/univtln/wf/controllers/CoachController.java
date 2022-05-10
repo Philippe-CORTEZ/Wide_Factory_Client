@@ -34,6 +34,12 @@ public class CoachController extends GenericController
     @FXML
     private Spinner<Integer> timeRecordingSpinner;
 
+    @FXML
+    private TextField exerciseName;
+
+    @FXML
+    private TextArea exerciseDescription;
+
 
     /** Initialize the widgets wanted */
     @FXML
@@ -60,6 +66,10 @@ public class CoachController extends GenericController
             log.error("Error while sending message to server with WS client", error);
         }
         WSClient.setState(WSState.RECORDING);
+
+        // Set name and description to the movement
+        WSClient.getSTATIC_JME().getMv().getMovement().setName(exerciseName.getText());
+        WSClient.getSTATIC_JME().getMv().getMovement().setDescription(exerciseDescription.getText());
 
         createPopup("/view/fxml/recordpopup.fxml");
     }
