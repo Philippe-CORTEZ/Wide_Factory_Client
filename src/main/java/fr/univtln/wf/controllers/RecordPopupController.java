@@ -27,10 +27,14 @@ public class RecordPopupController {
     private Button visualizeBtn;
 
 
+    /** Initialize widgets */
     @FXML
     public void initialize()
     {
         loading();
+
+        // Bind red cross button with cancel button (to reset data)
+//        cancelBtn.getScene().getWindow().setOnCloseRequest(event -> cancelRecording());
     }
 
     /** close the popup and clear the movement in memory */
@@ -40,46 +44,42 @@ public class RecordPopupController {
         WSClient.getSTATIC_JME().getMv().clear();
     }
 
-    /**
-     * restart the record
-     */
-    public void restartRecording() {
+    /** restart the record */
+    public void restartRecording()
+    {
         // TODO : restart recording with previous parameters
         WSClient.getSTATIC_JME().getMv().getMovement().getSkeletons().clear();
     }
 
-    /**
-     * persist the data record earlier
-     */
-     public void uploadRecording() {
+    /** persist the data record earlier and close the window */
+     public void uploadRecording()
+     {
+         // Persist if the movement is not empty of skeletons
          if (!WSClient.getSTATIC_JME().getMv().getMovement().getSkeletons().isEmpty())
          {
              new MovementDAO().persist(WSClient.getSTATIC_JME().getMv().getMovement());
          }
+         // Clear the movement to record another movement in the futur
          WSClient.getSTATIC_JME().getMv().clear();
+
+         // Close the popup window
+         ((Stage)(validateBtn.getScene().getWindow())).close();
     }
 
-    /**
-     * visualize the movement in memory
-     */
-    public void visualizeRecording() {
+    /** Visualize the movement in memory in Jmonkey application */
+    public void visualizeRecording()
+    {
         WSClient.getSTATIC_JME().start();
     }
 
-    /**
-     *
-     */
-    public void loading() {
-//        new Thread(() -> {
-//            Platform.runLater( () ->
-//                    {
+
+    /** Enable button */
+    public void loading()
+    {
         restartBtn.setDisable(false);
         cancelBtn.setDisable(false);
         validateBtn.setDisable(false);
         visualizeBtn.setDisable(false);
-//                    }
-//            );
-//        }).start();
     }
 
 }
