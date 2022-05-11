@@ -34,7 +34,7 @@ public class RecordPopupController {
         loading();
 
         // Bind red cross button with cancel button (to reset data)
-        cancelBtn.getScene().getWindow().setOnCloseRequest(event -> cancelRecording());
+//        cancelBtn.getScene().getWindow().setOnCloseRequest(event -> cancelRecording());
     }
 
     /** close the popup and clear the movement in memory */
