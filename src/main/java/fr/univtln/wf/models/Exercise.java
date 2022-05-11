@@ -3,15 +3,12 @@ package fr.univtln.wf.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * An exercise is a set of movements like squat --> push up
  * @author Wide Factory Team
  */
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
@@ -23,13 +20,17 @@ public class Exercise
 {
     /** The name of an exercise is unique */
     @Id
-    private String name;
+    @Builder.Default
+    private String name = "";
+
     /** A short description of the exercise */
-    private String description;
+    @Builder.Default
+    private String description = "";
 
     /** The people that done this exercise */
     @ManyToMany(mappedBy = "exercices", cascade = CascadeType.PERSIST)
-    private List<Person> persons;
+    @Builder.Default
+    private List<Person> persons = new ArrayList<>();
 
     /** The coach that created this exercise */
     @ManyToOne
@@ -38,8 +39,33 @@ public class Exercise
 
     /** Mapping many to many with movement */
     @OneToMany(mappedBy = "movement")
-    private Set<MovementsExercises> movements;
+    @Builder.Default
+    private Set<MovementsExercises> movements = new HashSet<>();
 
+    /**
+     * add a movement to this exercise with his number of repetition
+     * @param movement movement to add
+     * @param repetition number of repetition
+     */
+    public void addMovement(Movement movement, int repetition)
+    {
+        MovementsExercises movementsExercises = MovementsExercises.builder()
+                .exercise(this)
+                .movement(movement)
+                .defaultRepetition(repetition)
+                .build();
+        movements.add(movementsExercises);
+    }
+
+    /**
+     * constructor without parameter
+     */
+    public Exercise() {
+        name = "";
+        description = "";
+        movements = new HashSet<>();
+        persons = new ArrayList<>();
+    }
 
     /** Overriding equals */
     @Override

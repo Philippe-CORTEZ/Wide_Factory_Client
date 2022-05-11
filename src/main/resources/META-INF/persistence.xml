@@ -23,8 +23,8 @@
             <property name="jakarta.persistence.jdbc.password" value="test"/>
 
             <!-- Les options de générations des tables -->
-<!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
-<!--            <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>
             <property name="jakarta.persistence.schema-generation.scripts.create-target" value="sampleCreate.ddl"/>
             <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="sampleDrop.ddl"/>
 <!--            <property name="jakarta.persistence.sql-load-script-source" value="insert.sql"/>-->
