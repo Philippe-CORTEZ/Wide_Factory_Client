@@ -95,14 +95,6 @@ public class WSClient
             if(state.equals(WSState.RECORDING))
             {
                 // Just add all skeletons in the final movement in JME class
-                for(Skeleton sk : skeletons)
-                {
-                    sk.setMovement(STATIC_JME.getMv().getMovement());
-                    for (Joint j: sk.getJoints())
-                    {
-                        j.setSkeleton(sk);
-                    }
-                }
                 STATIC_JME.getMv().getMovement().setSkeletons(skeletons);
             }
 
