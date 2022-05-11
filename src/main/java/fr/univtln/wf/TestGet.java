@@ -12,7 +12,7 @@ public class TestGet
     {
         // Used to get and display a movement
         MovementDAO movementDAO = new MovementDAO();
-        Movement m = movementDAO.find("coucou");
+        Movement m = movementDAO.find("name");
 
 
         for(Skeleton skeleton : m.getSkeletons())
