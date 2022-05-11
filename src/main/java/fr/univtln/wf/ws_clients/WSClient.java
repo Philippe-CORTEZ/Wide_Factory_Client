@@ -103,7 +103,7 @@ public class WSClient
                         j.setSkeleton(sk);
                     }
                 }
-                STATIC_JME.getMv().getMovement().getSkeletons().addAll(skeletons);
+                STATIC_JME.getMv().getMovement().setSkeletons(skeletons);
             }
 
             else

@@ -20,7 +20,7 @@ import java.util.*;
 @Setter
 
 @Entity
-public class Movement
+public class Movement implements MappingBidirectional
 {
     /** The movement name */
     @Id
@@ -72,16 +72,24 @@ public class Movement
         description = "";
         exercises = new ArrayList<>();
         defaultRepetition = 10;
+    }
 
-        // To bind skeleton to movement and joint to skeleton (for JPA)
-        for(Skeleton skeleton : skeletons)
+
+    public void setSkeleton(List<Skeleton> skeletons)
+    {
+        this.skeletons = skeletons;
+    }
+
+    /**
+     * used when it needs to be persisted,
+     * set the bidirectional relation
+     */
+    public void mappingAttribute()
+    {
+        for (Skeleton sk : skeletons)
         {
-            skeleton.setMovement(this);
-
-            for(Joint joint : skeleton.getJoints())
-            {
-                joint.setSkeleton(skeleton);
-            }
+            sk.setMovement(this);
+            sk.mappingAttribute();
         }
     }
 

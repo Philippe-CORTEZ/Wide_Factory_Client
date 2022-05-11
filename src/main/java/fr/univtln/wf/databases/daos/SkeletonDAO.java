@@ -8,4 +8,22 @@ import fr.univtln.wf.models.Skeleton;
  */
 public class SkeletonDAO extends GenericDAO<Skeleton>
 {
+    /**
+     * Persist an entity in database and return after persisting
+     * Equal to persist of entity manager
+     * @param entity entity to persist
+     * @return entity after persisting
+     */
+    @Override
+    public Skeleton persist(Skeleton entity)
+    {
+        entity.mappingAttribute();
+        transaction.begin();
+        entityManager.persist(entity);
+        transaction.commit();
+
+        // Update the entity with modification performed by the database (like auto generated id)
+        entityManager.refresh(entity);
+        return entity;
+    }
 }

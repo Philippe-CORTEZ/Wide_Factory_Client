@@ -16,7 +16,7 @@ import java.util.*;
 @Setter
 
 @Entity
-public class Exercise
+public class Exercise implements MappingBidirectional
 {
     /** The name of an exercise is unique */
     @Id
@@ -62,6 +62,18 @@ public class Exercise
         movements = new ArrayList<>();
         persons = new ArrayList<>();
         creator = new Person();
+    }
+
+    /**
+     * used when it needs to be persisted,
+     * set the bidirectional relation
+     */
+    public void mappingAttribute()
+    {
+        for (Movement m : movements)
+        {
+            m.mappingAttribute();
+        }
     }
 
     /** Overriding equals */
