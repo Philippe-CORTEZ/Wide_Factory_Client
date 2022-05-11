@@ -11,22 +11,23 @@ public class TestInsertExercise {
     public static void main(String[] args) throws IOException
     {
 //        MovementDAO movementDAO = new MovementDAO();
-//        Movement m = new Movement("src/main/resources/movement_coucou.json", "coucou");
+        Movement m = new Movement("src/main/resources/movement_coucou.json", "coucou");
 //        Movement m = movementDAO.find("coucou");
 //        // TODO : put it in DAO
-//        for(Skeleton skeleton : m.getSkeletons())
-//        {
-//            skeleton.mappingJoint();
-//        }
+        for(Skeleton skeleton : m.getSkeletons())
+        {
+            skeleton.mappingJoint();
+        }
 //
 //        PersonDAO pdao = new PersonDAO();
-//        Person p = Person.builder().firstname("pcule").lastname("cucurbi").pseudo("moncucurbitace").roleEnum(RoleEnum.COACH).build();
-
-//        Exercise exo = Exercise.builder().description("UwU").name("coucou").creator(p).build();
-
-//        exo.addMovement(m, 10);
-//        ExerciseDAO eDAO = new ExerciseDAO();
-//        eDAO.persist(exo);
+        Person p = Person.builder().firstname("pcule").lastname("cucurbi").pseudo("moncucurbitace").roleEnum(RoleEnum.COACH).build();
+//
+        Exercise exo = Exercise.builder().description("UwU").name("courrier").creator(p).build();
+//
+        exo.addMovement(m);
+        ExerciseDAO eDAO = new ExerciseDAO();
+//        m.getExercises().add(exo);
+        eDAO.persist(exo);
 
     }
 }

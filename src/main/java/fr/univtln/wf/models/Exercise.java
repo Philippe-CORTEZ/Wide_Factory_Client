@@ -33,28 +33,24 @@ public class Exercise
     private List<Person> persons = new ArrayList<>();
 
     /** The coach that created this exercise */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "PSEUDO_EDITOR")
-    private Person creator;
+    @Builder.Default
+    private Person creator = new Person();
 
     /** Mapping many to many with movement */
-    @OneToMany(mappedBy = "movement")
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @Builder.Default
-    private Set<MovementsExercises> movements = new HashSet<>();
+    @JoinTable(name = "MOVEMENTS_EXERCISES", joinColumns = @JoinColumn(name = "NAME_EXERCISE"), inverseJoinColumns = @JoinColumn(name = "NAME_MOVEMENT"))
+    private List<Movement> movements = new ArrayList<>();
 
     /**
      * add a movement to this exercise with his number of repetition
      * @param movement movement to add
-     * @param repetition number of repetition
      */
-    public void addMovement(Movement movement, int repetition)
+    public void addMovement(Movement movement)
     {
-        MovementsExercises movementsExercises = MovementsExercises.builder()
-                .exercise(this)
-                .movement(movement)
-                .defaultRepetition(repetition)
-                .build();
-        movements.add(movementsExercises);
+        movements.add(movement);
     }
 
     /**
@@ -63,8 +59,9 @@ public class Exercise
     public Exercise() {
         name = "";
         description = "";
-        movements = new HashSet<>();
+        movements = new ArrayList<>();
         persons = new ArrayList<>();
+        creator = new Person();
     }
 
     /** Overriding equals */

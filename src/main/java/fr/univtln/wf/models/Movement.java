@@ -24,19 +24,28 @@ public class Movement
 {
     /** The movement name */
     @Id
-    private String name;
+    @Builder.Default
+    private String name = "";
 
     /** List of skeletons that represent the movement */
     @OneToMany(mappedBy = "movement", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @OrderBy("frame ASC")
-    private List<Skeleton> skeletons;
+    @Builder.Default
+    private List<Skeleton> skeletons = new ArrayList<>();
 
     /** Description of a movement*/
-    private String description;
+    @Builder.Default
+    private String description = "";
 
     /** Mapping many to many with exercise */
-    @OneToMany(mappedBy = "exercise")
-    Set<MovementsExercises> exercises;
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "movements")
+    @Builder.Default
+    private List<Exercise> exercises = new ArrayList<>();
+
+    /** default  repetition of the movement */
+    @Column(name = "default_repetition")
+    @Builder.Default
+    private int defaultRepetition = 10;
 
 
     /** Default constructor initialize attributes with default value (not null) */
@@ -45,7 +54,8 @@ public class Movement
         this.name = "";
         this.skeletons = new ArrayList<>();
         this.description = "";
-        this.exercises = new HashSet<>();
+        this.exercises = new ArrayList<>();
+        this.defaultRepetition = 10;
     }
 
     /**
@@ -60,7 +70,8 @@ public class Movement
         skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
         description = "";
-        exercises = new HashSet<>();
+        exercises = new ArrayList<>();
+        defaultRepetition = 10;
 
         // To bind skeleton to movement and joint to skeleton (for JPA)
         for(Skeleton skeleton : skeletons)
@@ -75,18 +86,6 @@ public class Movement
     }
 
     /**
-     * Constructor with a list of skeletons
-     * @param skeletons list of Skeletons
-     * @param name the movement name
-     */
-    public Movement(List<Skeleton> skeletons, String name)
-    {
-        this.name = name;
-        this.skeletons = skeletons;
-    }
-
-
-    /**
      * clear all attribute of this movement
      */
     public void clear()
@@ -95,6 +94,7 @@ public class Movement
         description = "";
         skeletons.clear();
         exercises.clear();
+        defaultRepetition = 10;
     }
 
 
