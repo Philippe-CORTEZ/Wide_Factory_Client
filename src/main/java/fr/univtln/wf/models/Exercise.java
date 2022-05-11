@@ -37,8 +37,8 @@ public class Exercise
     private Person creator;
 
     /** Mapping many to many with movement */
-    @OneToMany(mappedBy = "exercise")
-    private Set<MovementsExercises> exercises;
+    @OneToMany(mappedBy = "movement")
+    private Set<MovementsExercises> movements;
 
 
     /** Overriding equals */
@@ -66,5 +66,6 @@ public class Exercise
     {
         return name;
     }
+
 
 }

@@ -35,8 +35,8 @@ public class Movement
     private String description;
 
     /** Mapping many to many with exercise */
-    @OneToMany(mappedBy = "movement")
-    Set<MovementsExercises> movements;
+    @OneToMany(mappedBy = "exercise")
+    Set<MovementsExercises> exercises;
 
 
     /** Default constructor initialize attributes with default value (not null) */
@@ -45,7 +45,7 @@ public class Movement
         this.name = "";
         this.skeletons = new ArrayList<>();
         this.description = "";
-        this.movements = new HashSet<>();
+        this.exercises = new HashSet<>();
     }
 
     /**
@@ -60,7 +60,7 @@ public class Movement
         skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
         description = "";
-        movements = new HashSet<>();
+        exercises = new HashSet<>();
 
         // To bind skeleton to movement and joint to skeleton (for JPA)
         for(Skeleton skeleton : skeletons)
@@ -94,7 +94,7 @@ public class Movement
         name = "";
         description = "";
         skeletons.clear();
-        movements.clear();
+        exercises.clear();
     }
 
 
