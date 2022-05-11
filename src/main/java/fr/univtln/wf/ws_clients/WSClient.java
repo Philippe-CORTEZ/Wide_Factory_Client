@@ -90,11 +90,11 @@ public class WSClient
 
         if(!skeletons.isEmpty())
         {
-            // When recording, skeletons are send one by one
+            // When recording, skeletons are send in one block
             if(state.equals(WSState.RECORDING))
             {
-                // Just add skeleton in the final movement in JME class
-                STATIC_JME.getMv().getMovement().getSkeletons().add(skeletons.get(0));
+                // Just add all skeletons in the final movement in JME class
+                STATIC_JME.getMv().getMovement().getSkeletons().addAll(skeletons);
             }
 
             else
