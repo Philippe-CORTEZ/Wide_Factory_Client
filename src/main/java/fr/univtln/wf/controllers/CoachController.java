@@ -1,6 +1,7 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.ExerciseDAO;
+import fr.univtln.wf.databases.daos.MovementDAO;
 import fr.univtln.wf.models.Exercise;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CoachController extends GenericController
 {
+
+    @FXML
+    private Label errorLabel;
+
     @FXML
     private AnchorPane exercisesStack;
 
@@ -50,11 +55,34 @@ public class CoachController extends GenericController
     /** this function is called when clicking on start recording button */
     public void startRecording()
     {
-        // Create a popup to manage recording and set data used in popup
-        DataGUI.setTimeRecording(timeRecordingSpinner.getValue());
-        DataGUI.setMovementNameRecording(movementName.getText());
-        DataGUI.setMovementDescriptionRecording(movementDescription.getText());
-        createPopupUndecorated("/view/fxml/recordpopup.fxml");
+        MovementDAO movementDAO = new MovementDAO();
+
+        String name = movementName.getText();
+
+        // Don't start recording if the name is empty or already taken
+        if(name.isEmpty())
+        {
+            errorLabel.setText("Please enter a name");
+        }
+        else if(movementDAO.find(name)!=null)
+        {
+            errorLabel.setText("Try another movement's name, this name already exits ");
+        }
+
+        else
+        {
+            // Empty error label if it displayed
+            errorLabel.setText("");
+
+            // Create a popup to manage recording and set data used in popup
+            DataGUI.setTimeRecording(timeRecordingSpinner.getValue());
+            DataGUI.setMovementNameRecording(movementName.getText());
+            DataGUI.setMovementDescriptionRecording(movementDescription.getText());
+            createPopupUndecorated("/view/fxml/recordpopup.fxml");
+
+        }
+    }
+
     }
 
 

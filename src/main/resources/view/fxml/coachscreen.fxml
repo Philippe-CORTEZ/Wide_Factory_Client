@@ -99,6 +99,7 @@
                   </Label>
                   <Spinner fx:id="timeRecordingSpinner" layoutX="492.0" layoutY="341.0" />
                   <Label layoutX="283.0" layoutY="345.0" text="Time of recording in second : " />
+                  <Label fx:id="errorLabel" alignment="CENTER" layoutX="213.0" layoutY="239.0" prefHeight="16.0" prefWidth="530.0" textAlignment="CENTER" textFill="RED" />
                </children>
             </AnchorPane>
          </children>
