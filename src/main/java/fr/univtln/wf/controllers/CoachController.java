@@ -2,16 +2,12 @@ package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.models.Exercise;
-import fr.univtln.wf.ws_clients.WSClient;
-import fr.univtln.wf.ws_clients.WSState;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
 
 
 /**
@@ -34,10 +30,10 @@ public class CoachController extends GenericController
     private Spinner<Integer> timeRecordingSpinner;
 
     @FXML
-    private TextField exerciseName;
+    private TextField movementName;
 
     @FXML
-    private TextArea exerciseDescription;
+    private TextArea movementDescription;
 
 
     /** Initialize the widgets wanted */
@@ -54,24 +50,11 @@ public class CoachController extends GenericController
     /** this function is called when clicking on start recording button */
     public void startRecording()
     {
-        try
-        {
-            // Sending record message to server with time to record
-            WSClient.getSession().getBasicRemote().sendText("r " + timeRecordingSpinner.getValue());
-            DataGUI.setSpinnerValue(timeRecordingSpinner.getValue());
-        }
-        catch (IOException error)
-        {
-            log.error("Error while sending message to server with WS client", error);
-        }
-        // Set the state of client websocket to recording, to record movement
-        WSClient.setState(WSState.RECORDING);
-
-        // Set name and description to the movement
-        WSClient.getSTATIC_JME().getMv().getMovement().setName(exerciseName.getText());
-        WSClient.getSTATIC_JME().getMv().getMovement().setDescription(exerciseDescription.getText());
-
-        createPopupRedLess("/view/fxml/recordpopup.fxml");
+        // Create a popup to manage recording and set data used in popup
+        DataGUI.setTimeRecording(timeRecordingSpinner.getValue());
+        DataGUI.setMovementNameRecording(movementName.getText());
+        DataGUI.setMovementDescriptionRecording(movementDescription.getText());
+        createPopupUndecorated("/view/fxml/recordpopup.fxml");
     }
 
 

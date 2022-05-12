@@ -63,10 +63,10 @@ public abstract class GenericController
 
 
     /**
-     * CreatePopup without red cross button
+     * CreatePopup without red cross, minimize and maximize button
      * @param fxmlFileName the fxml file path
      */
-    public void createPopupRedLess(String fxmlFileName)
+    public void createPopupUndecorated(String fxmlFileName)
     {
         // TODO : Need to be refactored
         try
