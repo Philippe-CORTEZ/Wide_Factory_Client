@@ -41,11 +41,29 @@ public class RecordPopupController {
     @FXML
     public void initialize()
     {
+        // Initialize progress bar and bind event when is filled
+        IntegerProperty seconds = new SimpleIntegerProperty();
+        progressBar.progressProperty().bind(seconds.divide(60.0));
+        Timeline timeline = new Timeline
+                (
+                        new KeyFrame(Duration.ZERO, new KeyValue(seconds, 0)),
+                        new KeyFrame(Duration.seconds(DataGUI.getSpinnerValue()), event ->
+                        {
+                            // When progress bar is filled (progression finished)
+                            restartBtn.setDisable(false);
+                            cancelBtn.setDisable(false);
+                            validateBtn.setDisable(false);
+                            visualizeBtn.setDisable(false);
+                            recordingLabel.setText("Finished");
+                            recordingLabel.setTextFill(Color.rgb(96,207,21));
+                            progressBar.setStyle("-fx-accent: #60CF15 ;");
+                        }, new KeyValue(seconds, 60))
+                );
 
-
-        loading();
+        timeline.play();
     }
 
+    
     /** close the popup and clear the movement in memory */
     public void cancelRecording()
     {
@@ -77,29 +95,6 @@ public class RecordPopupController {
      */
     public void visualizeRecording() {
         WSClient.getSTATIC_JME().start();
-    }
-
-    /**
-     * Initialize the ProgressBar
-     */
-    public void loading() {
-        IntegerProperty seconds = new SimpleIntegerProperty();
-        progressBar.progressProperty().bind(seconds.divide(60.0));
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(seconds, 0)),
-                new KeyFrame(Duration.seconds(DataGUI.getSpinnerValue()), e-> {
-                    // do anything you need here on completion...
-                    System.out.println("Minute over");
-                    restartBtn.setDisable(false);
-                    cancelBtn.setDisable(false);
-                    validateBtn.setDisable(false);
-                    visualizeBtn.setDisable(false);
-                    recordingLabel.setText("Finished");
-                    recordingLabel.setTextFill(Color.rgb(96,207,21));
-                    progressBar.setStyle("-fx-accent: #60CF15 ;");
-                }, new KeyValue(seconds, 60))
-        );
-        timeline.play();
     }
 
 }
