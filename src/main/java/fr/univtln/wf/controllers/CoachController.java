@@ -59,6 +59,7 @@ public class CoachController extends GenericController
         {
             // Sending record message to server with time to record
             WSClient.getSession().getBasicRemote().sendText("r " + timeRecordingSpinner.getValue());
+            DataGUI.setSpinnerValue(timeRecordingSpinner.getValue());
         }
         catch (IOException error)
         {

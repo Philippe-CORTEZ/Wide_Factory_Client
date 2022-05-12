@@ -17,4 +17,8 @@ public class DataGUI
     @Getter
     @Setter
     private static Exercise exerciseSelected;
+
+    @Getter
+    @Setter
+    private static int spinnerValue;
 }
