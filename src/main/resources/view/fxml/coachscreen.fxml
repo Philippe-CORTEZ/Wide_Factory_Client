@@ -92,13 +92,14 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Label layoutX="32.0" layoutY="206.0" prefHeight="44.0" prefWidth="941.0" text="Choose a name for your exercise and write a discription And once you are ready click start to start recording  " AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0">
+                  <Label layoutX="37.0" layoutY="166.0" prefHeight="44.0" prefWidth="941.0" text="Choose a name for your exercise and write a discription And once you are ready click start to start recording  " AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="16.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
                   <Spinner fx:id="timeRecordingSpinner" layoutX="492.0" layoutY="341.0" />
                   <Label layoutX="283.0" layoutY="345.0" text="Time of recording in second : " />
+                  <Label fx:id="errorLabel" alignment="CENTER" layoutX="213.0" layoutY="239.0" prefHeight="16.0" prefWidth="530.0" textAlignment="CENTER" textFill="RED" />
                </children>
             </AnchorPane>
          </children>

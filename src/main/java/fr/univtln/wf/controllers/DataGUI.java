@@ -21,4 +21,6 @@ public class DataGUI
     @Getter
     @Setter
     private static int spinnerValue;
+
+
 }
