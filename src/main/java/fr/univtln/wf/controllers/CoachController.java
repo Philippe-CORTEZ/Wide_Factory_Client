@@ -70,7 +70,7 @@ public class CoachController extends GenericController
         WSClient.getSTATIC_JME().getMv().getMovement().setName(exerciseName.getText());
         WSClient.getSTATIC_JME().getMv().getMovement().setDescription(exerciseDescription.getText());
 
-        createPopup("/view/fxml/recordpopup.fxml");
+        createPopupRedLess("/view/fxml/recordpopup.fxml");
     }
 
 

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -50,6 +51,31 @@ public abstract class GenericController
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Exercise");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            log.error("Unable to load the file specified", e);
+        }
+    }
+
+
+    /**
+     * CreatePopup without red cross button
+     * @param fxmlFileName the fxml file path
+     */
+    public void createPopupRedLess(String fxmlFileName)
+    {
+        // TODO : Need to be refactored
+        try
+        {
+            // This is a popup, so, a stage is created
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Exercise");
             stage.setScene(new Scene(root));
             stage.show();
