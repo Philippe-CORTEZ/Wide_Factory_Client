@@ -62,13 +62,24 @@ public class CoachController extends GenericController
     public void startRecording()
     {
         MovementDAO movementDAO = new MovementDAO();
-        String name = exerciseName.getText();
-        if(name.isEmpty()){
-            errorLabel.setText("Please enter a name");
 
-        }else if(movementDAO.find(name)!=null){
+        String name = exerciseName.getText();
+
+        // Don't start recording if the name is empty or already taken
+        if(name.isEmpty())
+        {
+            errorLabel.setText("Please enter a name");
+        }
+        else if(movementDAO.find(name)!=null)
+        {
             errorLabel.setText("Try another movement's name, this name already exits ");
-        }else {
+        }
+
+        else
+        {
+            // Empty error label if it displayed
+            errorLabel.setText("");
+
             try
             {
                 // Sending record message to server with time to record
