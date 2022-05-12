@@ -45,16 +45,11 @@ public class JointDisplayable extends Node
      */
     public void place(Joint joint)
     {
-        // TODO : check if it possible to delete the else block
         if (joint != null)
         {
             geometry.setName(joint.getName());
             geometry.setLocalTranslation(new Vector3f(-joint.getX(), -joint.getY(), joint.getZ()).normalize());
             geometry.setLocalRotation(new Quaternion(joint.getW(), -joint.getWx(), -joint.getWy(), joint.getWz()));
-        }
-        else
-        {
-            geometry.setName("null");
         }
     }
 

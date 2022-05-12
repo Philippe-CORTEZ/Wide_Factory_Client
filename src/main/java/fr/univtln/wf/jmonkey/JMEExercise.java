@@ -3,7 +3,6 @@ package fr.univtln.wf.jmonkey;
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
 import fr.univtln.wf.databases.daos.ExerciseDAO;
-import fr.univtln.wf.models.Exercise;
 
 public class JMEExercise extends SimpleApplication
 {

@@ -49,7 +49,6 @@ public class JME extends SimpleApplication
     public void simpleUpdate(float tpf)
     {
         mv.displayNextFrame(assetManager);
-        System.out.println(mv.getCount());
     }
 
     public static void main(String[] args) {
