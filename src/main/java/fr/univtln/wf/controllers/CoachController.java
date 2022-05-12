@@ -54,7 +54,7 @@ public class CoachController extends GenericController
         DataGUI.setTimeRecording(timeRecordingSpinner.getValue());
         DataGUI.setMovementNameRecording(movementName.getText());
         DataGUI.setMovementDescriptionRecording(movementDescription.getText());
-        createPopupRedLess("/view/fxml/recordpopup.fxml");
+        createPopupUndecorated("/view/fxml/recordpopup.fxml");
     }
 
 
