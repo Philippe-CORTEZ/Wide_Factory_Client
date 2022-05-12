@@ -17,7 +17,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="782.0" prefWidth="1305.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.wf.controllers.CoachController">
    <left>
-      <AnchorPane prefHeight="782.0" prefWidth="311.0" style="-fx-background-color: grey;" stylesheets="@styes.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="782.0" prefWidth="329.0" style="-fx-background-color: grey;" stylesheets="@styes.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="98.0" fitWidth="97.0" layoutX="107.0" AnchorPane.leftAnchor="107.0">
                <image>
@@ -29,7 +29,7 @@
                   <Font name="Yrsa SemiBold" size="52.0" />
                </font>
             </Label>
-            <Label layoutX="130.0" layoutY="85.0" prefHeight="78.0" prefWidth="158.0" text="Factory" textAlignment="CENTER" textFill="GOLD" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="24.0">
+            <Label layoutX="141.0" layoutY="85.0" prefHeight="78.0" prefWidth="158.0" text="Factory" textAlignment="CENTER" textFill="GOLD" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="13.0">
                <font>
                   <Font name="Yrsa SemiBold" size="52.0" />
                </font>
