@@ -27,7 +27,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "SKELETON", uniqueConstraints = { @UniqueConstraint(columnNames = {"frame", "name_movement" }) })
-public class Skeleton
+public class Skeleton implements MappingBidirectional
 {
     /** ID in database */
     @Id
@@ -101,6 +101,18 @@ public class Skeleton
         map.clear();
         for (Joint j : joints) {
             map.put(JointEnum.valueOf(j.getName()), j);
+        }
+    }
+
+    /**
+     * used when it needs to be persisted,
+     * set the bidirectional relation
+     */
+    public void mappingAttribute()
+    {
+        for (Joint j : joints)
+        {
+            j.setSkeleton(this);
         }
     }
 

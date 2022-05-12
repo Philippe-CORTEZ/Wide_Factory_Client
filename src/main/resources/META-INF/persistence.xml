@@ -12,7 +12,6 @@
         <class>fr.univtln.wf.models.Joint</class>
         <class>fr.univtln.wf.models.Exercise</class>
         <class>fr.univtln.wf.models.Person</class>
-        <class>fr.univtln.wf.models.MovementsExercises</class>
 
         <properties>
             <!-- Les paramètres de connexions -->

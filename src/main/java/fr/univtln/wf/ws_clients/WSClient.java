@@ -4,6 +4,7 @@ package fr.univtln.wf.ws_clients;
 import com.jme3.system.AppSettings;
 import fr.univtln.wf.jmonkey.DynamicJME;
 import fr.univtln.wf.jmonkey.JME;
+import fr.univtln.wf.models.Joint;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
 import lombok.Getter;
@@ -94,7 +95,7 @@ public class WSClient
             if(state.equals(WSState.RECORDING))
             {
                 // Just add all skeletons in the final movement in JME class
-                STATIC_JME.getMv().getMovement().getSkeletons().addAll(skeletons);
+                STATIC_JME.getMv().getMovement().setSkeletons(skeletons);
             }
 
             else

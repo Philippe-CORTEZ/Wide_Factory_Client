@@ -3,15 +3,12 @@ package fr.univtln.wf.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * An exercise is a set of movements like squat --> push up
  * @author Wide Factory Team
  */
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
@@ -19,27 +16,88 @@ import java.util.Set;
 @Setter
 
 @Entity
-public class Exercise
+public class Exercise implements MappingBidirectional
 {
     /** The name of an exercise is unique */
     @Id
-    private String name;
+    @Builder.Default
+    private String name = "";
+
     /** A short description of the exercise */
-    private String description;
+    @Builder.Default
+    private String description = "";
 
     /** The people that done this exercise */
     @ManyToMany(mappedBy = "exercices", cascade = CascadeType.PERSIST)
-    private List<Person> persons;
+    @Builder.Default
+    private List<Person> persons = new ArrayList<>();
 
     /** The coach that created this exercise */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "PSEUDO_EDITOR")
-    private Person creator;
+    @Builder.Default
+    private Person creator = new Person();
 
     /** Mapping many to many with movement */
-    @OneToMany(mappedBy = "exercise")
-    private Set<MovementsExercises> exercises;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @Builder.Default
+    @JoinTable(name = "MOVEMENTS_EXERCISES", joinColumns = @JoinColumn(name = "NAME_EXERCISE"), inverseJoinColumns = @JoinColumn(name = "NAME_MOVEMENT"))
+    private List<Movement> movements = new ArrayList<>();
 
+
+
+    /**
+     * setter which handle the mapping of skeletons
+     * @param movements
+     */
+    public void setMovements(List<Movement> movements)
+    {
+        this.movements = movements;
+    }
+
+    /**
+     * constructor without parameter
+     */
+    public Exercise() {
+        name = "";
+        description = "";
+        movements = new ArrayList<>();
+        persons = new ArrayList<>();
+        creator = new Person();
+    }
+
+
+    /**
+     * add a movement to this exercise with his number of repetition
+     * @param movement movement to add
+     */
+    public void addMovement(Movement movement)
+    {
+        movements.add(movement);
+    }
+
+    /**
+     * used when it needs to be persisted,
+     * set the bidirectional relation
+     */
+    public void mappingAttribute()
+    {
+        for (Movement m : movements)
+        {
+            m.mappingAttribute();
+        }
+    }
+
+    /**
+     * mapping of skeletons
+     */
+    public void mappingSkeletons()
+    {
+        for (Movement m : movements)
+        {
+            m.mappingSkeletons();
+        }
+    }
 
     /** Overriding equals */
     @Override

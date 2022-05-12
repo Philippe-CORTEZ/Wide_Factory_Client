@@ -20,23 +20,32 @@ import java.util.*;
 @Setter
 
 @Entity
-public class Movement
+public class Movement implements MappingBidirectional
 {
     /** The movement name */
     @Id
-    private String name;
+    @Builder.Default
+    private String name = "";
 
     /** List of skeletons that represent the movement */
     @OneToMany(mappedBy = "movement", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @OrderBy("frame ASC")
-    private List<Skeleton> skeletons;
+    @Builder.Default
+    private List<Skeleton> skeletons = new ArrayList<>();
 
     /** Description of a movement*/
-    private String description;
+    @Builder.Default
+    private String description = "";
 
     /** Mapping many to many with exercise */
-    @OneToMany(mappedBy = "movement")
-    Set<MovementsExercises> movements;
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "movements")
+    @Builder.Default
+    private List<Exercise> exercises = new ArrayList<>();
+
+    /** default  repetition of the movement */
+    @Column(name = "default_repetition")
+    @Builder.Default
+    private int defaultRepetition = 10;
 
 
     /** Default constructor initialize attributes with default value (not null) */
@@ -45,7 +54,8 @@ public class Movement
         this.name = "";
         this.skeletons = new ArrayList<>();
         this.description = "";
-        this.movements = new HashSet<>();
+        this.exercises = new ArrayList<>();
+        this.defaultRepetition = 10;
     }
 
     /**
@@ -60,31 +70,43 @@ public class Movement
         skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
         description = "";
-        movements = new HashSet<>();
+        exercises = new ArrayList<>();
+        defaultRepetition = 10;
+    }
 
-        // To bind skeleton to movement and joint to skeleton (for JPA)
-        for(Skeleton skeleton : skeletons)
+
+    /**
+     * setter of skeletons and map them correctly
+     * @param skeletons
+     */
+    public void setSkeleton(List<Skeleton> skeletons)
+    {
+        this.skeletons = skeletons;
+    }
+
+    /**
+     * used when it needs to be persisted,
+     * set the bidirectional relation
+     */
+    public void mappingAttribute()
+    {
+        for (Skeleton sk : skeletons)
         {
-            skeleton.setMovement(this);
-
-            for(Joint joint : skeleton.getJoints())
-            {
-                joint.setSkeleton(skeleton);
-            }
+            sk.setMovement(this);
+            sk.mappingAttribute();
         }
     }
 
     /**
-     * Constructor with a list of skeletons
-     * @param skeletons list of Skeletons
-     * @param name the movement name
+     * mapping of skeletons
      */
-    public Movement(List<Skeleton> skeletons, String name)
+    public void mappingSkeletons()
     {
-        this.name = name;
-        this.skeletons = skeletons;
+        for(Skeleton skeleton : this.skeletons)
+        {
+            skeleton.mappingJoint();
+        }
     }
-
 
     /**
      * clear all attribute of this movement
@@ -94,7 +116,8 @@ public class Movement
         name = "";
         description = "";
         skeletons.clear();
-        movements.clear();
+        exercises.clear();
+        defaultRepetition = 10;
     }
 
 

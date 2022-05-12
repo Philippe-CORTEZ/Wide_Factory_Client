@@ -4,7 +4,6 @@ import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.models.Exercise;
 import fr.univtln.wf.ws_clients.WSClient;
 import fr.univtln.wf.ws_clients.WSState;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -72,7 +71,7 @@ public class CoachController extends GenericController
         WSClient.getSTATIC_JME().getMv().getMovement().setName(exerciseName.getText());
         WSClient.getSTATIC_JME().getMv().getMovement().setDescription(exerciseDescription.getText());
 
-        createPopup("/view/fxml/recordpopup.fxml");
+        createPopupRedLess("/view/fxml/recordpopup.fxml");
     }
 
 
@@ -110,13 +109,17 @@ public class CoachController extends GenericController
         ObservableList<Exercise> exercises = getAllExercises();
         listOfExercises.setItems(exercises);
 
-        // Add biding for each exercise when clicking on
-        listOfExercises.getSelectionModel().selectedItemProperty().addListener((ChangeListener<? super Exercise>) (observable, oldValue, newValue) -> {
+        // Add binding on each item in listview (set exercise selected and unselect to reselect after popup closed)
+        listOfExercises.setOnMouseClicked(event -> {
             DataGUI.setExerciseSelected(listOfExercises.getSelectionModel().selectedItemProperty().getValue());
+            int index = listOfExercises.getSelectionModel().getSelectedIndex();
+            listOfExercises.getSelectionModel().clearSelection(index);
             switchToPopupScene();
         });
+
     }
 
+    /** Create a popup window to interact with the exercise selected */
     public void switchToPopupScene()
     {
        createPopup("/view/fxml/popupscreen.fxml");
