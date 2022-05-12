@@ -28,18 +28,18 @@ public class Exercise implements MappingBidirectional
     private String description = "";
 
     /** The people that done this exercise */
-    @ManyToMany(mappedBy = "exercices", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "exercices")
     @Builder.Default
     private List<Person> persons = new ArrayList<>();
 
     /** The coach that created this exercise */
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "PSEUDO_EDITOR")
     @Builder.Default
     private Person creator = new Person();
 
     /** Mapping many to many with movement */
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @Builder.Default
     @JoinTable(name = "MOVEMENTS_EXERCISES", joinColumns = @JoinColumn(name = "NAME_EXERCISE"), inverseJoinColumns = @JoinColumn(name = "NAME_MOVEMENT"))
     private List<Movement> movements = new ArrayList<>();

@@ -18,7 +18,19 @@ public class DataGUI
     @Setter
     private static Exercise exerciseSelected;
 
+    /** Time of recording wished by a coach */
     @Getter
     @Setter
-    private static int spinnerValue;
+    private static int timeRecording;
+
+    /** Name of movement that will be recorded */
+    @Getter
+    @Setter
+    private static String movementNameRecording;
+
+    /** Description of movement that will be recorded */
+    @Getter
+    @Setter
+    private static String movementDescriptionRecording;
+
 }
