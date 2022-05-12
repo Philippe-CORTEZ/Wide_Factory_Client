@@ -43,7 +43,7 @@
                   <Font name="Yrsa SemiBold" size="22.0" />
                </font>
             </Label>
-            <ProgressBar fx:id="progressBar" layoutX="63.0" layoutY="131.0" prefHeight="20.0" prefWidth="306.0" progress="0.0" />
+            <ProgressBar fx:id="progressBar" layoutX="63.0" layoutY="131.0" prefHeight="20.0" prefWidth="306.0" progress="0.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="62.0" />
          </children>
       </AnchorPane>
    </center>
