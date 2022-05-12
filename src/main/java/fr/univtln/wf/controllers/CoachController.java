@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Wide Factory Team
  */
 @Slf4j
-public class CoachController extends GenericController
+public class CoachController implements Controller
 {
 
     @FXML

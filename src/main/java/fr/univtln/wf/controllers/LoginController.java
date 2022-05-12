@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Wide Factory Team
  */
 @Slf4j
-public class LoginController extends GenericController
+public class LoginController implements Controller
 {
     /** Used to get the password typed */
     @FXML
