@@ -102,8 +102,8 @@ public class RecordPopupController
 
         anchorPane.setOnMouseDragged(event ->
         {
-            ((Stage)(anchorPane.getScene().getWindow())).setX(event.getScreenX() - xOffset);
-            ((Stage)(anchorPane.getScene().getWindow())).setY(event.getScreenY() - yOffset);
+            anchorPane.getScene().getWindow().setX(event.getScreenX() - xOffset);
+            anchorPane.getScene().getWindow().setY(event.getScreenY() - yOffset);
         });
     }
 
