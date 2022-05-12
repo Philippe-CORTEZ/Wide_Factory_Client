@@ -4,16 +4,17 @@ import fr.univtln.wf.databases.daos.MovementDAO;
 import fr.univtln.wf.ws_clients.WSClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Controller to manage a movement recorded
+ * @author Wide Factory Team
+ */
 @Slf4j
-public class RecordPopupController {
-
-    @FXML
-    private Label recordingLabel;
-
+public class RecordPopupController
+{
     @FXML
     private Button cancelBtn;
 
@@ -26,12 +27,22 @@ public class RecordPopupController {
     @FXML
     private Button visualizeBtn;
 
+    @FXML
+    private AnchorPane anchorPane;
+
+    /** Used to move window */
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+
 
     /** Initialize widgets */
     @FXML
     public void initialize()
     {
         loading();
+        // make window draggable (because undecorated)
+        makeDraggable();
     }
 
     /** close the popup and clear the movement in memory */
@@ -80,9 +91,20 @@ public class RecordPopupController {
     }
 
 
-    public void changeRedCrossBehaviour()
+    /** Add possibility to drag window by his anchorPane */
+    public void makeDraggable()
     {
-        // Bind red cross button with cancel button (to reset data)
-        cancelBtn.getScene().getWindow().setOnCloseRequest(event -> cancelRecording());
+       anchorPane.setOnMousePressed(event ->
+       {
+           xOffset = event.getSceneX();
+           yOffset = event.getSceneY();
+       });
+
+        anchorPane.setOnMouseDragged(event ->
+        {
+            ((Stage)(anchorPane.getScene().getWindow())).setX(event.getScreenX() - xOffset);
+            ((Stage)(anchorPane.getScene().getWindow())).setY(event.getScreenY() - yOffset);
+        });
     }
+
 }
