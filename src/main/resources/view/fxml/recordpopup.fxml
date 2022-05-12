@@ -9,42 +9,47 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.wf.controllers.RecordPopupController">
-   <left>
-      <AnchorPane prefHeight="282.0" prefWidth="169.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="31.0" prefHeight="30.0" prefWidth="62.0" text="Wide" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Yrsa SemiBold" size="26.0" />
-               </font>
-            </Label>
-            <Label layoutX="76.0" layoutY="32.0" prefHeight="37.0" prefWidth="76.0" text="Factory" textAlignment="CENTER" textFill="GOLD">
-               <font>
-                  <Font name="Yrsa SemiBold" size="24.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="33.0" fitWidth="37.0">
-               <image>
-                  <Image url="@../images/2.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-   </left>
-   <center>
-      <AnchorPane prefHeight="282.0" prefWidth="498.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="cancelBtn" layoutX="337.0" layoutY="219.0" mnemonicParsing="false" onAction="#cancelRecording" prefHeight="24.0" prefWidth="64.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
-            <Button fx:id="visualizeBtn" disable="true" layoutX="124.0" layoutY="219.0" mnemonicParsing="false" onAction="#visualizeRecording" prefHeight="24.0" prefWidth="79.0" style="-fx-background-color: gold;" text="Visualize" textFill="WHITE" />
-            <Button fx:id="restartBtn" disable="true" layoutX="234.0" layoutY="219.0" mnemonicParsing="false" onAction="#restartRecording" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: gold;" text="Restart" textFill="WHITE" />
-            <Button fx:id="validateBtn" disable="true" layoutX="23.0" layoutY="219.0" mnemonicParsing="false" onAction="#uploadRecording" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #60CF15;" text="Validate" textFill="WHITE" />
-            <Label fx:id="recordingLabel" layoutX="157.0" layoutY="37.0" prefHeight="68.0" prefWidth="118.0" text="Recording..." textAlignment="CENTER" textFill="GREY">
-               <font>
-                  <Font name="Yrsa SemiBold" size="22.0" />
-               </font>
-            </Label>
-            <ProgressBar fx:id="progressBar" layoutX="63.0" layoutY="131.0" prefHeight="20.0" prefWidth="306.0" progress="0.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="62.0" />
-         </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.wf.controllers.RecordPopupController">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="600.0">
+         <left>
+            <AnchorPane prefHeight="282.0" prefWidth="169.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="31.0" prefHeight="30.0" prefWidth="62.0" text="Wide" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Yrsa SemiBold" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="76.0" layoutY="32.0" prefHeight="37.0" prefWidth="76.0" text="Factory" textAlignment="CENTER" textFill="GOLD">
+                     <font>
+                        <Font name="Yrsa SemiBold" size="24.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="33.0" fitWidth="37.0">
+                     <image>
+                        <Image url="@../images/2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="282.0" prefWidth="498.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="cancelBtn" layoutX="337.0" layoutY="219.0" mnemonicParsing="false" onAction="#cancelRecording" prefHeight="24.0" prefWidth="64.0" style="-fx-background-color: red;" text="Cancel" textFill="WHITE" />
+                  <Button fx:id="visualizeBtn" disable="true" layoutX="124.0" layoutY="219.0" mnemonicParsing="false" onAction="#visualizeRecording" prefHeight="24.0" prefWidth="79.0" style="-fx-background-color: gold;" text="Visualize" textFill="WHITE" />
+                  <Button fx:id="restartBtn" disable="true" layoutX="234.0" layoutY="219.0" mnemonicParsing="false" onAction="#restartRecording" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: gold;" text="Restart" textFill="WHITE" />
+                  <Button fx:id="validateBtn" disable="true" layoutX="23.0" layoutY="219.0" mnemonicParsing="false" onAction="#uploadRecording" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #60CF15;" text="Validate" textFill="WHITE" />
+                  <Label fx:id="recordingLabel" layoutX="157.0" layoutY="37.0" prefHeight="68.0" prefWidth="118.0" text="Recording..." textAlignment="CENTER" textFill="GREY">
+                     <font>
+                        <Font name="Yrsa SemiBold" size="22.0" />
+                     </font>
+                  </Label>
+                  <ProgressBar fx:id="progressBar" layoutX="63.0" layoutY="131.0" prefHeight="20.0" prefWidth="306.0" progress="0.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="62.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
