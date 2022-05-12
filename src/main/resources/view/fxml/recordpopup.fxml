@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="282.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univtln.wf.controllers.RecordPopupController">
    <left>
-      <AnchorPane prefHeight="282.0" prefWidth="169.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+      <AnchorPane onMouseDragEntered="#changeRedCrossBehaviour" prefHeight="282.0" prefWidth="169.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="31.0" prefHeight="30.0" prefWidth="62.0" text="Wide" textAlignment="CENTER" textFill="WHITE">
                <font>
