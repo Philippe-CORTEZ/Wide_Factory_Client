@@ -1,5 +1,6 @@
 package fr.univtln.wf.controllers;
 
+import fr.univtln.wf.jmonkey.JMEExercise;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -23,7 +24,9 @@ public class PopupScreenController
     /** Visualize reference exercise with reference movements */
     public void visualize()
     {
-        //TODO show animation from the database
+        JMEExercise jme = new JMEExercise();
+        jme.getExoDisplayable().setExercise(DataGUI.getExerciseSelected());
+        jme.start();
     }
 
     public void initDescription()
