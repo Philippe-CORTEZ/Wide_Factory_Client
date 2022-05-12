@@ -11,6 +11,7 @@ public class SkeletonDAO extends GenericDAO<Skeleton>
     /**
      * Persist an entity in database and return after persisting
      * Equal to persist of entity manager
+     * Add a mapping to his joints
      * @param entity entity to persist
      * @return entity after persisting
      */

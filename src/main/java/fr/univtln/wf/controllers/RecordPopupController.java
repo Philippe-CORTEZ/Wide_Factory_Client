@@ -32,9 +32,6 @@ public class RecordPopupController {
     public void initialize()
     {
         loading();
-
-        // Bind red cross button with cancel button (to reset data)
-//        cancelBtn.getScene().getWindow().setOnCloseRequest(event -> cancelRecording());
     }
 
     /** close the popup and clear the movement in memory */
@@ -82,4 +79,10 @@ public class RecordPopupController {
         visualizeBtn.setDisable(false);
     }
 
+
+    public void changeRedCrossBehaviour()
+    {
+        // Bind red cross button with cancel button (to reset data)
+        cancelBtn.getScene().getWindow().setOnCloseRequest(event -> cancelRecording());
+    }
 }

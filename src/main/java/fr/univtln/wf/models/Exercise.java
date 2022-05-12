@@ -44,14 +44,7 @@ public class Exercise implements MappingBidirectional
     @JoinTable(name = "MOVEMENTS_EXERCISES", joinColumns = @JoinColumn(name = "NAME_EXERCISE"), inverseJoinColumns = @JoinColumn(name = "NAME_MOVEMENT"))
     private List<Movement> movements = new ArrayList<>();
 
-    /**
-     * add a movement to this exercise with his number of repetition
-     * @param movement movement to add
-     */
-    public void addMovement(Movement movement)
-    {
-        movements.add(movement);
-    }
+
 
     /**
      * setter which handle the mapping of skeletons
@@ -71,6 +64,16 @@ public class Exercise implements MappingBidirectional
         movements = new ArrayList<>();
         persons = new ArrayList<>();
         creator = new Person();
+    }
+
+
+    /**
+     * add a movement to this exercise with his number of repetition
+     * @param movement movement to add
+     */
+    public void addMovement(Movement movement)
+    {
+        movements.add(movement);
     }
 
     /**
@@ -121,6 +124,5 @@ public class Exercise implements MappingBidirectional
     {
         return name;
     }
-
 
 }
