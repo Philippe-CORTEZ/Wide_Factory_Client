@@ -42,8 +42,10 @@ public abstract class GenericController
     /**
      * Load a fxml file and display it, create a window popup
      * @param fxmlFileName the fxml file path
+     * @param title the title of the window
+     * @param undecorated if true the window is undecorated (without red cross, minimize and maximize button)
      */
-    public void createPopup(String fxmlFileName)
+    public void createPopup(String fxmlFileName, String title, boolean undecorated)
     {
         try
         {
@@ -51,7 +53,14 @@ public abstract class GenericController
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Exercise");
+
+            // if true remove red cross, minimize and maximize button
+            if(undecorated)
+            {
+                stage.initStyle(StageStyle.UNDECORATED);
+            }
+
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -61,29 +70,23 @@ public abstract class GenericController
         }
     }
 
+    /**
+     * Load a fxml file and display it, create a window popup with default decoration
+     * @param fxmlFileName the fxml file path
+     * @param title the title of the window
+     */
+    public void createPopup(String fxmlFileName, String title)
+    {
+        createPopup(fxmlFileName, title, false);
+    }
 
     /**
-     * CreatePopup without red cross, minimize and maximize button
+     * Load a fxml file and display it, create a window popup with a default title and default decoration
      * @param fxmlFileName the fxml file path
      */
-    public void createPopupUndecorated(String fxmlFileName)
+    public void createPopup(String fxmlFileName)
     {
-        // TODO : Need to be refactored
-        try
-        {
-            // This is a popup, so, a stage is created
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFileName)));
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("Exercise");
-            stage.setScene(new Scene(root));
-            stage.show();
-        }
-        catch (IOException e)
-        {
-            log.error("Unable to load the file specified", e);
-        }
+        createPopup(fxmlFileName, "Wide Factory");
     }
 
 }
