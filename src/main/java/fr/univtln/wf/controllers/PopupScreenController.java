@@ -1,5 +1,6 @@
 package fr.univtln.wf.controllers;
 
+import com.jme3.system.AppSettings;
 import fr.univtln.wf.jmonkey.JMEExercise;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -26,6 +27,18 @@ public class PopupScreenController
     {
         JMEExercise jme = new JMEExercise();
         jme.getExoDisplayable().setExercise(DataGUI.getExerciseSelected());
+
+        jme.setShowSettings(false);
+
+        AppSettings settings = new AppSettings(true);
+        settings.put("Width", 1280);
+        settings.put("Height", 720);
+        settings.put("Title", "My awesome Game");
+        settings.put("VSync", true);
+        settings.put("Samples", 4);
+
+        jme.setSettings(settings);
+
         jme.start();
     }
 
