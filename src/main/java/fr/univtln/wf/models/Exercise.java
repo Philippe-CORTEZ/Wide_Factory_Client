@@ -54,6 +54,15 @@ public class Exercise implements MappingBidirectional
     }
 
     /**
+     * setter which handle the mapping of skeletons
+     * @param movements
+     */
+    public void setMovements(List<Movement> movements)
+    {
+        this.movements = movements;
+    }
+
+    /**
      * constructor without parameter
      */
     public Exercise() {
@@ -73,6 +82,17 @@ public class Exercise implements MappingBidirectional
         for (Movement m : movements)
         {
             m.mappingAttribute();
+        }
+    }
+
+    /**
+     * mapping of skeletons
+     */
+    public void mappingSkeletons()
+    {
+        for (Movement m : movements)
+        {
+            m.mappingSkeletons();
         }
     }
 

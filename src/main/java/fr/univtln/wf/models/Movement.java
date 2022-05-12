@@ -75,6 +75,10 @@ public class Movement implements MappingBidirectional
     }
 
 
+    /**
+     * setter of skeletons and map them correctly
+     * @param skeletons
+     */
     public void setSkeleton(List<Skeleton> skeletons)
     {
         this.skeletons = skeletons;
@@ -90,6 +94,17 @@ public class Movement implements MappingBidirectional
         {
             sk.setMovement(this);
             sk.mappingAttribute();
+        }
+    }
+
+    /**
+     * mapping of skeletons
+     */
+    public void mappingSkeletons()
+    {
+        for(Skeleton skeleton : this.skeletons)
+        {
+            skeleton.mappingJoint();
         }
     }
 

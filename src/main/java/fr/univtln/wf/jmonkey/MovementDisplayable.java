@@ -37,6 +37,7 @@ public class MovementDisplayable extends Node
     public MovementDisplayable(Movement movement)
     {
         this.movement = movement;
+        this.movement.mappingSkeletons();
         this.count = 0;
         this.loop = true;
     }
@@ -45,8 +46,9 @@ public class MovementDisplayable extends Node
     /**
      * display the skeleton and put the count to the next frame
      * @param assetManager assetManager of Jmonkey application
+     * @return boolean that indicate if the movement has been fully displayed
      */
-    public void displayNextFrame(AssetManager assetManager)
+    public boolean displayNextFrame(AssetManager assetManager)
     {
         // Animation not finished
         if (count < movement.getSkeletons().size())
@@ -56,12 +58,14 @@ public class MovementDisplayable extends Node
             sk.displaySkeleton(movement.getSkeletons().get(count), assetManager);
             this.attachChild(sk);
             count++;
+            return false;
         }
         // Animation finished and loop is activate, replay animation
         else if (loop)
         {
             count = 0;
         }
+        return true;
     }
 
     /** Erase all data that was in before */
@@ -79,6 +83,7 @@ public class MovementDisplayable extends Node
     public void setMovement(Movement movement)
     {
         this.movement = movement;
+        this.movement.mappingSkeletons();
         this.count = 0;
     }
 
