@@ -10,16 +10,16 @@ import javafx.scene.control.Label;
  * Controller that manage pop up window options when an exercise is double clicked
  * @author Wide Factory Team
  */
-public class PopupScreenController
+public class ExercisePopupController
 {
     @FXML
-    private Label execiseDescription;
+    private Label exerciseDescription;
 
 
     @FXML
     public void initialize()
     {
-        initDescription();
+        exerciseDescription.setText("description : " + DataGUI.getExerciseSelected().getDescription());
     }
 
     /** Visualize reference exercise with reference movements */
@@ -40,13 +40,6 @@ public class PopupScreenController
         jme.setSettings(settings);
 
         jme.start();
-    }
-
-    public void initDescription()
-    {
-        //TODO fill the decsription with the selected exercise description
-
-        execiseDescription.setText("description : " + DataGUI.getExerciseSelected().getDescription());
     }
 
 }

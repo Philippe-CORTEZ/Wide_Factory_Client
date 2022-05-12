@@ -129,7 +129,7 @@ public class CoachController implements Controller
     /** Create a popup window to interact with the exercise selected */
     public void switchToPopupScene()
     {
-       createPopup("/view/fxml/popupscreen.fxml");
+       createPopup("/view/fxml/exercisepopup.fxml");
     }
 
 }
