@@ -56,7 +56,6 @@ public class CoachController extends GenericController
     public void startRecording()
     {
         MovementDAO movementDAO = new MovementDAO();
-
         String name = movementName.getText();
 
         // Don't start recording if the name is empty or already taken
@@ -81,8 +80,6 @@ public class CoachController extends GenericController
             createPopupUndecorated("/view/fxml/recordpopup.fxml");
 
         }
-    }
-
     }
 
 

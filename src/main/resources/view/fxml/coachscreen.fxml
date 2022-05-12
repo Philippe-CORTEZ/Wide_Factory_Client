@@ -92,7 +92,7 @@
                         </Label>
                      </children>
                   </AnchorPane>
-                  <Label layoutX="9.0" layoutY="206.0" prefHeight="45.0" prefWidth="964.0" text="Choose a name for your movement and write a description And once you are ready click start to start recording  " AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="21.0">
+                  <Label layoutX="14.0" layoutY="161.0" prefHeight="47.0" prefWidth="964.0" text="Choose a name for your movement and write a description And once you are ready click start to start recording  " AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-2.0">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
