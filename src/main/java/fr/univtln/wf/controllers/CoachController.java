@@ -45,6 +45,7 @@ public class CoachController implements Controller
     @FXML
     public void initialize()
     {
+        // Get all exercises in database to display in exercises list
         initListOfExercises();
 
         // Initialize spinner timer (2 to 10, initial 2, and change value 1 by 1)
@@ -117,19 +118,15 @@ public class CoachController implements Controller
         listOfExercises.setItems(exercises);
 
         // Add binding on each item in listview (set exercise selected and unselect to reselect after popup closed)
-        listOfExercises.setOnMouseClicked(event -> {
+        listOfExercises.setOnMouseClicked(event ->
+        {
             DataGUI.setExerciseSelected(listOfExercises.getSelectionModel().selectedItemProperty().getValue());
             int index = listOfExercises.getSelectionModel().getSelectedIndex();
             listOfExercises.getSelectionModel().clearSelection(index);
-            switchToPopupScene();
+
+            // Create a popup window to interact with the exercise selected */
+            createPopup("/view/fxml/exercisepopup.fxml");
         });
-
-    }
-
-    /** Create a popup window to interact with the exercise selected */
-    public void switchToPopupScene()
-    {
-       createPopup("/view/fxml/exercisepopup.fxml");
     }
 
 }
