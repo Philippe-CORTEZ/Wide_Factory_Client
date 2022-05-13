@@ -47,7 +47,7 @@ public class ExerciseDisplayable extends Node {
     }
 
     /**
-     * dispaly the next frame of the exercise
+     * display the next frame of the exercise
      */
     public void displayNextFrame(AssetManager assetManager)
     {

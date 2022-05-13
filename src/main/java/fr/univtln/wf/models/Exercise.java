@@ -46,19 +46,9 @@ public class Exercise implements MappingBidirectional
 
 
 
-    /**
-     * setter which handle the mapping of skeletons
-     * @param movements
-     */
-    public void setMovements(List<Movement> movements)
+    /** Constructor without parameter */
+    public Exercise()
     {
-        this.movements = movements;
-    }
-
-    /**
-     * constructor without parameter
-     */
-    public Exercise() {
         name = "";
         description = "";
         movements = new ArrayList<>();
