@@ -4,6 +4,10 @@ import com.jme3.math.Vector3f;
 import fr.univtln.wf.jmonkey.ExerciseDisplayable;
 import lombok.Getter;
 
+/**
+ * A Jmonkey application that enable to display a complete exercise
+ * @author Wide Factory Team
+ */
 public class JMEExercise extends JMEGeneric
 {
     /** A movement with skeletons that can be displayed */

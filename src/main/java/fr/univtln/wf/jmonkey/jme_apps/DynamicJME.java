@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A Jmonkey application that enable to display a continus skeleton recorded by the Kinect
+ * A Jmonkey application that enable to display a continus skeleton recorded by the Kinect in real time
  * @author Wide Factory Team
  */
 @Getter

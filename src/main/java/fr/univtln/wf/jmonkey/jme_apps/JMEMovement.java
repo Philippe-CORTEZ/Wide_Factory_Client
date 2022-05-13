@@ -12,14 +12,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class JME extends JMEGeneric
+public class JMEMovement extends JMEGeneric
 {
     /** A movement with skeletons that can be displayed */
     private MovementDisplayable mv;
 
 
     /** Default constructor */
-    public JME()
+    public JMEMovement()
     {
         this.mv = new MovementDisplayable();
     }

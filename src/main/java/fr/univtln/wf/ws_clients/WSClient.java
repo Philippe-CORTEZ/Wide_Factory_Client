@@ -2,7 +2,7 @@ package fr.univtln.wf.ws_clients;
 
 
 import fr.univtln.wf.jmonkey.jme_apps.DynamicJME;
-import fr.univtln.wf.jmonkey.jme_apps.JME;
+import fr.univtln.wf.jmonkey.jme_apps.JMEMovement;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
 import lombok.Getter;
@@ -32,7 +32,7 @@ public class WSClient
 
     /** Instance of Jmonkey app to display skeletons of a movement (not real time) */
     @Getter
-    private static final JME STATIC_JME = new JME();
+    private static final JMEMovement STATIC_JME_MOVEMENT = new JMEMovement();
 
     /** Describe state of the client */
     @Getter
@@ -79,7 +79,7 @@ public class WSClient
             if(state.equals(WSState.RECORDING))
             {
                 // Just add all skeletons in the final movement in JME class
-                STATIC_JME.getMv().getMovement().setSkeletons(skeletons);
+                STATIC_JME_MOVEMENT.getMv().getMovement().setSkeletons(skeletons);
             }
 
             else
