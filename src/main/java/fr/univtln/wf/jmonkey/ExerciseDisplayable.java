@@ -33,7 +33,7 @@ public class ExerciseDisplayable extends Node {
 
     /**
      * constructor with an exercise
-     * @param exercise
+     * @param exercise an exercise given
      */
     public ExerciseDisplayable(Exercise exercise)
     {
@@ -48,9 +48,8 @@ public class ExerciseDisplayable extends Node {
 
     /**
      * dispaly the next frame of the exercise
-     * @return boolean that indicate if the exercise has been fully displayed
      */
-    public boolean displayNextFrame(AssetManager assetManager)
+    public void displayNextFrame(AssetManager assetManager)
     {
         boolean movementFinished;
         if (movementNumber < movementDisplayables.size())
@@ -67,12 +66,15 @@ public class ExerciseDisplayable extends Node {
             {
                 attachNextMovement();
             }
-            return false;
         }
-        return true;
     }
 
-    public void setExercise(Exercise exercise) {
+    /**
+     * Special setter that reset exercise displayable in same time
+     * @param exercise new exercise given
+     */
+    public void setExercise(Exercise exercise)
+    {
         this.exercise = exercise;
         movementDisplayables.clear();
         for (Movement m : exercise.getMovements())
@@ -97,4 +99,5 @@ public class ExerciseDisplayable extends Node {
         }
         movementRepetition = 0;
     }
+
 }

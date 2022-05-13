@@ -151,6 +151,7 @@ public class RecordPopupController
     }
 
 
+    /** Initialize a progress bar and his callback when is filled */
     private void initializeProgressBar()
     {
         // Default color of label and progress bar
@@ -168,6 +169,7 @@ public class RecordPopupController
                         new KeyFrame(Duration.seconds(DataGUI.getTimeRecording()), event ->
                         {
                             // When progress bar is filled (progression finished)
+                            // Change color to green, enable all button and display finished
                             restartBtn.setDisable(false);
                             cancelBtn.setDisable(false);
                             validateBtn.setDisable(false);
@@ -181,11 +183,12 @@ public class RecordPopupController
         timeline.play();
     }
 
-
+    /** reset all buttons in the popup (disable all buttons excepted cancel) */
     private void resetButtons()
     {
         validateBtn.setDisable(true);
         visualizeBtn.setDisable(true);
         restartBtn.setDisable(true);
     }
+
 }
