@@ -1,15 +1,14 @@
-package fr.univtln.wf.jmonkey;
+package fr.univtln.wf.jmonkey.jme_apps;
 
-import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
-import fr.univtln.wf.databases.daos.ExerciseDAO;
+import fr.univtln.wf.jmonkey.ExerciseDisplayable;
 import lombok.Getter;
 
-public class JMEExercise extends SimpleApplication
+public class JMEExercise extends JMEGeneric
 {
     /** A movement with skeletons that can be displayed */
     @Getter
-    private ExerciseDisplayable exoDisplayable;
+    private final ExerciseDisplayable exoDisplayable;
 
 
     /** Default constructor */
@@ -42,8 +41,4 @@ public class JMEExercise extends SimpleApplication
         exoDisplayable.displayNextFrame(assetManager);
     }
 
-    public static void main(String[] args) {
-        JMEExercise j = new JMEExercise();
-        j.start();
-    }
 }

@@ -1,10 +1,7 @@
-package fr.univtln.wf.jmonkey;
+package fr.univtln.wf.jmonkey.jme_apps;
 
-import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
-import fr.univtln.wf.databases.daos.MovementDAO;
-import fr.univtln.wf.models.Movement;
-import fr.univtln.wf.models.Skeleton;
+import fr.univtln.wf.jmonkey.MovementDisplayable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class JME extends SimpleApplication
+public class JME extends JMEGeneric
 {
     /** A movement with skeletons that can be displayed */
     private MovementDisplayable mv;
@@ -49,13 +46,6 @@ public class JME extends SimpleApplication
     public void simpleUpdate(float tpf)
     {
         mv.displayNextFrame(assetManager);
-    }
-
-    public static void main(String[] args) {
-        JME j = new JME();
-        Movement m = new MovementDAO().find("coucou");
-        j.getMv().setMovement(m);
-        j.start();
     }
 
 }

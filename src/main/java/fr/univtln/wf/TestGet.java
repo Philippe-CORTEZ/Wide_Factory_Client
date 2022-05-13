@@ -1,7 +1,7 @@
 package fr.univtln.wf;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
-import fr.univtln.wf.jmonkey.JME;
+import fr.univtln.wf.jmonkey.jme_apps.JME;
 import fr.univtln.wf.models.Movement;
 import fr.univtln.wf.models.Skeleton;
 
