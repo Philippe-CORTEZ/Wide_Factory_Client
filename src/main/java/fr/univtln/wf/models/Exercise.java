@@ -16,7 +16,7 @@ import java.util.*;
 @Setter
 
 @Entity
-public class Exercise implements MappingBidirectional
+public class Exercise
 {
     /** The name of an exercise is unique */
     @Id
@@ -27,11 +27,6 @@ public class Exercise implements MappingBidirectional
     @Builder.Default
     private String description = "";
 
-    /** The people that done this exercise */
-    @ManyToMany(mappedBy = "exercices")
-    @Builder.Default
-    private List<Person> persons = new ArrayList<>();
-
     /** The coach that created this exercise */
     @ManyToOne
     @JoinColumn(name = "PSEUDO_EDITOR")
@@ -40,8 +35,8 @@ public class Exercise implements MappingBidirectional
 
     /** Mapping many to many with movement */
     @ManyToMany
-    @Builder.Default
     @JoinTable(name = "MOVEMENTS_EXERCISES", joinColumns = @JoinColumn(name = "NAME_EXERCISE"), inverseJoinColumns = @JoinColumn(name = "NAME_MOVEMENT"))
+    @Builder.Default
     private List<Movement> movements = new ArrayList<>();
 
 
@@ -52,7 +47,6 @@ public class Exercise implements MappingBidirectional
         name = "";
         description = "";
         movements = new ArrayList<>();
-        persons = new ArrayList<>();
         creator = new Person();
     }
 
@@ -66,23 +60,12 @@ public class Exercise implements MappingBidirectional
         movements.add(movement);
     }
 
-    /**
-     * used when it needs to be persisted,
-     * set the bidirectional relation
-     */
-    public void mappingAttribute()
-    {
-        for (Movement m : movements)
-        {
-            m.mappingAttribute();
-        }
-    }
-
-    /**
-     * mapping of skeletons
-     */
+    /** Mapping of skeletons used to make a link between exercise movements and skeletons */
     public void mappingSkeletons()
     {
+        // Currently this method is not used
+        // The mapping for exercise and movements is performed in the setter of ExerciseDisplayable
+        // (With constructor parameters of Movement)
         for (Movement m : movements)
         {
             m.mappingSkeletons();

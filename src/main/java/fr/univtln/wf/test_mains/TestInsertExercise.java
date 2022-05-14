@@ -1,4 +1,4 @@
-package fr.univtln.wf;
+package fr.univtln.wf.tmps;
 
 import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.models.*;

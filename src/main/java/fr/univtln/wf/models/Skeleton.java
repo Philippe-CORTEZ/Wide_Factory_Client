@@ -24,10 +24,9 @@ import java.util.*;
 @Getter
 @Setter
 
-
 @Entity
 @Table(name = "SKELETON", uniqueConstraints = { @UniqueConstraint(columnNames = {"frame", "name_movement" }) })
-public class Skeleton implements MappingBidirectional
+public class Skeleton
 {
     /** ID in database */
     @Id
@@ -40,13 +39,9 @@ public class Skeleton implements MappingBidirectional
 
     /** List of join objects that represent 3D skeleton */
     @JsonProperty("joints")
-    @OneToMany(mappedBy = "skeleton", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_SKELETON")
     private List<Joint> joints;
-
-    /** movement that the skeleton refer */
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(referencedColumnName = "NAME", name = "NAME_MOVEMENT")
-    private Movement movement;
 
     /** Mapping joint */
     @Transient
@@ -104,19 +99,8 @@ public class Skeleton implements MappingBidirectional
         }
     }
 
-    /**
-     * used when it needs to be persisted,
-     * set the bidirectional relation
-     */
-    public void mappingAttribute()
-    {
-        for (Joint j : joints)
-        {
-            j.setSkeleton(this);
-        }
-    }
 
-
+    // Static block called one time during the first reference to the Skeleton class
     static
     {
         // mapping of bones hierarchy
@@ -206,17 +190,14 @@ public class Skeleton implements MappingBidirectional
 
         Skeleton skeleton = (Skeleton) o;
 
-        if (frame != skeleton.frame) return false;
-        return Objects.equals(movement, skeleton.movement);
+        return frame == skeleton.frame;
     }
 
     /** Overriding hashCode */
     @Override
     public int hashCode()
     {
-        int result = frame;
-        result = 31 * result + (movement != null ? movement.hashCode() : 0);
-        return result;
+        return frame;
     }
 
     /** Overriding toString */
