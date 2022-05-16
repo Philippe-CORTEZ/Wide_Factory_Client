@@ -1,10 +1,8 @@
 package fr.univtln.wf.ws_clients;
 
 
-import com.jme3.system.AppSettings;
-import fr.univtln.wf.jmonkey.DynamicJME;
-import fr.univtln.wf.jmonkey.JME;
-import fr.univtln.wf.models.Joint;
+import fr.univtln.wf.jmonkey.jme_apps.DynamicJME;
+import fr.univtln.wf.jmonkey.jme_apps.JMEMovement;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
 import lombok.Getter;
@@ -34,7 +32,7 @@ public class WSClient
 
     /** Instance of Jmonkey app to display skeletons of a movement (not real time) */
     @Getter
-    private static final JME STATIC_JME = new JME();
+    private static final JMEMovement STATIC_JME_MOVEMENT = new JMEMovement();
 
     /** Describe state of the client */
     @Getter
@@ -58,20 +56,6 @@ public class WSClient
         {
             log.error("Error in onOpen : ", error);
         }
-
-        // Initialize Jmonkey apps for visualisation dynamic and non dynamic
-        DYNAMIC_JME.setShowSettings(false);
-        STATIC_JME.setShowSettings(false);
-
-        AppSettings settings = new AppSettings(true);
-        settings.put("Width", 1280);
-        settings.put("Height", 720);
-        settings.put("Title", "My awesome Game");
-        settings.put("VSync", true);
-        settings.put("Samples", 4);
-
-        DYNAMIC_JME.setSettings(settings);
-        STATIC_JME.setSettings(settings);
     }
 
 
@@ -95,7 +79,7 @@ public class WSClient
             if(state.equals(WSState.RECORDING))
             {
                 // Just add all skeletons in the final movement in JME class
-                STATIC_JME.getMv().getMovement().setSkeletons(skeletons);
+                STATIC_JME_MOVEMENT.getMv().getMovement().setSkeletons(skeletons);
             }
 
             else

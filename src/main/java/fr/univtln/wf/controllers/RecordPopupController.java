@@ -86,8 +86,8 @@ public class RecordPopupController
         WSClient.setState(WSState.RECORDING);
 
         // Set name and description to the movement
-        WSClient.getSTATIC_JME().getMv().getMovement().setName(DataGUI.getMovementNameRecording());
-        WSClient.getSTATIC_JME().getMv().getMovement().setDescription(DataGUI.getMovementDescriptionRecording());
+        WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().setName(DataGUI.getMovementNameRecording());
+        WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().setDescription(DataGUI.getMovementDescriptionRecording());
     }
 
     /** close the popup and clear the movement in memory */
@@ -95,7 +95,7 @@ public class RecordPopupController
     {
         // Close window reset data from WS client
         ((Stage)(cancelBtn.getScene().getWindow())).close();
-        WSClient.getSTATIC_JME().getMv().clear();
+        WSClient.getSTATIC_JME_MOVEMENT().getMv().clear();
         WSClient.setState(WSState.STANDBY);
     }
 
@@ -103,7 +103,7 @@ public class RecordPopupController
     public void restartRecording()
     {
         // Clear the skeleton recorded with kinect
-        WSClient.getSTATIC_JME().getMv().getMovement().getSkeletons().clear();
+        WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().getSkeletons().clear();
 
         // Reset widget (button, progress bar)
         initializeProgressBar();
@@ -117,12 +117,12 @@ public class RecordPopupController
      public void uploadRecording()
      {
          // Persist if the movement is not empty of skeletons
-         if (!WSClient.getSTATIC_JME().getMv().getMovement().getSkeletons().isEmpty())
+         if (!WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().getSkeletons().isEmpty())
          {
-             new MovementDAO().persist(WSClient.getSTATIC_JME().getMv().getMovement());
+             new MovementDAO().persist(WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement());
          }
          // Clear the movement to record another movement in the futur
-         WSClient.getSTATIC_JME().getMv().clear();
+         WSClient.getSTATIC_JME_MOVEMENT().getMv().clear();
 
          // Close the popup window
          ((Stage)(validateBtn.getScene().getWindow())).close();
@@ -131,7 +131,7 @@ public class RecordPopupController
     /** Visualize the movement in memory in Jmonkey application */
     public void visualizeRecording()
     {
-        WSClient.getSTATIC_JME().start();
+        WSClient.getSTATIC_JME_MOVEMENT().start();
     }
 
     /** Add possibility to drag window by his anchorPane */
@@ -151,6 +151,7 @@ public class RecordPopupController
     }
 
 
+    /** Initialize a progress bar and his callback when is filled */
     private void initializeProgressBar()
     {
         // Default color of label and progress bar
@@ -168,6 +169,7 @@ public class RecordPopupController
                         new KeyFrame(Duration.seconds(DataGUI.getTimeRecording()), event ->
                         {
                             // When progress bar is filled (progression finished)
+                            // Change color to green, enable all button and display finished
                             restartBtn.setDisable(false);
                             cancelBtn.setDisable(false);
                             validateBtn.setDisable(false);
@@ -181,11 +183,12 @@ public class RecordPopupController
         timeline.play();
     }
 
-
+    /** reset all buttons in the popup (disable all buttons excepted cancel) */
     private void resetButtons()
     {
         validateBtn.setDisable(true);
         visualizeBtn.setDisable(true);
         restartBtn.setDisable(true);
     }
+
 }

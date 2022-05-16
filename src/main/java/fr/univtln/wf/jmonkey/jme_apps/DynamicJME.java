@@ -1,18 +1,18 @@
-package fr.univtln.wf.jmonkey;
+package fr.univtln.wf.jmonkey.jme_apps;
 
-import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
+import fr.univtln.wf.jmonkey.SkeletonDisplayable;
 import fr.univtln.wf.models.Skeleton;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A Jmonkey application that enable to display a continus skeleton recorded by the Kinect
+ * A Jmonkey application that enable to display a continus skeleton recorded by the Kinect in real time
  * @author Wide Factory Team
  */
 @Getter
 @Setter
-public class DynamicJME extends SimpleApplication
+public class DynamicJME extends JMEGeneric
 {
     /** Jmonkey structure for representing the skeleton in 3D environment */
     private SkeletonDisplayable sk;

@@ -3,7 +3,7 @@ package fr.univtln.wf.jmonkey;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import fr.univtln.wf.models.Exercise;
-import fr.univtln.wf.models.Movement;
+import fr.univtln.wf.models.FragmentExercise;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -33,29 +33,29 @@ public class ExerciseDisplayable extends Node {
 
     /**
      * constructor with an exercise
-     * @param exercise
+     * @param exercise an exercise given
      */
     public ExerciseDisplayable(Exercise exercise)
     {
        this.exercise = exercise;
-       for (Movement m : exercise.getMovements())
+       for (FragmentExercise fragment : exercise.getFragments())
        {
-           movementDisplayables.add(new MovementDisplayable(m));
+           // Add a movement with parameters constructor (mappingSkeleton is called)
+           movementDisplayables.add(new MovementDisplayable(fragment.getMovement()));
        }
        if (!movementDisplayables.isEmpty()) attachChild(movementDisplayables.get(0));
        this.exercise.mappingSkeletons();
     }
 
     /**
-     * dispaly the next frame of the exercise
-     * @return boolean that indicate if the exercise has been fully displayed
+     * display the next frame of the exercise
      */
-    public boolean displayNextFrame(AssetManager assetManager)
+    public void displayNextFrame(AssetManager assetManager)
     {
         boolean movementFinished;
         if (movementNumber < movementDisplayables.size())
         {
-            if (movementRepetition < exercise.getMovements().get(movementNumber).getDefaultRepetition())
+            if (movementRepetition < exercise.getFragments().get(movementNumber).getRepetition())
             {
                 movementFinished = movementDisplayables.get(movementNumber).displayNextFrame(assetManager);
                 if (movementFinished)
@@ -67,17 +67,21 @@ public class ExerciseDisplayable extends Node {
             {
                 attachNextMovement();
             }
-            return false;
         }
-        return true;
     }
 
-    public void setExercise(Exercise exercise) {
+    /**
+     * Special setter that reset exercise displayable in same time
+     * @param exercise new exercise given
+     */
+    public void setExercise(Exercise exercise)
+    {
         this.exercise = exercise;
         movementDisplayables.clear();
-        for (Movement m : exercise.getMovements())
+        for (FragmentExercise fragment : exercise.getFragments())
         {
-            movementDisplayables.add(new MovementDisplayable(m));
+            // Add a movement with parameters constructor (mappingSkeleton is called)
+            movementDisplayables.add(new MovementDisplayable(fragment.getMovement()));
         }
         if (!movementDisplayables.isEmpty()) attachChild(movementDisplayables.get(0));
         this.movementNumber = 0;
@@ -97,4 +101,5 @@ public class ExerciseDisplayable extends Node {
         }
         movementRepetition = 0;
     }
+
 }

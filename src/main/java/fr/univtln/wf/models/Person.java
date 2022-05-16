@@ -27,6 +27,7 @@ public class Person
     /** last name and first name */
     private String lastname;
     private String firstname;
+
     /** role of the person, simple user or coach at this time */
     @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)

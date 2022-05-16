@@ -16,7 +16,7 @@ import java.util.*;
 @Setter
 
 @Entity
-public class Exercise implements MappingBidirectional
+public class Exercise
 {
     /** The name of an exercise is unique */
     @Id
@@ -27,11 +27,6 @@ public class Exercise implements MappingBidirectional
     @Builder.Default
     private String description = "";
 
-    /** The people that done this exercise */
-    @ManyToMany(mappedBy = "exercices")
-    @Builder.Default
-    private List<Person> persons = new ArrayList<>();
-
     /** The coach that created this exercise */
     @ManyToOne
     @JoinColumn(name = "PSEUDO_EDITOR")
@@ -39,30 +34,19 @@ public class Exercise implements MappingBidirectional
     private Person creator = new Person();
 
     /** Mapping many to many with movement */
-    @ManyToMany
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.PERSIST)
+    @OrderBy("position ASC")
     @Builder.Default
-    @JoinTable(name = "MOVEMENTS_EXERCISES", joinColumns = @JoinColumn(name = "NAME_EXERCISE"), inverseJoinColumns = @JoinColumn(name = "NAME_MOVEMENT"))
-    private List<Movement> movements = new ArrayList<>();
+    private List<FragmentExercise> fragments = new ArrayList<>();
 
 
 
-    /**
-     * setter which handle the mapping of skeletons
-     * @param movements
-     */
-    public void setMovements(List<Movement> movements)
+    /** Constructor without parameter */
+    public Exercise()
     {
-        this.movements = movements;
-    }
-
-    /**
-     * constructor without parameter
-     */
-    public Exercise() {
         name = "";
         description = "";
-        movements = new ArrayList<>();
-        persons = new ArrayList<>();
+        fragments = new ArrayList<>();
         creator = new Person();
     }
 
@@ -73,29 +57,37 @@ public class Exercise implements MappingBidirectional
      */
     public void addMovement(Movement movement)
     {
-        movements.add(movement);
+        FragmentExercise fragment = FragmentExercise
+                .builder()
+                .position(fragments.size())
+                .exercise(this)
+                .movement(movement)
+                .build();
+
+        fragments.add(fragment);
     }
 
     /**
-     * used when it needs to be persisted,
-     * set the bidirectional relation
+     * add a movement to this exercise with his number of repetition
+     * @param movement movement to add
+     * @param repetition number of repetition of this movement
      */
-    public void mappingAttribute()
+    public void addMovement(Movement movement, int repetition)
     {
-        for (Movement m : movements)
-        {
-            m.mappingAttribute();
-        }
+        addMovement(movement);
+        fragments.get(fragments.size() - 1).setRepetition(repetition);
     }
 
-    /**
-     * mapping of skeletons
-     */
+
+    /** Mapping of skeletons used to make a link between exercise movements and skeletons */
     public void mappingSkeletons()
     {
-        for (Movement m : movements)
+        // Currently this method is not used
+        // The mapping for exercise and movements is performed in the setter of ExerciseDisplayable
+        // (With constructor parameters of Movement)
+        for (FragmentExercise fragment : fragments)
         {
-            m.mappingSkeletons();
+            fragment.getMovement().mappingSkeletons();
         }
     }
 

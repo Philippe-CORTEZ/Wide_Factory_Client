@@ -7,7 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -16,15 +17,16 @@ import java.util.Objects;
  * Mutualise common behaviour between controllers
  * @author Wide Factory Team
  */
-@Slf4j
-public abstract class GenericController
+public interface Controller
 {
     /**
      * Load a fxml file and display it, replace the current FXML of the primary stage
      * @param fxmlFileName the fxml file path
      */
-    public void changeFXML(String fxmlFileName)
+    default void changeFXML(String fxmlFileName)
     {
+        Logger log = LoggerFactory.getLogger(Controller.class);
+
         try
         {
             Parent root = FXMLLoader.load(Objects.requireNonNull(App.class.getClassLoader().getResource(fxmlFileName)));
@@ -45,8 +47,10 @@ public abstract class GenericController
      * @param title the title of the window
      * @param undecorated if true the window is undecorated (without red cross, minimize and maximize button)
      */
-    public void createPopup(String fxmlFileName, String title, boolean undecorated)
+    default void createPopup(String fxmlFileName, String title, boolean undecorated)
     {
+        Logger log = LoggerFactory.getLogger(Controller.class);
+
         try
         {
             // This is a popup, so, a stage is created
@@ -75,7 +79,7 @@ public abstract class GenericController
      * @param fxmlFileName the fxml file path
      * @param title the title of the window
      */
-    public void createPopup(String fxmlFileName, String title)
+    default void createPopup(String fxmlFileName, String title)
     {
         createPopup(fxmlFileName, title, false);
     }
@@ -84,7 +88,7 @@ public abstract class GenericController
      * Load a fxml file and display it, create a window popup with a default title and default decoration
      * @param fxmlFileName the fxml file path
      */
-    public void createPopup(String fxmlFileName)
+    default void createPopup(String fxmlFileName)
     {
         createPopup(fxmlFileName, "Wide Factory");
     }

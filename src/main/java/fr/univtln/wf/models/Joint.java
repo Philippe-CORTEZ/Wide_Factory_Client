@@ -30,13 +30,10 @@ public class Joint
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    /** skeleton that the joint belong to */
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(referencedColumnName = "ID", name = "ID_SKELETON")
-    private Skeleton skeleton;
-
     /** Name of joint describe a part of body */
     private String name;
+
+    /** 3D informations like position and quaternion info */
     private float w;
     private float wx;
     private float wy;
@@ -55,7 +52,6 @@ public class Joint
 
         Joint joint = (Joint) o;
 
-        if (!Objects.equals(skeleton, joint.skeleton)) return false;
         return Objects.equals(name, joint.name);
     }
 
@@ -63,9 +59,7 @@ public class Joint
     @Override
     public int hashCode()
     {
-        int result = skeleton != null ? skeleton.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return name != null ? name.hashCode() : 0;
     }
 
     /** Overriding toString */

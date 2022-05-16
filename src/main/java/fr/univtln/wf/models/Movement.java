@@ -13,14 +13,14 @@ import java.util.*;
  * Class that represent a movement
  * @author Wide Factory Team
  */
-@Builder
 @AllArgsConstructor
+@Builder
 
 @Getter
 @Setter
 
 @Entity
-public class Movement implements MappingBidirectional
+public class Movement
 {
     /** The movement name */
     @Id
@@ -28,7 +28,8 @@ public class Movement implements MappingBidirectional
     private String name = "";
 
     /** List of skeletons that represent the movement */
-    @OneToMany(mappedBy = "movement", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "NAME_MOVEMENT")
     @OrderBy("frame ASC")
     @Builder.Default
     private List<Skeleton> skeletons = new ArrayList<>();
@@ -37,16 +38,6 @@ public class Movement implements MappingBidirectional
     @Builder.Default
     private String description = "";
 
-    /** Mapping many to many with exercise */
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "movements")
-    @Builder.Default
-    private List<Exercise> exercises = new ArrayList<>();
-
-    /** default  repetition of the movement */
-    @Column(name = "default_repetition")
-    @Builder.Default
-    private int defaultRepetition = 10;
-
 
     /** Default constructor initialize attributes with default value (not null) */
     public Movement()
@@ -54,8 +45,6 @@ public class Movement implements MappingBidirectional
         this.name = "";
         this.skeletons = new ArrayList<>();
         this.description = "";
-        this.exercises = new ArrayList<>();
-        this.defaultRepetition = 10;
     }
 
     /**
@@ -70,36 +59,11 @@ public class Movement implements MappingBidirectional
         skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
         description = "";
-        exercises = new ArrayList<>();
-        defaultRepetition = 10;
     }
 
 
-    /**
-     * setter of skeletons and map them correctly
-     * @param skeletons
-     */
-    public void setSkeleton(List<Skeleton> skeletons)
-    {
-        this.skeletons = skeletons;
-    }
 
-    /**
-     * used when it needs to be persisted,
-     * set the bidirectional relation
-     */
-    public void mappingAttribute()
-    {
-        for (Skeleton sk : skeletons)
-        {
-            sk.setMovement(this);
-            sk.mappingAttribute();
-        }
-    }
-
-    /**
-     * mapping of skeletons
-     */
+    /** mapping of skeletons */
     public void mappingSkeletons()
     {
         for(Skeleton skeleton : this.skeletons)
@@ -108,16 +72,12 @@ public class Movement implements MappingBidirectional
         }
     }
 
-    /**
-     * clear all attribute of this movement
-     */
+    /** clear all attribute of this movement */
     public void clear()
     {
         name = "";
         description = "";
         skeletons.clear();
-        exercises.clear();
-        defaultRepetition = 10;
     }
 
 

@@ -1,30 +1,24 @@
-package fr.univtln.wf.jmonkey;
+package fr.univtln.wf.jmonkey.jme_apps;
 
-import com.jme3.app.SimpleApplication;
 import com.jme3.math.Vector3f;
-import fr.univtln.wf.databases.daos.MovementDAO;
-import fr.univtln.wf.models.Movement;
-import fr.univtln.wf.models.Skeleton;
+import fr.univtln.wf.jmonkey.ExerciseDisplayable;
 import lombok.Getter;
-import lombok.Setter;
-
 
 /**
- * A Jmonkey application that enable to display a complete movement, used to display a reference movement
+ * A Jmonkey application that enable to display a complete exercise
  * @author Wide Factory Team
  */
-@Getter
-@Setter
-public class JME extends SimpleApplication
+public class JMEExercise extends JMEGeneric
 {
     /** A movement with skeletons that can be displayed */
-    private MovementDisplayable mv;
+    @Getter
+    private final ExerciseDisplayable exoDisplayable;
 
 
     /** Default constructor */
-    public JME()
+    public JMEExercise()
     {
-        this.mv = new MovementDisplayable();
+        this.exoDisplayable = new ExerciseDisplayable();
     }
 
 
@@ -35,7 +29,7 @@ public class JME extends SimpleApplication
         // Move camera rearward
         cam.setLocation(new Vector3f(0,0, 3));
         // Display the first skeleton of the movement
-        rootNode.attachChild(mv);
+        rootNode.attachChild(exoDisplayable);
 
         // Set frame rate to 30 fps to synchronize with kinect
         settings.setFrameRate(30);
@@ -48,14 +42,7 @@ public class JME extends SimpleApplication
     @Override
     public void simpleUpdate(float tpf)
     {
-        mv.displayNextFrame(assetManager);
-    }
-
-    public static void main(String[] args) {
-        JME j = new JME();
-        Movement m = new MovementDAO().find("coucou");
-        j.getMv().setMovement(m);
-        j.start();
+        exoDisplayable.displayNextFrame(assetManager);
     }
 
 }
