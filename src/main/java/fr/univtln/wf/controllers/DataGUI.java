@@ -1,6 +1,7 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.models.Exercise;
+import fr.univtln.wf.models.Person;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,4 +34,8 @@ public class DataGUI
     @Setter
     private static String movementDescriptionRecording;
 
+    @Getter
+    @Setter
+    /** User connected */
+    private static Person currentUser;
 }
