@@ -45,11 +45,11 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="555.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="finalmovements" layoutX="139.0" layoutY="327.0" prefHeight="200.0" prefWidth="421.0" />
+            <TableView fx:id="exerciseMovements" layoutX="139.0" layoutY="327.0" prefHeight="200.0" prefWidth="421.0" />
             <Button layoutX="108.0" layoutY="594.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="528.0" layoutY="594.0" mnemonicParsing="false" onAction="#addmovement" text="Button" />
+            <Button layoutX="528.0" layoutY="594.0" mnemonicParsing="false" onAction="#addmovement" text="Add" />
             <Button layoutX="319.0" layoutY="594.0" mnemonicParsing="false" text="Button" />
-            <TableView fx:id="listofmovements" layoutX="138.0" layoutY="63.0" prefHeight="200.0" prefWidth="408.0" />
+            <TableView fx:id="movementsDatabase" layoutX="138.0" layoutY="63.0" prefHeight="200.0" prefWidth="408.0" />
          </children>
       </AnchorPane>
    </center>

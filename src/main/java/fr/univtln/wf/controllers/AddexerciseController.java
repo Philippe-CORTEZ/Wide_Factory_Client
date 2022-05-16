@@ -7,37 +7,24 @@ import fr.univtln.wf.models.FragmentExercise;
 import fr.univtln.wf.models.Movement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class AddexerciseController   {
 
-
-
+    /** movement available in the database */
     @FXML
-    private TableView<Movement> finalmovements;
+    private TableView<Movement> movementsDatabase;
 
+    /** movement that fill the exercise */
     @FXML
-    private TableView<Movement> listofmovements;
+    private TableView<FragmentExercise> exerciseMovements;
 
-
-    static List<Movement> l = new ArrayList<>();
-
-
-
+    private Exercise exercise;
 
     @FXML
     public void initialize()
@@ -45,6 +32,7 @@ public class AddexerciseController   {
         initmovement();
         initfinallist();
         // Initialize spinner timer (2 to 10, initial 2, and change value 1 by 1)
+        exercise = new Exercise();
     }
 
 
@@ -58,9 +46,7 @@ public class AddexerciseController   {
 
     public void initmovement()
     {
-        listofmovements.getSelectionModel().setSelectionMode(
-                SelectionMode.MULTIPLE
-        );
+        movementsDatabase.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         TableColumn<Movement, String> nomCol = new TableColumn<>("name");
 
@@ -69,22 +55,18 @@ public class AddexerciseController   {
         nomCol.setMinWidth(400);
 
         ObservableList<Movement> movements = getAllmMovement();
-        listofmovements.setItems(movements);
-        listofmovements.getColumns().addAll(nomCol);
-        //
-
-
+        movementsDatabase.setItems(movements);
+        movementsDatabase.getColumns().addAll(nomCol);
     }
 
-
     void initfinallist(){
-        TableColumn<Movement, String> nomCol = new TableColumn<>("name");
-       // TableColumn repscount = new TableColumn("repscount");
-        nomCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-       // repscount.setEditable(true);
+        TableColumn<FragmentExercise, String> nomCol = new TableColumn<>("name");
+        TableColumn repetition = new TableColumn("repetition");
+        repetition.setEditable(true);
 
-        //repscount.setCellValueFactory(new PropertyValueFactory<Movement, TextField>("firstName"));
-        finalmovements.getColumns().addAll(nomCol);
+        nomCol.setCellValueFactory(new PropertyValueFactory<>("movement/name"));
+        repetition.setCellValueFactory(new PropertyValueFactory<FragmentExercise, Integer>("repetition"));
+        exerciseMovements.getColumns().addAll(nomCol, repetition);
 
 
     }
@@ -93,7 +75,7 @@ public class AddexerciseController   {
     @FXML
     void addmovement() {
 
-        Movement movement =  listofmovements.getSelectionModel().getSelectedItem();
+        Movement movement =  movementsDatabase.getSelectionModel().getSelectedItem();
 
 
 
@@ -102,7 +84,7 @@ public class AddexerciseController   {
         movements = FXCollections.observableArrayList(l);
 
 
-        finalmovements.setItems(movements);
+        exerciseMovements.setItems(movements);
     }
 
 
