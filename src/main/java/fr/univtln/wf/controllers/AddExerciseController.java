@@ -81,15 +81,15 @@ public class AddExerciseController {
      * initialize the list of fragmentExercise of the exercise to create
      */
     void initExerciseMovements(){
-        TableColumn<FragmentExercise, String> nomCol = new TableColumn<>("name");
-        TableColumn<FragmentExercise, Integer> repetition = new TableColumn("repetition");
-        repetition.setEditable(true);
+        TableColumn<FragmentExercise, String> nameColumn = new TableColumn<>("name");
+        TableColumn<FragmentExercise, Integer> repetitionColumn = new TableColumn("repetition");
+        repetitionColumn.setEditable(true);
 
-        repetition.setCellValueFactory(new PropertyValueFactory<>("repetition"));
-        nomCol.setCellValueFactory(
+        repetitionColumn.setCellValueFactory(new PropertyValueFactory<>("repetition"));
+        nameColumn.setCellValueFactory(
                 param -> new SimpleStringProperty(param.getValue().getMovement().getName())
         );
-        exerciseMovements.getColumns().addAll(nomCol, repetition);
+        exerciseMovements.getColumns().addAll(nameColumn, repetitionColumn);
         exerciseMovements.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
