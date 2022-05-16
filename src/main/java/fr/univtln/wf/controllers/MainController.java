@@ -50,12 +50,15 @@ public class MainController implements Controller
         // Add binding on each item in listview (set exercise selected and unselect to reselect after popup closed)
         listOfExercises.setOnMouseClicked(event ->
         {
-            DataGUI.setExerciseSelected(listOfExercises.getSelectionModel().selectedItemProperty().getValue());
-            int index = listOfExercises.getSelectionModel().getSelectedIndex();
-            listOfExercises.getSelectionModel().clearSelection(index);
+            if (listOfExercises.getSelectionModel().selectedItemProperty().getValue() != null)
+            {
+                DataGUI.setExerciseSelected(listOfExercises.getSelectionModel().selectedItemProperty().getValue());
+                int index = listOfExercises.getSelectionModel().getSelectedIndex();
+                listOfExercises.getSelectionModel().clearSelection(index);
 
-            // Create a popup window to interact with the exercise selected */
-            createPopup("/view/fxml/exercisepopup.fxml");
+                // Create a popup window to interact with the exercise selected */
+                createPopup("/view/fxml/exercisepopup.fxml");
+            }
         });
     }
 
