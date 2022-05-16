@@ -34,10 +34,10 @@ public class Exercise
     private Person creator = new Person();
 
     /** Mapping many to many with movement */
-    @ManyToMany
-    @JoinTable(name = "MOVEMENTS_EXERCISES", joinColumns = @JoinColumn(name = "NAME_EXERCISE"), inverseJoinColumns = @JoinColumn(name = "NAME_MOVEMENT"))
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.PERSIST)
+    @OrderBy("position ASC")
     @Builder.Default
-    private List<Movement> movements = new ArrayList<>();
+    private List<FragmentExercise> fragments = new ArrayList<>();
 
 
 
@@ -46,7 +46,7 @@ public class Exercise
     {
         name = "";
         description = "";
-        movements = new ArrayList<>();
+        fragments = new ArrayList<>();
         creator = new Person();
     }
 
@@ -57,8 +57,27 @@ public class Exercise
      */
     public void addMovement(Movement movement)
     {
-        movements.add(movement);
+        FragmentExercise fragment = FragmentExercise
+                .builder()
+                .position(fragments.size())
+                .exercise(this)
+                .movement(movement)
+                .build();
+
+        fragments.add(fragment);
     }
+
+    /**
+     * add a movement to this exercise with his number of repetition
+     * @param movement movement to add
+     * @param repetition number of repetition of this movement
+     */
+    public void addMovement(Movement movement, int repetition)
+    {
+        addMovement(movement);
+        fragments.get(fragments.size() - 1).setRepetition(repetition);
+    }
+
 
     /** Mapping of skeletons used to make a link between exercise movements and skeletons */
     public void mappingSkeletons()
@@ -66,9 +85,9 @@ public class Exercise
         // Currently this method is not used
         // The mapping for exercise and movements is performed in the setter of ExerciseDisplayable
         // (With constructor parameters of Movement)
-        for (Movement m : movements)
+        for (FragmentExercise fragment : fragments)
         {
-            m.mappingSkeletons();
+            fragment.getMovement().mappingSkeletons();
         }
     }
 

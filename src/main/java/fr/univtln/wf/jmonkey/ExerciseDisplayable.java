@@ -3,7 +3,7 @@ package fr.univtln.wf.jmonkey;
 import com.jme3.asset.AssetManager;
 import com.jme3.scene.Node;
 import fr.univtln.wf.models.Exercise;
-import fr.univtln.wf.models.Movement;
+import fr.univtln.wf.models.FragmentExercise;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -38,9 +38,10 @@ public class ExerciseDisplayable extends Node {
     public ExerciseDisplayable(Exercise exercise)
     {
        this.exercise = exercise;
-       for (Movement m : exercise.getMovements())
+       for (FragmentExercise fragment : exercise.getFragments())
        {
-           movementDisplayables.add(new MovementDisplayable(m));
+           // Add a movement with parameters constructor (mappingSkeleton is called)
+           movementDisplayables.add(new MovementDisplayable(fragment.getMovement()));
        }
        if (!movementDisplayables.isEmpty()) attachChild(movementDisplayables.get(0));
        this.exercise.mappingSkeletons();
@@ -54,7 +55,7 @@ public class ExerciseDisplayable extends Node {
         boolean movementFinished;
         if (movementNumber < movementDisplayables.size())
         {
-            if (movementRepetition < exercise.getMovements().get(movementNumber).getDefaultRepetition())
+            if (movementRepetition < exercise.getFragments().get(movementNumber).getRepetition())
             {
                 movementFinished = movementDisplayables.get(movementNumber).displayNextFrame(assetManager);
                 if (movementFinished)
@@ -77,9 +78,10 @@ public class ExerciseDisplayable extends Node {
     {
         this.exercise = exercise;
         movementDisplayables.clear();
-        for (Movement m : exercise.getMovements())
+        for (FragmentExercise fragment : exercise.getFragments())
         {
-            movementDisplayables.add(new MovementDisplayable(m));
+            // Add a movement with parameters constructor (mappingSkeleton is called)
+            movementDisplayables.add(new MovementDisplayable(fragment.getMovement()));
         }
         if (!movementDisplayables.isEmpty()) attachChild(movementDisplayables.get(0));
         this.movementNumber = 0;
