@@ -1,6 +1,8 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.App;
+import fr.univtln.wf.models.Person;
+import fr.univtln.wf.models.RoleEnum;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -24,25 +26,42 @@ public class LoginController implements Controller
 
 
     /** Method called when the authentification succeeded, it load user data and display main view */
-    @FXML
     public void login()
     {
-        //TODO send user to the right screen (check if its a coach or a regular user)
-        switchToCoachScene();
+        // TODO : authentification + get the right user
+        Person user = Person.builder().pseudo("greekgod").firstname("Zakk").lastname("Wide").roleEnum(RoleEnum.COACH).build();
+        DataGUI.setCurrentUser(user);
+
+        // If the user is a coach
+        if(user.getRoleEnum().equals(RoleEnum.COACH))
+        {
+            switchToCoachScene();
+        }
+
+        // Else the user is a regular user
+        else
+        {
+            switchToMainScene();
+        }
     }
 
 
     /** Close the JavaFX stage when the button Exit is clicked */
-    @FXML
-    void close()
+    public void close()
     {
         App.getStage().close();
     }
 
-    /** Change the element in the stage (login to main view) */
+    /** Change the element in the stage (login to main view as a coach) */
     public void switchToCoachScene()
     {
        changeFXML("view/fxml/coachscreen.fxml");
+    }
+
+    /** Change the element in the stage (login to main view as a regular user) */
+    public void switchToMainScene()
+    {
+        changeFXML("view/fxml/mainscreen.fxml");
     }
 
 }
