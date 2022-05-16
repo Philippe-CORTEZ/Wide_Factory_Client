@@ -29,7 +29,7 @@ public class LoginController implements Controller
     public void login()
     {
         // TODO : authentification + get the right user
-        Person user = Person.builder().pseudo("greekgod").firstname("Zakk").lastname("Wide").roleEnum(RoleEnum.COACH).build();
+        Person user = Person.builder().pseudo("Sketard").firstname("Zakk").lastname("Wide").roleEnum(RoleEnum.COACH).build();
         DataGUI.setCurrentUser(user);
 
         // If the user is a coach

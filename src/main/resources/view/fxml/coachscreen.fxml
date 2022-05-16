@@ -100,7 +100,7 @@
                      </children>
                   </AnchorPane>
                   <ListView fx:id="listOfExercises" layoutX="44.0" layoutY="240.0" prefHeight="472.0" prefWidth="906.0" />
-                  <Button layoutX="875.0" layoutY="193.0" mnemonicParsing="false" onAction="#addexercise" stylesheets="@styes.css" text="Add " />
+                  <Button layoutX="875.0" layoutY="193.0" mnemonicParsing="false" onAction="#addExercise" stylesheets="@styes.css" text="Add " />
                </children>
             </AnchorPane>
          </children>
