@@ -38,11 +38,6 @@ public class Movement
     @Builder.Default
     private String description = "";
 
-    /** default  repetition of the movement */
-    @Column(name = "DEFAULT_REPETITION")
-    @Builder.Default
-    private int defaultRepetition = 10;
-
 
     /** Default constructor initialize attributes with default value (not null) */
     public Movement()
@@ -50,7 +45,6 @@ public class Movement
         this.name = "";
         this.skeletons = new ArrayList<>();
         this.description = "";
-        this.defaultRepetition = 10;
     }
 
     /**
@@ -65,7 +59,6 @@ public class Movement
         skeletons = objectMapper.readValue(new File(nameFileJson), new TypeReference<>(){});
         name = nameMovement;
         description = "";
-        defaultRepetition = 10;
     }
 
 
@@ -85,7 +78,6 @@ public class Movement
         name = "";
         description = "";
         skeletons.clear();
-        defaultRepetition = 10;
     }
 
 
