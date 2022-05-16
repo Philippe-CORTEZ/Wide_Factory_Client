@@ -3,6 +3,7 @@ package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
 import fr.univtln.wf.models.Exercise;
+import fr.univtln.wf.models.FragmentExercise;
 import fr.univtln.wf.models.Movement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AddexerciseController extends GenericController  {
+public class AddexerciseController   {
 
 
 
@@ -78,14 +79,12 @@ public class AddexerciseController extends GenericController  {
 
     void initfinallist(){
         TableColumn<Movement, String> nomCol = new TableColumn<>("name");
-        TableColumn repscount = new TableColumn("repscount");
+       // TableColumn repscount = new TableColumn("repscount");
         nomCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        repscount.setEditable(true);
+       // repscount.setEditable(true);
 
-
-
-        repscount.setCellValueFactory(new PropertyValueFactory<Movement, TextField>("firstName"));
-        finalmovements.getColumns().addAll(nomCol,repscount);
+        //repscount.setCellValueFactory(new PropertyValueFactory<Movement, TextField>("firstName"));
+        finalmovements.getColumns().addAll(nomCol);
 
 
     }
@@ -94,11 +93,14 @@ public class AddexerciseController extends GenericController  {
     @FXML
     void addmovement() {
 
-        Movement test =  listofmovements.getSelectionModel().getSelectedItem();
+        Movement movement =  listofmovements.getSelectionModel().getSelectedItem();
 
-        l.add(test);
+
+
+        l.add(movement);
         ObservableList<Movement> movements;
         movements = FXCollections.observableArrayList(l);
+
 
         finalmovements.setItems(movements);
     }

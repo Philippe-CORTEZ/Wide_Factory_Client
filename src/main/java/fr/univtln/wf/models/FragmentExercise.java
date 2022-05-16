@@ -35,6 +35,17 @@ public class FragmentExercise
     @JoinColumn(name = "NAME_MOVEMENT")
     private Movement movement;
 
+
+    public void setName(String name) {
+        this.name = this.movement.getName();
+    }
+
+    private String name;
+
+
+
+
+
     /** Position of the movement in the exercise */
     private int position;
 
