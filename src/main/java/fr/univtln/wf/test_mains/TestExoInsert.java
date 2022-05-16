@@ -1,4 +1,4 @@
-package fr.univtln.wf.tmps;
+package fr.univtln.wf.test_mains;
 
 import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.databases.daos.MovementDAO;
