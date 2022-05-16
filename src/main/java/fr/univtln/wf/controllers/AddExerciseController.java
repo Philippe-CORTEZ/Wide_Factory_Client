@@ -38,6 +38,9 @@ public class AddExerciseController {
     /** exercise that will be generated */
     private Exercise exercise;
 
+    /**
+     * initialize attribute
+     */
     @FXML
     public void initialize()
     {
@@ -47,8 +50,10 @@ public class AddExerciseController {
         exercise = new Exercise();
     }
 
-
-
+    /**
+     * get all movement in the database
+     * @return ObservableList that contain all Movement in database
+     */
     public ObservableList<Movement> getAllMovement()
     {
         MovementDAO movementDAO = new MovementDAO();
@@ -56,6 +61,9 @@ public class AddExerciseController {
         return FXCollections.observableArrayList(movementDAO.findAll());
     }
 
+    /**
+     * initialize the list of movement that are in database
+     */
     public void initMovementDatabase()
     {
 
@@ -69,6 +77,9 @@ public class AddExerciseController {
         movementsDatabase.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
+    /**
+     * initialize the list of fragmentExercise of the exercise to create
+     */
     void initExerciseMovements(){
         TableColumn<FragmentExercise, String> nomCol = new TableColumn<>("name");
         TableColumn<FragmentExercise, Integer> repetition = new TableColumn("repetition");
@@ -93,6 +104,9 @@ public class AddExerciseController {
         }
     }
 
+    /**
+     * persist the exercise created if possible
+     */
     public void validate()
     {
         ExerciseDAO exerciseDAO = new ExerciseDAO();
@@ -121,6 +135,9 @@ public class AddExerciseController {
         }
     }
 
+    /**
+     * add a movement to the exercise
+     */
     public void addMovement()
     {
         if(movementsDatabase.getSelectionModel().getSelectedItem() != null)
