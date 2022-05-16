@@ -64,20 +64,6 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="exercisesStack" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
-               <children>
-                  <AnchorPane layoutX="37.0" layoutY="23.0" prefHeight="117.0" prefWidth="925.0" style="-fx-background-color: GREY;" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="32.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="21.0" prefHeight="76.0" prefWidth="297.0" text="Exercises List" textAlignment="CENTER" textFill="GOLD">
-                           <font>
-                              <Font name="Yrsa SemiBold" size="52.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <ListView fx:id="listOfExercises" layoutX="44.0" layoutY="240.0" prefHeight="472.0" prefWidth="906.0" />
-               </children>
-            </AnchorPane>
             <AnchorPane fx:id="recordStack" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
                   <TextField fx:id="movementName" layoutX="331.0" layoutY="273.0" prefHeight="24.0" prefWidth="332.0" promptText="Name" AnchorPane.leftAnchor="331.0" AnchorPane.rightAnchor="331.0" />
@@ -100,6 +86,21 @@
                   <Spinner fx:id="timeRecordingSpinner" layoutX="492.0" layoutY="341.0" />
                   <Label layoutX="283.0" layoutY="345.0" text="Time of recording in second : " />
                   <Label fx:id="errorLabel" alignment="CENTER" layoutX="213.0" layoutY="239.0" prefHeight="16.0" prefWidth="530.0" textAlignment="CENTER" textFill="RED" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="exercisesStack" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <children>
+                  <AnchorPane layoutX="37.0" layoutY="23.0" prefHeight="117.0" prefWidth="925.0" style="-fx-background-color: GREY;" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="32.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="314.0" layoutY="21.0" prefHeight="76.0" prefWidth="297.0" text="Exercises List" textAlignment="CENTER" textFill="GOLD">
+                           <font>
+                              <Font name="Yrsa SemiBold" size="52.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <ListView fx:id="listOfExercises" layoutX="44.0" layoutY="240.0" prefHeight="472.0" prefWidth="906.0" />
+                  <Button layoutX="875.0" layoutY="193.0" mnemonicParsing="false" onAction="#addexercise" stylesheets="@styes.css" text="Add " />
                </children>
             </AnchorPane>
          </children>

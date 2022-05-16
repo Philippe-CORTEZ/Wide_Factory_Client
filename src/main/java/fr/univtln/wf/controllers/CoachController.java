@@ -132,4 +132,9 @@ public class CoachController extends GenericController
        createPopup("/view/fxml/popupscreen.fxml");
     }
 
+    @FXML
+    void addexercise() {
+        createPopup("/view/fxml/addexercisepopup.fxml");
+    }
+
 }

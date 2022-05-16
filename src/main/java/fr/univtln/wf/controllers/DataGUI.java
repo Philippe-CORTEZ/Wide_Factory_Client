@@ -1,6 +1,7 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.models.Exercise;
+import fr.univtln.wf.models.Movement;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,12 @@ public class DataGUI
     @Getter
     @Setter
     private static Exercise exerciseSelected;
+
+
+    @Getter
+    @Setter
+    private static Movement movementSelected;
+
 
     /** Time of recording wished by a coach */
     @Getter
