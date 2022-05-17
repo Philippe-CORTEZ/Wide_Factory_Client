@@ -8,15 +8,14 @@ import lombok.Getter;
  * A Jmonkey application that enable to display a complete exercise
  * @author Wide Factory Team
  */
-public class JMEExercise extends JMEGeneric
+public class JMEVisualizeExercise extends JMEGeneric
 {
     /** A movement with skeletons that can be displayed */
     @Getter
     private final ExerciseDisplayable exoDisplayable;
 
-
     /** Default constructor */
-    public JMEExercise()
+    public JMEVisualizeExercise()
     {
         this.exoDisplayable = new ExerciseDisplayable();
     }

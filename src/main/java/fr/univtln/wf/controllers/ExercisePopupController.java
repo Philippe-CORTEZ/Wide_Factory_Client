@@ -1,6 +1,6 @@
 package fr.univtln.wf.controllers;
 
-import fr.univtln.wf.jmonkey.jme_apps.JMEExercise;
+import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeExercise;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -24,7 +24,7 @@ public class ExercisePopupController
     /** Visualize reference exercise with reference movements */
     public void visualize()
     {
-        JMEExercise jme = new JMEExercise();
+        JMEVisualizeExercise jme = new JMEVisualizeExercise();
         jme.getExoDisplayable().setExercise(DataGUI.getExerciseSelected());
         jme.start();
     }
