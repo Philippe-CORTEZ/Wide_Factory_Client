@@ -20,26 +20,6 @@ import java.util.List;
 @ClientEndpoint
 public class WSClient
 {
-    /** Used ta send data from controllers */
-    @Getter
-    @Setter
-    private static Session session;
-
-
-    /** Instance of Jmonkey app to display skeletons in real time */
-    @Getter
-    private static final DynamicJME DYNAMIC_JME = new DynamicJME();
-
-    /** Instance of Jmonkey app to display skeletons of a movement (not real time) */
-    @Getter
-    private static final JMEVisualizeMovement STATIC_JME_MOVEMENT = new JMEVisualizeMovement();
-
-    /** Describe state of the client */
-    @Getter
-    @Setter
-    private static WSState state = WSState.STANDBY;
-
-
     /**
      * Methode called when the client open a websocket connection with a server
      * @param session describe the websocket connection
@@ -76,10 +56,10 @@ public class WSClient
         if(!skeletons.isEmpty())
         {
             // When recording, skeletons are send in one block
-            if(state.equals(WSState.RECORDING))
+            if(WSData.getState().equals(WSState.RECORDING))
             {
                 // Just add all skeletons in the final movement in JME class
-                STATIC_JME_MOVEMENT.getMv().getMovement().setSkeletons(skeletons);
+                WSData.getMovement().setSkeletons(skeletons);
             }
 
             else
@@ -89,7 +69,7 @@ public class WSClient
 
             // Set the skeleton displayable in the Jmonkey app to make an animation
             // If it's a continuous displaying, in the list there is only one skeleton
-//            DYNAMIC_JME.setSkeleton(skeletons.get(0));
+            WSData.setSkeleton(skeletons.get(0));
         }
     }
 

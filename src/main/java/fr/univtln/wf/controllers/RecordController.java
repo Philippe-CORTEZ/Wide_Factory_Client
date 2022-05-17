@@ -1,7 +1,8 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
-import fr.univtln.wf.ws_clients.WSClient;
+import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeMovement;
+import fr.univtln.wf.ws_clients.WSData;
 import fr.univtln.wf.ws_clients.WSState;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -76,18 +77,18 @@ public class RecordController
         try
         {
             // Sending record message to server with time to record
-            WSClient.getSession().getBasicRemote().sendText("r " + DataGUI.getTimeRecording());
+            WSData.getSession().getBasicRemote().sendText("r " + DataGUI.getTimeRecording());
         }
         catch (IOException error)
         {
             log.error("Error while sending message to server with WS client", error);
         }
         // Set the state of client websocket to recording, to record movement
-        WSClient.setState(WSState.RECORDING);
+        WSData.setState(WSState.RECORDING);
 
         // Set name and description to the movement
-        WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().setName(DataGUI.getMovementNameRecording());
-        WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().setDescription(DataGUI.getMovementDescriptionRecording());
+        WSData.getMovement().setName(DataGUI.getMovementNameRecording());
+        WSData.getMovement().setDescription(DataGUI.getMovementDescriptionRecording());
     }
 
     /** close the popup and clear the movement in memory */
@@ -95,15 +96,15 @@ public class RecordController
     {
         // Close window reset data from WS client
         ((Stage)(cancelBtn.getScene().getWindow())).close();
-        WSClient.getSTATIC_JME_MOVEMENT().getMv().clear();
-        WSClient.setState(WSState.STANDBY);
+        WSData.getMovement().clear();
+        WSData.setState(WSState.STANDBY);
     }
 
     /** restart the record */
     public void restartRecording()
     {
-        // Clear the skeleton recorded with kinect
-        WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().getSkeletons().clear();
+        // Clear the skeleton recorded with kinect and keep the name and description
+        WSData.getMovement().getSkeletons().clear();
 
         // Reset widget (button, progress bar)
         initializeProgressBar();
@@ -117,12 +118,12 @@ public class RecordController
      public void uploadRecording()
      {
          // Persist if the movement is not empty of skeletons
-         if (!WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement().getSkeletons().isEmpty())
+         if (!WSData.getMovement().getSkeletons().isEmpty())
          {
-             new MovementDAO().persist(WSClient.getSTATIC_JME_MOVEMENT().getMv().getMovement());
+             new MovementDAO().persist(WSData.getMovement());
          }
          // Clear the movement to record another movement in the futur
-         WSClient.getSTATIC_JME_MOVEMENT().getMv().clear();
+         WSData.getMovement().clear();
 
          // Close the popup window
          ((Stage)(validateBtn.getScene().getWindow())).close();
@@ -131,7 +132,9 @@ public class RecordController
     /** Visualize the movement in memory in Jmonkey application */
     public void visualizeRecording()
     {
-        WSClient.getSTATIC_JME_MOVEMENT().start();
+        JMEVisualizeMovement jme = new JMEVisualizeMovement();
+        jme.getMv().setMovement(WSData.getMovement());
+        jme.start();
     }
 
     /** Add possibility to drag window by his anchorPane */

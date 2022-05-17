@@ -3,32 +3,16 @@ package fr.univtln.wf.jmonkey.jme_apps;
 import com.jme3.math.Vector3f;
 import fr.univtln.wf.jmonkey.ExerciseDisplayable;
 import fr.univtln.wf.jmonkey.SkeletonDisplayable;
-import fr.univtln.wf.models.Skeleton;
-import lombok.Getter;
-import lombok.Setter;
+import fr.univtln.wf.ws_clients.WSData;
 
-/**
- * Jmonkey app called when a exercise start
- * @author Wide Factory Team
- */
-@Getter
-public class JMEStartExercise extends JMEGeneric
-{
-    /** Used to display all referenced movements recorded by a coach */
-    private final ExerciseDisplayable exerciseDisplayable;
+public class JMEStartExercise extends JMEGeneric{
+    private ExerciseDisplayable exerciseDisplayable;
+    private SkeletonDisplayable skeletonDisplayable;
 
-    /** Used to display in real time skeleton of user */
-    private final SkeletonDisplayable skeletonDisplayable;
-    @Setter
-    private Skeleton skeleton;
-
-
-    /** Default constructor initialize attributes by its default values */
     public JMEStartExercise()
     {
-        this.exerciseDisplayable = new ExerciseDisplayable();
-        this.skeletonDisplayable = new SkeletonDisplayable();
-        this.skeleton = new Skeleton();
+        exerciseDisplayable = new ExerciseDisplayable();
+        skeletonDisplayable = new SkeletonDisplayable();
     }
 
     /** Initialize the Jmonkey components */
@@ -37,8 +21,7 @@ public class JMEStartExercise extends JMEGeneric
     {
         // Move camera rearward
         cam.setLocation(new Vector3f(0,0, 3));
-
-        // Display the skeletons of the referenced exercise and the user's skeleton
+        // Display the first skeleton of the movement
         rootNode.attachChild(exerciseDisplayable);
         rootNode.attachChild(skeletonDisplayable);
     }
@@ -50,10 +33,8 @@ public class JMEStartExercise extends JMEGeneric
     @Override
     public void simpleUpdate(float tpf)
     {
-        // Update the referenced exercise
         exerciseDisplayable.displayNextFrame(assetManager);
-        // Update the real time user's skeleton
-        skeletonDisplayable.displaySkeleton(skeleton, assetManager);
-    }
+        skeletonDisplayable.displaySkeleton(WSData.getSkeleton(), assetManager);
 
+    }
 }

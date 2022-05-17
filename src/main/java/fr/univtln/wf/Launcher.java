@@ -1,6 +1,7 @@
 package fr.univtln.wf;
 
 import fr.univtln.wf.ws_clients.WSClient;
+import fr.univtln.wf.ws_clients.WSData;
 import jakarta.websocket.ContainerProvider;
 import jakarta.websocket.DeploymentException;
 import jakarta.websocket.WebSocketContainer;
@@ -25,7 +26,7 @@ public class Launcher
         try
         {
             // Try to connect on port 9001
-            WSClient.setSession(container.connectToServer(WSClient.class, URI.create("ws://localhost:9001/monTest")));
+            WSData.setSession(container.connectToServer(WSClient.class, URI.create("ws://localhost:9001/monTest")));
         }
         catch (DeploymentException | IOException ex)
         {

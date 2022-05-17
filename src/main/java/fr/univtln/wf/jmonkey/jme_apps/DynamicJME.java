@@ -3,6 +3,7 @@ package fr.univtln.wf.jmonkey.jme_apps;
 import com.jme3.math.Vector3f;
 import fr.univtln.wf.jmonkey.SkeletonDisplayable;
 import fr.univtln.wf.models.Skeleton;
+import fr.univtln.wf.ws_clients.WSData;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,15 +17,12 @@ public class DynamicJME extends JMEGeneric
 {
     /** Jmonkey structure for representing the skeleton in 3D environment */
     private SkeletonDisplayable sk;
-    /** The skeleton get by the WS client, used to update the SkeletonDisplayable */
-    private Skeleton skeleton;
 
 
     /** Default constructor */
     public DynamicJME()
     {
         this.sk = new SkeletonDisplayable();
-        this.skeleton = new Skeleton();
     }
 
 
@@ -46,7 +44,7 @@ public class DynamicJME extends JMEGeneric
     @Override
     public void simpleUpdate(float tpf)
     {
-        sk.displaySkeleton(skeleton, assetManager);
+        sk.displaySkeleton(WSData.getSkeleton(), assetManager);
     }
 
 }
