@@ -1,8 +1,11 @@
 package fr.univtln.wf.controllers;
 
+import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.jmonkey.jme_apps.JMEExercise;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 
 /**
@@ -11,6 +14,8 @@ import javafx.scene.control.Label;
  */
 public class ExercisePopupController
 {
+    @FXML
+    private Button deleteBtn;
     @FXML
     private Label exerciseDescription;
 
@@ -27,6 +32,26 @@ public class ExercisePopupController
         JMEExercise jme = new JMEExercise();
         jme.getExoDisplayable().setExercise(DataGUI.getExerciseSelected());
         jme.start();
+    }
+
+    /**
+     * delete the exercise selected
+     */
+    public void delete()
+    {
+        ExerciseDAO exerciseDAO = new ExerciseDAO();
+        DataGUI.setExerciseSelected(exerciseDAO.merge(DataGUI.getExerciseSelected()));
+        exerciseDAO.remove(DataGUI.getExerciseSelected());
+        ((Stage)(deleteBtn.getScene().getWindow())).close();
+    }
+
+    /**
+     * start the exercise selected
+     */
+    public void start()
+    {
+        // TODO add special treatment for the exercise
+        visualize();
     }
 
 }

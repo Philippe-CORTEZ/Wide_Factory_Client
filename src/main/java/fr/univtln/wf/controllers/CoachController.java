@@ -81,13 +81,16 @@ public class CoachController extends MainController
     /** Display the exercises list and hide recording screen */
     public void displayExercisesList()
     {
+        initListOfExercises();
         exercisesStack.toFront();
         recordStack.toBack();
+
     }
 
     /** Display the recording screen and hide the exercises list view */
     public void displayRecordView()
     {
+
         exercisesStack.toBack();
         recordStack.toFront();
     }
