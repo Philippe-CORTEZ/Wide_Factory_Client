@@ -6,6 +6,7 @@ import fr.univtln.wf.databases.daos.MovementDAO;
 import fr.univtln.wf.models.Exercise;
 import fr.univtln.wf.models.FragmentExercise;
 import fr.univtln.wf.models.Movement;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 
 public class AddExerciseController {
@@ -44,7 +44,9 @@ public class AddExerciseController {
     @FXML
     public void initialize()
     {
+        // Init upper tableview from database
         initMovementDatabase();
+        // Init lower tableview with user choices
         initExerciseMovements();
         // Initialize spinner timer (2 to 10, initial 2, and change value 1 by 1)
         exercise = new Exercise();
@@ -81,18 +83,19 @@ public class AddExerciseController {
      * initialize the list of fragmentExercise of the exercise to create
      */
     void initExerciseMovements(){
-        TableColumn<FragmentExercise, String> nameColumn = new TableColumn<>("name");
-        TableColumn<FragmentExercise, Integer> repetitionColumn = new TableColumn("repetition");
-        repetitionColumn.setEditable(true);
+        TableColumn<FragmentExercise, String> nomCol = new TableColumn<>("name");
+        TableColumn<FragmentExercise, Spinner<Integer>> repetition = new TableColumn<>("repetition");
+        repetition.setEditable(true);
 
-        repetitionColumn.setCellValueFactory(new PropertyValueFactory<>("repetition"));
-        nameColumn.setCellValueFactory(
-                param -> new SimpleStringProperty(param.getValue().getMovement().getName())
-        );
-        exerciseMovements.getColumns().addAll(nameColumn, repetitionColumn);
+        repetition.setCellValueFactory(new PropertyValueFactory<>("repetition"));
+        nomCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMovement().getName()) );
+
+        // Add columns to lower tableview
+        exerciseMovements.getColumns().addAll(nomCol, repetition);
         exerciseMovements.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
+    /** Delete a movement from the list of movements of the exercise */
     public void deleteMovement()
     {
         if (exerciseMovements.getSelectionModel().getSelectedItem() != null)

@@ -1,7 +1,6 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
