@@ -4,7 +4,11 @@ import com.jme3.math.Vector3f;
 import fr.univtln.wf.jmonkey.ExerciseDisplayable;
 import fr.univtln.wf.jmonkey.SkeletonDisplayable;
 import fr.univtln.wf.ws_clients.WSData;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class JMEStartExercise extends JMEGeneric{
     private ExerciseDisplayable exerciseDisplayable;
     private SkeletonDisplayable skeletonDisplayable;

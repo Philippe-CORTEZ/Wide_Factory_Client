@@ -1,5 +1,6 @@
 package fr.univtln.wf.controllers;
 
+import fr.univtln.wf.jmonkey.jme_apps.JMEStartExercise;
 import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeExercise;
 import fr.univtln.wf.databases.daos.ExerciseDAO;
 import javafx.fxml.FXML;
@@ -51,7 +52,9 @@ public class ExerciseController
     public void start()
     {
         // TODO add special treatment for the exercise
-        visualize();
+        JMEStartExercise jme = new JMEStartExercise();
+        jme.getExerciseDisplayable().setExercise(DataGUI.getExerciseSelected());
+        jme.start();
     }
 
 }
