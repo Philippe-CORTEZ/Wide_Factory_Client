@@ -6,13 +6,16 @@ import fr.univtln.wf.databases.daos.MovementDAO;
 import fr.univtln.wf.models.Exercise;
 import fr.univtln.wf.models.FragmentExercise;
 import fr.univtln.wf.models.Movement;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 /**
  * Controller to add an exercise with movements that already exist in database as a coach
@@ -77,17 +80,56 @@ public class AddExerciseController
         movementsDatabase.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
-    /** Initialize the list of fragmentExercise of the exercise to create */
+    /**
+     * initialize the list of fragmentExercise of the exercise to create
+     */
     void initExerciseMovements(){
-        TableColumn<FragmentExercise, String> nomCol = new TableColumn<>("name");
-        TableColumn<FragmentExercise, Integer> repetition = new TableColumn<>("repetition");
-        repetition.setEditable(true);
+        TableColumn<FragmentExercise, String> nameColumn = new TableColumn<>("name");
+        //  TableColumn<FragmentExercise, Integer> repetitionColumn = new TableColumn("repetition");
+        TableColumn<FragmentExercise, Spinner> repetitionColumn = new TableColumn<FragmentExercise, Spinner>("repetition");
 
-        repetition.setCellValueFactory(new PropertyValueFactory<>("repetition"));
-        nomCol.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getMovement().getName()) );
+        nameColumn.setMinWidth(241);
+        repetitionColumn.setMinWidth(241);
+        repetitionColumn.setEditable(true);
 
-        // Add columns to lower tableview
-        exerciseMovements.getColumns().addAll(nomCol, repetition);
+        //repetitionColumn.setCellValueFactory(new PropertyValueFactory<>("repetition"));
+
+
+        exerciseMovements.setEditable(true);
+        repetitionColumn.setEditable(true);
+
+        repetitionColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<FragmentExercise, Spinner>, ObservableValue<Spinner>>() {
+
+            @Override
+            public ObservableValue<Spinner> call(
+                    TableColumn.CellDataFeatures<FragmentExercise, Spinner> arg0) {
+                FragmentExercise fragmenttoobject = arg0.getValue();
+
+                Spinner<Integer> quantita = new Spinner<Integer>(0, 10, 1);
+                quantita.valueProperty().addListener(
+                        (obs, oldValue, newValue) -> {
+                            System.out.println("New value: " + newValue);
+
+                            fragmenttoobject.setRepetition(newValue);
+
+
+
+                        }
+                );
+
+                return new SimpleObjectProperty<Spinner>(quantita);
+
+            }
+
+        });
+
+
+
+
+        nameColumn.setCellValueFactory(
+                param -> new SimpleStringProperty(param.getValue().getMovement().getName())
+        );
+        exerciseMovements.getColumns().addAll(nameColumn, repetitionColumn);
         exerciseMovements.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
