@@ -28,6 +28,7 @@ public class JMEStartExercise extends JMEGeneric{
         // Display the first skeleton of the movement
         rootNode.attachChild(exerciseDisplayable);
         rootNode.attachChild(skeletonDisplayable);
+        exerciseDisplayable.move(-1, 0, 0);
     }
 
     /**
