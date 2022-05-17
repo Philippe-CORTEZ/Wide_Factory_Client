@@ -23,6 +23,9 @@ public class ExerciseController
     private Label exerciseDescription;
 
 
+    /**
+     * initialisation of the GUI
+     */
     @FXML
     public void initialize()
     {

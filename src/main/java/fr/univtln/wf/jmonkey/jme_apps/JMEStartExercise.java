@@ -7,12 +7,18 @@ import fr.univtln.wf.ws_clients.WSData;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * JME which manage the display of an exercise started
+ */
 @Getter
 @Setter
 public class JMEStartExercise extends JMEGeneric{
     private ExerciseDisplayable exerciseDisplayable;
     private SkeletonDisplayable skeletonDisplayable;
 
+    /**
+     * default constructor
+     */
     public JMEStartExercise()
     {
         exerciseDisplayable = new ExerciseDisplayable();
@@ -23,7 +29,7 @@ public class JMEStartExercise extends JMEGeneric{
     @Override
     public void simpleInitApp()
     {
-        // Move camera rearward
+        // Move camera backward
         cam.setLocation(new Vector3f(0,0, 3));
         // Display the first skeleton of the movement
         rootNode.attachChild(exerciseDisplayable);
