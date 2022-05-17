@@ -67,9 +67,12 @@ public class WSClient
                 log.info("");
             }
 
-            // Set the skeleton displayable in the Jmonkey app to make an animation
-            // If it's a continuous displaying, in the list there is only one skeleton
-            WSData.setSkeleton(skeletons.get(0));
+            if (WSData.getState().equals(WSState.REAL_TIME))
+            {
+                // Set the skeleton displayable in the Jmonkey app to make an animation
+                // If it's a continuous displaying, in the list there is only one skeleton
+                WSData.setSkeleton(skeletons.get(0));
+            }
 
         }
     }

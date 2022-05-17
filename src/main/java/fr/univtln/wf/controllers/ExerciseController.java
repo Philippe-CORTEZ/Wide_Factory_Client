@@ -3,6 +3,8 @@ package fr.univtln.wf.controllers;
 import fr.univtln.wf.jmonkey.jme_apps.JMEStartExercise;
 import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeExercise;
 import fr.univtln.wf.databases.daos.ExerciseDAO;
+import fr.univtln.wf.ws_clients.WSData;
+import fr.univtln.wf.ws_clients.WSState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -51,7 +53,7 @@ public class ExerciseController
      */
     public void start()
     {
-        // TODO add special treatment for the exercise
+        WSData.setState(WSState.REAL_TIME);
         JMEStartExercise jme = new JMEStartExercise();
         jme.getExerciseDisplayable().setExercise(DataGUI.getExerciseSelected());
         jme.start();
