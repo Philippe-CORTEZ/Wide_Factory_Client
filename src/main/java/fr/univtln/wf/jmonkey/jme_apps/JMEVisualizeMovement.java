@@ -33,9 +33,6 @@ public class JMEVisualizeMovement extends JMEGeneric
         cam.setLocation(new Vector3f(0,0, 3));
         // Display the first skeleton of the movement
         rootNode.attachChild(mv);
-
-        // Set frame rate to 30 fps to synchronize with kinect
-        settings.setFrameRate(30);
     }
 
     /**

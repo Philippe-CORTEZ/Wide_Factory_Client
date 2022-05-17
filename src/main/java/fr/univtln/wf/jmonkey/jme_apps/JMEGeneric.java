@@ -23,6 +23,7 @@ public abstract class JMEGeneric extends SimpleApplication
         customSettings.put("Title", title);
         customSettings.put("VSync", true);
         customSettings.put("Samples", 4);
+        customSettings.setFrameRate(15);
 
         this.setShowSettings(false);
         this.setSettings(customSettings);
