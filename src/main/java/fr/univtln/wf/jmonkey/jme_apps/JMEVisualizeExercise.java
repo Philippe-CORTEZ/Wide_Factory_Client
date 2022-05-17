@@ -8,15 +8,14 @@ import lombok.Getter;
  * A Jmonkey application that enable to display a complete exercise
  * @author Wide Factory Team
  */
-public class JMEExercise extends JMEGeneric
+public class JMEVisualizeExercise extends JMEGeneric
 {
     /** A movement with skeletons that can be displayed */
     @Getter
     private final ExerciseDisplayable exoDisplayable;
 
-
     /** Default constructor */
-    public JMEExercise()
+    public JMEVisualizeExercise()
     {
         this.exoDisplayable = new ExerciseDisplayable();
     }
@@ -30,9 +29,6 @@ public class JMEExercise extends JMEGeneric
         cam.setLocation(new Vector3f(0,0, 3));
         // Display the first skeleton of the movement
         rootNode.attachChild(exoDisplayable);
-
-        // Set frame rate to 30 fps to synchronize with kinect
-        settings.setFrameRate(30);
     }
 
     /**

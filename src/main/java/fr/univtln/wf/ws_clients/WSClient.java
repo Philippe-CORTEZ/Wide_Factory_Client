@@ -2,7 +2,7 @@ package fr.univtln.wf.ws_clients;
 
 
 import fr.univtln.wf.jmonkey.jme_apps.DynamicJME;
-import fr.univtln.wf.jmonkey.jme_apps.JMEMovement;
+import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeMovement;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
 import lombok.Getter;
@@ -32,7 +32,7 @@ public class WSClient
 
     /** Instance of Jmonkey app to display skeletons of a movement (not real time) */
     @Getter
-    private static final JMEMovement STATIC_JME_MOVEMENT = new JMEMovement();
+    private static final JMEVisualizeMovement STATIC_JME_MOVEMENT = new JMEVisualizeMovement();
 
     /** Describe state of the client */
     @Getter
