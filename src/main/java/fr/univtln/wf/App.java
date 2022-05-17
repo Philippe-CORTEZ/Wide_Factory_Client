@@ -33,7 +33,7 @@ public class App extends Application
         App.setStage(primaryStage);
 
         // Load fxml file and display it
-        Parent root = FXMLLoader.load(Objects.requireNonNull(App.class.getClassLoader().getResource("view/fxml/login.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(App.class.getClassLoader().getResource("view/fxml/Login.fxml")));
         Scene scene = new Scene(root, 600, 400);
         stage.setScene(scene);
         stage.setTitle("Wide Factory");

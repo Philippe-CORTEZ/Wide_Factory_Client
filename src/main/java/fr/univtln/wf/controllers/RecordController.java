@@ -25,7 +25,7 @@ import java.io.IOException;
  * @author Wide Factory Team
  */
 @Slf4j
-public class RecordPopupController
+public class RecordController
 {
     @FXML
     private ProgressBar progressBar;

@@ -74,7 +74,7 @@ public class CoachController extends MainController
             DataGUI.setTimeRecording(timeRecordingSpinner.getValue());
             DataGUI.setMovementNameRecording(movementName.getText());
             DataGUI.setMovementDescriptionRecording(movementDescription.getText());
-            createPopup("/view/fxml/recordpopup.fxml", "Recording", true);
+            createPopup("/view/fxml/Record.fxml", "Recording", true);
         }
     }
 
@@ -96,6 +96,6 @@ public class CoachController extends MainController
     }
 
     public void addExercise() {
-        createPopup("/view/fxml/addexercisepopup.fxml");
+        createPopup("/view/fxml/AddExercise.fxml");
     }
 }

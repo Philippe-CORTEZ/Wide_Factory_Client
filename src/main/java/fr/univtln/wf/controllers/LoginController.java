@@ -55,13 +55,13 @@ public class LoginController implements Controller
     /** Change the element in the stage (login to main view as a coach) */
     public void switchToCoachScene()
     {
-       changeFXML("view/fxml/coachscreen.fxml");
+       changeFXML("view/fxml/CoachScreen.fxml");
     }
 
     /** Change the element in the stage (login to main view as a regular user) */
     public void switchToMainScene()
     {
-        changeFXML("view/fxml/mainscreen.fxml");
+        changeFXML("view/fxml/MainScreen.fxml");
     }
 
 }

@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * Controller that manage pop up window options when an exercise is double clicked
  * @author Wide Factory Team
  */
-public class ExercisePopupController
+public class ExerciseController
 {
     @FXML
     private Button deleteBtn;

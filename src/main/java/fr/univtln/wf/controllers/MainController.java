@@ -30,7 +30,7 @@ public class MainController implements Controller
     /** Method called when the user click on logout button */
     public void logout()
     {
-        changeFXML("view/fxml/login.fxml");
+        changeFXML("view/fxml/Login.fxml");
     }
 
     /** Get all exercises from database */
@@ -57,7 +57,7 @@ public class MainController implements Controller
                 listOfExercises.getSelectionModel().clearSelection(index);
 
                 // Create a popup window to interact with the exercise selected */
-                createPopup("/view/fxml/exercisepopup.fxml");
+                createPopup("/view/fxml/Exercise.fxml");
             }
         });
     }
