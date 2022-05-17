@@ -1,12 +1,8 @@
 package fr.univtln.wf.ws_clients;
 
 
-import fr.univtln.wf.jmonkey.jme_apps.DynamicJME;
-import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeMovement;
 import fr.univtln.wf.models.Skeleton;
 import jakarta.websocket.*;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -47,11 +43,8 @@ public class WSClient
     @OnMessage
     public void onMessage(String message, Session session)
     {
-        // Currently it display only skeletons there isn't processing before to check another message
-
         // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
         List<Skeleton> skeletons = Skeleton.newInstance(message);
-
 
         if(!skeletons.isEmpty())
         {
@@ -73,7 +66,6 @@ public class WSClient
                 // If it's a continuous displaying, in the list there is only one skeleton
                 WSData.setSkeleton(skeletons.get(0));
             }
-
         }
     }
 

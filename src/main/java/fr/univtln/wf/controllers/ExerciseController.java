@@ -56,6 +56,7 @@ public class ExerciseController
      */
     public void start()
     {
+        // Set state to real time and call the right jmonkey app
         WSData.setState(WSState.REAL_TIME);
         JMEStartExercise jme = new JMEStartExercise();
         jme.getExerciseDisplayable().setExercise(DataGUI.getExerciseSelected());
