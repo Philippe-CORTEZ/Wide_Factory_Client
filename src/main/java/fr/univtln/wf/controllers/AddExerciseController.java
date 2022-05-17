@@ -6,9 +6,7 @@ import fr.univtln.wf.databases.daos.MovementDAO;
 import fr.univtln.wf.models.Exercise;
 import fr.univtln.wf.models.FragmentExercise;
 import fr.univtln.wf.models.Movement;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,9 +14,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-
-public class AddExerciseController {
-
+/**
+ * Controller to add an exercise with movements that already exist in database as a coach
+ * @author Wide Factory Team
+ */
+public class AddExerciseController
+{
     /** movement available in the database */
     @FXML
     private TableView<Movement> movementsDatabase;
@@ -38,9 +39,8 @@ public class AddExerciseController {
     /** exercise that will be generated */
     private Exercise exercise;
 
-    /**
-     * initialize attribute
-     */
+
+    /** Initialize attribute */
     @FXML
     public void initialize()
     {
@@ -63,9 +63,7 @@ public class AddExerciseController {
         return FXCollections.observableArrayList(movementDAO.findAll());
     }
 
-    /**
-     * initialize the list of movement that are in database
-     */
+    /** Initialize the list of movement that are in database */
     public void initMovementDatabase()
     {
 
@@ -79,12 +77,10 @@ public class AddExerciseController {
         movementsDatabase.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 
-    /**
-     * initialize the list of fragmentExercise of the exercise to create
-     */
+    /** Initialize the list of fragmentExercise of the exercise to create */
     void initExerciseMovements(){
         TableColumn<FragmentExercise, String> nomCol = new TableColumn<>("name");
-        TableColumn<FragmentExercise, Spinner<Integer>> repetition = new TableColumn<>("repetition");
+        TableColumn<FragmentExercise, Integer> repetition = new TableColumn<>("repetition");
         repetition.setEditable(true);
 
         repetition.setCellValueFactory(new PropertyValueFactory<>("repetition"));
@@ -107,9 +103,7 @@ public class AddExerciseController {
         }
     }
 
-    /**
-     * persist the exercise created if possible
-     */
+    /** Persist the exercise created if possible */
     public void validate()
     {
         ExerciseDAO exerciseDAO = new ExerciseDAO();
@@ -138,9 +132,7 @@ public class AddExerciseController {
         }
     }
 
-    /**
-     * add a movement to the exercise
-     */
+    /** Add a movement to the futur exercise in the tableview */
     public void addMovement()
     {
         if(movementsDatabase.getSelectionModel().getSelectedItem() != null)
