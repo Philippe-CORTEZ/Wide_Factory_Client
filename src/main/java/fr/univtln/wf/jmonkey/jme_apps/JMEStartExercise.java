@@ -9,21 +9,25 @@ import lombok.Setter;
 
 /**
  * JME which manage the display of an exercise started
+ * @author Wide Factory Team
  */
 @Getter
 @Setter
-public class JMEStartExercise extends JMEGeneric{
+public class JMEStartExercise extends JMEGeneric
+{
+    /** Used to display the reference exercise recorded by a coach */
     private ExerciseDisplayable exerciseDisplayable;
+    /** Used to display user's skeleton in real time */
     private SkeletonDisplayable skeletonDisplayable;
 
-    /**
-     * default constructor
-     */
+
+    /** Default constructor */
     public JMEStartExercise()
     {
         exerciseDisplayable = new ExerciseDisplayable();
         skeletonDisplayable = new SkeletonDisplayable();
     }
+
 
     /** Initialize the Jmonkey components */
     @Override
@@ -31,9 +35,11 @@ public class JMEStartExercise extends JMEGeneric{
     {
         // Move camera backward
         cam.setLocation(new Vector3f(0,0, 3));
-        // Display the first skeleton of the movement
+
+        // Attach the two skeletons to display (reference and user)
         rootNode.attachChild(exerciseDisplayable);
         rootNode.attachChild(skeletonDisplayable);
+
         exerciseDisplayable.move(-1, 0, 0);
     }
 
@@ -45,7 +51,8 @@ public class JMEStartExercise extends JMEGeneric{
     public void simpleUpdate(float tpf)
     {
         exerciseDisplayable.displayNextFrame(assetManager);
+        // Change skeleton with the data get by kinect and stored in WSData (for real time)
         skeletonDisplayable.displaySkeleton(WSData.getSkeleton(), assetManager);
-
     }
+
 }
