@@ -51,6 +51,10 @@ public class AddExerciseController
         // Init lower tableview with user choices
         initExerciseMovements();
 
+        // Set default message when tableview is empty
+        movementsDatabase.setPlaceholder(new Label("No content in table"));
+        exerciseMovements.setPlaceholder(new Label("No content in table"));
+
         exercise = new Exercise();
     }
 
