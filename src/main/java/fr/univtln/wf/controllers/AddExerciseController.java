@@ -90,10 +90,7 @@ public class AddExerciseController
 
         nameColumn.setMinWidth(241);
         repetitionColumn.setMinWidth(241);
-        repetitionColumn.setEditable(true);
-
         //repetitionColumn.setCellValueFactory(new PropertyValueFactory<>("repetition"));
-
 
         exerciseMovements.setEditable(true);
         repetitionColumn.setEditable(true);
@@ -104,21 +101,15 @@ public class AddExerciseController
             public ObservableValue<Spinner> call(
                     TableColumn.CellDataFeatures<FragmentExercise, Spinner> arg0) {
                 FragmentExercise fragmenttoobject = arg0.getValue();
-
                 Spinner<Integer> quantita = new Spinner<Integer>(0, 10, 1);
+                fragmenttoobject.setRepetition(1);
                 quantita.valueProperty().addListener(
                         (obs, oldValue, newValue) -> {
                             System.out.println("New value: " + newValue);
-
                             fragmenttoobject.setRepetition(newValue);
-
-
-
                         }
                 );
-
                 return new SimpleObjectProperty<Spinner>(quantita);
-
             }
 
         });
