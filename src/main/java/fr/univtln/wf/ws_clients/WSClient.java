@@ -45,7 +45,6 @@ public class WSClient
     {
         // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
         List<Skeleton> skeletons = Skeleton.newInstance(message);
-
         if(!skeletons.isEmpty())
         {
             // When recording, skeletons are send in one block
@@ -55,16 +54,12 @@ public class WSClient
                 WSData.getMovement().setSkeletons(skeletons);
             }
 
-            else
-            {
-                log.info("");
-            }
-
-            if (WSData.getState().equals(WSState.REAL_TIME))
+            else if (WSData.getState().equals(WSState.REAL_TIME))
             {
                 // Set the skeleton displayable in the Jmonkey app to make an animation
                 // If it's a continuous displaying, in the list there is only one skeleton
                 WSData.setSkeleton(skeletons.get(0));
+                skeletons.clear();
             }
         }
     }

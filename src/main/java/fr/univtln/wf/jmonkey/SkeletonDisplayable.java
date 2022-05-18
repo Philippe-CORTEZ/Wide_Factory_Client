@@ -77,7 +77,7 @@ public class SkeletonDisplayable extends Node
                     if (skeleton.getMap().get(j2) != null)
                     {
                         JointDisplayable joint2 = jointDisplayableMap.get(j2);
-                        // generate a bone and display it
+                      //   generate a bone and display it
                         bone = generateBone(joint1, joint2, assetManager);
                         this.attachChild(bone);
                     }

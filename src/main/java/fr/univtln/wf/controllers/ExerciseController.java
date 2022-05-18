@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 /**
  * Controller that manage pop up window options when an exercise is double clicked
@@ -54,10 +56,10 @@ public class ExerciseController
     /**
      * start the exercise selected
      */
-    public void start()
-    {
+    public void start() throws IOException {
         // Set state to real time and call the right jmonkey app
         WSData.setState(WSState.REAL_TIME);
+        WSData.getSession().getBasicRemote().sendText("r 15");
         JMEStartExercise jme = new JMEStartExercise();
         jme.getExerciseDisplayable().setExercise(DataGUI.getExerciseSelected());
         jme.start();
