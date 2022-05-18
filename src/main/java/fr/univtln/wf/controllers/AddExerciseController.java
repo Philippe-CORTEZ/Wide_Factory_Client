@@ -95,7 +95,7 @@ public class AddExerciseController
         {
             FragmentExercise framgentExercise = fragment.getValue();
             Spinner<Integer> repetitionValue = new Spinner<>(1, 20, 10, 1);
-            framgentExercise.setRepetition(1);
+            framgentExercise.setRepetition(10);
             repetitionValue.valueProperty().addListener((obs, oldValue, newValue) -> framgentExercise.setRepetition(newValue) );
             return new SimpleObjectProperty<>(repetitionValue);
         });
