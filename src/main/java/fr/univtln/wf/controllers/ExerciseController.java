@@ -42,21 +42,20 @@ public class ExerciseController
         jme.start();
     }
 
-    /**
-     * delete the exercise selected
-     */
+    /** Delete the exercise selected */
     public void delete()
     {
         ExerciseDAO exerciseDAO = new ExerciseDAO();
+
+        // Before removing the object, is necessary to merge to warn entity manager that object need to be manage
         DataGUI.setExerciseSelected(exerciseDAO.merge(DataGUI.getExerciseSelected()));
         exerciseDAO.remove(DataGUI.getExerciseSelected());
         ((Stage)(deleteBtn.getScene().getWindow())).close();
     }
 
-    /**
-     * start the exercise selected
-     */
-    public void start() throws IOException {
+    /** Start the exercise selected */
+    public void start() throws IOException
+    {
         // Set state to real time and call the right jmonkey app
         WSData.setState(WSState.REAL_TIME);
         WSData.getSession().getBasicRemote().sendText("r 15");
