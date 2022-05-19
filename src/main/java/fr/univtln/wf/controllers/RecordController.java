@@ -2,7 +2,8 @@ package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
 import fr.univtln.wf.jmonkey.Visualize;
-import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeMovement;
+import fr.univtln.wf.ws_clients.EnumMessage;
+import fr.univtln.wf.ws_clients.WSClient;
 import fr.univtln.wf.ws_clients.WSData;
 import fr.univtln.wf.ws_clients.WSState;
 import javafx.animation.KeyFrame;
@@ -61,8 +62,7 @@ public class RecordController
 
     /** Initialize widgets */
     @FXML
-    public void initialize()
-    {
+    public void initialize() throws IOException {
         initializeProgressBar();
 
         // Make window draggable (because undecorated)
@@ -70,18 +70,20 @@ public class RecordController
 
         // Start recording directly
         startRecording();
+
+        WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.TURN_ON_KINECT.ordinal()));
     }
 
     /** Put websocket client in recording mode and ask to kinect to record movement */
-    public void startRecording()
-    {
-        try
-        {
+    public void startRecording() {
+        
+
+
+
+        try {
             // Sending record message to server with time to record
             WSData.getSession().getBasicRemote().sendText("r " + DataGUI.getTimeRecording());
-        }
-        catch (IOException error)
-        {
+        } catch (IOException error) {
             log.error("Error while sending message to server with WS client", error);
         }
         // Set the state of client websocket to recording, to record movement
@@ -93,12 +95,12 @@ public class RecordController
     }
 
     /** close the popup and clear the movement in memory */
-    public void cancelRecording()
-    {
+    public void cancelRecording() throws IOException {
         // Close window reset data from WS client
         ((Stage)(cancelBtn.getScene().getWindow())).close();
         WSData.getMovement().clear();
         WSData.setState(WSState.STANDBY);
+        WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.TURN_OFF_KINECT.ordinal()));
     }
 
     /** restart the record */
