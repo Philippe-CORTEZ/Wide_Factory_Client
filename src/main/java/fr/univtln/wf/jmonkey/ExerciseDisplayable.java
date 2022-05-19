@@ -50,7 +50,8 @@ public class ExerciseDisplayable extends Node {
     /**
      * display the next frame of the exercise
      */
-    public void displayNextFrame(AssetManager assetManager) throws InterruptedException {
+    public void displayNextFrame(AssetManager assetManager)
+    {
         boolean movementFinished;
         if (movementNumber < movementDisplayables.size())
         {

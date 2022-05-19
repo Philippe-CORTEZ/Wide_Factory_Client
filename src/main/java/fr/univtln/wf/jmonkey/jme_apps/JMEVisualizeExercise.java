@@ -3,7 +3,6 @@ package fr.univtln.wf.jmonkey.jme_apps;
 import com.jme3.math.Vector3f;
 import fr.univtln.wf.jmonkey.ExerciseDisplayable;
 import lombok.Getter;
-import lombok.SneakyThrows;
 
 /**
  * A Jmonkey application that enable to display a complete exercise
@@ -36,7 +35,6 @@ public class JMEVisualizeExercise extends JMEGeneric
      * Update the Jmonkey components when is possible
      * @param tpf float that represent the time elapsed during one frame
      */
-    @SneakyThrows
     @Override
     public void simpleUpdate(float tpf)
     {
