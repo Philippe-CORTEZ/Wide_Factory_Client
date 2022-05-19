@@ -65,7 +65,6 @@ public class ExerciseDisplayable extends Node {
             else
             {
                 attachNextMovement();
-                Thread.sleep(2000);
             }
         }
     }
