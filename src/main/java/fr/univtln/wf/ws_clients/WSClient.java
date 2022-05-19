@@ -43,6 +43,11 @@ public class WSClient
     @OnMessage
     public void onMessage(String message, Session session)
     {
+        if (message.startsWith("ok"))
+        {
+            WSData.setKinectOn(!WSData.isKinectOn());
+        }
+
         // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
         List<Skeleton> skeletons = Skeleton.newInstance(message);
         if(!skeletons.isEmpty())

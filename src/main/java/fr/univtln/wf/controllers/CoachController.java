@@ -1,10 +1,14 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
+import fr.univtln.wf.ws_clients.EnumMessage;
+import fr.univtln.wf.ws_clients.WSData;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 
 
 /**
@@ -50,8 +54,7 @@ public class CoachController extends MainController
 
 
     /** this function is called when clicking on start recording button */
-    public void startRecording()
-    {
+    public void startRecording() throws IOException {
         MovementDAO movementDAO = new MovementDAO();
         String name = movementName.getText();
 
@@ -74,6 +77,9 @@ public class CoachController extends MainController
             DataGUI.setTimeRecording(timeRecordingSpinner.getValue());
             DataGUI.setMovementNameRecording(movementName.getText());
             DataGUI.setMovementDescriptionRecording(movementDescription.getText());
+
+            WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.TURN_ON_KINECT.ordinal()));
+
             createPopup("/view/fxml/Record.fxml", "Recording", true);
         }
     }

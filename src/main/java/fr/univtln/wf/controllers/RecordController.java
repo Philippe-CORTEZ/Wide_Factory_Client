@@ -63,32 +63,29 @@ public class RecordController
     /** Initialize widgets */
     @FXML
     public void initialize() throws IOException {
-        initializeProgressBar();
+        if (WSData.isKinectOn())
+        {
+            try {
+                // Sending record message to server with time to record
+                WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.START_RECORD_BLOC.ordinal()));
+            } catch (IOException error) {
+                log.error("Error while sending message to server with WS client", error);
+            }
 
-        // Make window draggable (because undecorated)
-        makeDraggable();
+            initializeProgressBar();
 
-        // Start recording directly
-        startRecording();
+            // Make window draggable (because undecorated)
+            makeDraggable();
 
-        WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.TURN_ON_KINECT.ordinal()));
+            // Start recording directly
+            startRecording();
+        }
     }
 
     /** Put websocket client in recording mode and ask to kinect to record movement */
     public void startRecording() {
-        
-
-
-
-        try {
-            // Sending record message to server with time to record
-            WSData.getSession().getBasicRemote().sendText("r " + DataGUI.getTimeRecording());
-        } catch (IOException error) {
-            log.error("Error while sending message to server with WS client", error);
-        }
         // Set the state of client websocket to recording, to record movement
         WSData.setState(WSState.RECORDING);
-
         // Set name and description to the movement
         WSData.getMovement().setName(DataGUI.getMovementNameRecording());
         WSData.getMovement().setDescription(DataGUI.getMovementDescriptionRecording());
@@ -181,9 +178,13 @@ public class RecordController
                             recordingLabel.setText("Finished");
                             recordingLabel.setTextFill(Color.rgb(96,207,21));
                             progressBar.setStyle("-fx-accent: #60CF15 ;");
+                            try {
+                                WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.START_RECORD_BLOC.ordinal()));
+                            } catch (IOException e) {
+                                log.error("Error while sending message to server with WS client", e);
+                            }
                         }, new KeyValue(seconds, 60))
                 );
-
         timeline.play();
     }
 
