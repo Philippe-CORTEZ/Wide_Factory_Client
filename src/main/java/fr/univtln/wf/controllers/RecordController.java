@@ -1,6 +1,7 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
+import fr.univtln.wf.jmonkey.Visualize;
 import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeMovement;
 import fr.univtln.wf.ws_clients.WSData;
 import fr.univtln.wf.ws_clients.WSState;
@@ -132,9 +133,7 @@ public class RecordController
     /** Visualize the movement in memory in Jmonkey application */
     public void visualizeRecording()
     {
-        JMEVisualizeMovement jme = new JMEVisualizeMovement();
-        jme.getMv().setMovement(WSData.getMovement());
-        jme.start();
+        new Visualize().visualizeMovement(WSData.getMovement());
     }
 
     /** Add possibility to drag window by his anchorPane */

@@ -1,5 +1,6 @@
 package fr.univtln.wf.controllers;
 
+import fr.univtln.wf.jmonkey.Visualize;
 import fr.univtln.wf.jmonkey.jme_apps.JMEStartExercise;
 import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeExercise;
 import fr.univtln.wf.databases.daos.ExerciseDAO;
@@ -17,7 +18,7 @@ import java.io.IOException;
  * Controller that manage pop up window options when an exercise is double clicked
  * @author Wide Factory Team
  */
-public class ExerciseController
+public class ExerciseController implements Controller
 {
     @FXML
     private Button deleteBtn;
@@ -35,11 +36,9 @@ public class ExerciseController
     }
 
     /** Visualize reference exercise with reference movements */
-    public void visualize()
+    public void composition()
     {
-        JMEVisualizeExercise jme = new JMEVisualizeExercise();
-        jme.getExoDisplayable().setExercise(DataGUI.getExerciseSelected());
-        jme.start();
+        createPopup("/view/fxml/ExerciseComposition.fxml", "Composition of exercise");
     }
 
     /** Delete the exercise selected */
@@ -54,14 +53,9 @@ public class ExerciseController
     }
 
     /** Start the exercise selected */
-    public void start() throws IOException
+    public void start()
     {
-        // Set state to real time and call the right jmonkey app
-        WSData.setState(WSState.REAL_TIME);
-        WSData.getSession().getBasicRemote().sendText("r 15");
-        JMEStartExercise jme = new JMEStartExercise();
-        jme.getExerciseDisplayable().setExercise(DataGUI.getExerciseSelected());
-        jme.start();
+        new Visualize().visualizeExercise(DataGUI.getExerciseSelected());
     }
 
 }

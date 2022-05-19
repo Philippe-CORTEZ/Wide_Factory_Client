@@ -1,6 +1,7 @@
 package fr.univtln.wf.test_mains;
 
 import fr.univtln.wf.databases.daos.MovementDAO;
+import fr.univtln.wf.jmonkey.Visualize;
 import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeMovement;
 import fr.univtln.wf.models.Movement;
 import fr.univtln.wf.models.Skeleton;
@@ -20,9 +21,7 @@ public class TestGet
             skeleton.mappingJoint();
         }
 
-        JMEVisualizeMovement jmeVisualizeMovement = new JMEVisualizeMovement();
-        jmeVisualizeMovement.getMv().setMovement(m);
-        jmeVisualizeMovement.start();
+        new Visualize().visualizeMovement(m);
     }
 
 }
