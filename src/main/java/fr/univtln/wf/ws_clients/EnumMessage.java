@@ -1,6 +1,10 @@
 package fr.univtln.wf.ws_clients;
 
-public enum EnumMessage {
+/** Different messages that websocket client can send to the server
+ * @author Wie Factory Team
+ */
+public enum EnumMessage
+{
     TURN_ON_KINECT,
     TURN_OFF_KINECT,
     START_RECORD_FLUX,

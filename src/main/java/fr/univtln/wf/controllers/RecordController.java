@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 
 /**
  * Controller to manage a movement recorded
@@ -62,15 +61,11 @@ public class RecordController
 
     /** Initialize widgets */
     @FXML
-    public void initialize() throws IOException {
+    public void initialize()
+    {
         if (WSData.isKinectOn())
         {
-            try {
-                // Sending record message to server with time to record
-                WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.START_RECORD_BLOC.ordinal()));
-            } catch (IOException error) {
-                log.error("Error while sending message to server with WS client", error);
-            }
+            WSClient.sendMessage(EnumMessage.START_RECORD_BLOC);
 
             initializeProgressBar();
 
@@ -92,12 +87,13 @@ public class RecordController
     }
 
     /** close the popup and clear the movement in memory */
-    public void cancelRecording() throws IOException {
+    public void cancelRecording()
+    {
         // Close window reset data from WS client
         ((Stage)(cancelBtn.getScene().getWindow())).close();
         WSData.getMovement().clear();
         WSData.setState(WSState.STANDBY);
-        WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.TURN_OFF_KINECT.ordinal()));
+        WSClient.sendMessage(EnumMessage.TURN_OFF_KINECT);
     }
 
     /** restart the record */
@@ -178,11 +174,8 @@ public class RecordController
                             recordingLabel.setText("Finished");
                             recordingLabel.setTextFill(Color.rgb(96,207,21));
                             progressBar.setStyle("-fx-accent: #60CF15 ;");
-                            try {
-                                WSData.getSession().getBasicRemote().sendText(String.valueOf(EnumMessage.START_RECORD_BLOC.ordinal()));
-                            } catch (IOException e) {
-                                log.error("Error while sending message to server with WS client", e);
-                            }
+
+                            WSClient.sendMessage(EnumMessage.STOP_RECORD_BLOC);
                         }, new KeyValue(seconds, 60))
                 );
         timeline.play();

@@ -36,7 +36,7 @@ public class WSData
     @Setter
     private static Session session;
 
-    /** Used to know if the kinect is on */
+    /** Used to know if the kinect is turn on */
     @Setter
     @Getter
     private static boolean kinectOn = false;

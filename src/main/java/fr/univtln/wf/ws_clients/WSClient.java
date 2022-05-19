@@ -23,15 +23,7 @@ public class WSClient
     @OnOpen
     public void onOpen(Session session)
     {
-        try
-        {
-            // For the moment it send just a message to communicate with the server
-            session.getBasicRemote().sendText("start");
-        }
-        catch (IOException error)
-        {
-            log.error("Error in onOpen : ", error);
-        }
+        // Probably TURN ON the kinect here
     }
 
 
@@ -66,6 +58,21 @@ public class WSClient
                 WSData.setSkeleton(skeletons.get(0));
                 skeletons.clear();
             }
+        }
+    }
+
+    /**
+     * Used to send message to the server, useful to command kinect from client
+     * @param message EnumMessage action to perform on the Kinect
+     */
+    public static void sendMessage(EnumMessage message)
+    {
+        try
+        {
+            WSData.getSession().getBasicRemote().sendText(String.valueOf(message.ordinal()));
+        } catch (IOException error)
+        {
+           log.error("Unable to send message to the server", error);
         }
     }
 
