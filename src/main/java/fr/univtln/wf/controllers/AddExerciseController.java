@@ -3,6 +3,7 @@ package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.databases.daos.ExerciseDAO;
 import fr.univtln.wf.databases.daos.MovementDAO;
+import fr.univtln.wf.jmonkey.Visualize;
 import fr.univtln.wf.models.Exercise;
 import fr.univtln.wf.models.FragmentExercise;
 import fr.univtln.wf.models.Movement;
@@ -168,6 +169,22 @@ public class AddExerciseController
             exercise.addMovement(movement);
             exerciseMovements.setItems(FXCollections.observableArrayList(exercise.getFragments()));
         }
+    }
+
+    /**
+     * visualize the last movement selected
+     */
+    public void visualizeRefMovement()
+    {
+        new Visualize().visualizeMovement(movementsDatabase.getSelectionModel().getSelectedItem());
+    }
+
+    /**
+     * visualize the exercise in construction
+     */
+    public void visualizeNewExercise()
+    {
+        new Visualize().visualizeExercise(exercise);
     }
 
 }
