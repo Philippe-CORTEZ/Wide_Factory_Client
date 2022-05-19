@@ -79,7 +79,7 @@ public class SkeletonDisplayable extends Node
                         JointDisplayable joint2 = jointDisplayableMap.get(j2);
                       //   generate a bone and display it
                         bone = generateBone(joint1, joint2, assetManager);
-                        this.attachChild(bone);
+                        if (bone != null) this.attachChild(bone);
                     }
                 }
             }
@@ -98,23 +98,27 @@ public class SkeletonDisplayable extends Node
         // use for the length of the bone
         float distance = joint1.getGeometry().getLocalTranslation().distance(joint2.getGeometry().getLocalTranslation());
 
-        Cylinder t = new Cylinder(20, 50, 0.005f, distance, true);
-        Geometry geom = new Geometry("Cylinder", t);
+        if (distance > 0)
+        {
+            Cylinder t = new Cylinder(20, 50, 0.005f, distance, true);
+            Geometry geom = new Geometry("Cylinder", t);
 
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", ColorRGBA.Red);
+            Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+            mat.setColor("Color", ColorRGBA.Red);
 
-        geom.setMaterial(mat);
+            geom.setMaterial(mat);
 
-        // put the bone to the center between joint1 and joint2
-         Vector3f position = new Vector3f();
-        joint1.getGeometry().getLocalTranslation().add(joint2.getGeometry().getLocalTranslation(), position);
-        position.divideLocal(2);
+            // put the bone to the center between joint1 and joint2
+            Vector3f position = new Vector3f();
+            joint1.getGeometry().getLocalTranslation().add(joint2.getGeometry().getLocalTranslation(), position);
+            position.divideLocal(2);
 
-        geom.setLocalTranslation(position);
-        // orient the bone up to the joint
-        geom.lookAt(joint1.getGeometry().getLocalTranslation(), joint2.getGeometry().getLocalTranslation());
-        return geom;
+            geom.setLocalTranslation(position);
+            // orient the bone up to the joint
+            geom.lookAt(joint1.getGeometry().getLocalTranslation(), joint2.getGeometry().getLocalTranslation());
+            return geom;
+        }
+        return null;
     }
 
     /**
