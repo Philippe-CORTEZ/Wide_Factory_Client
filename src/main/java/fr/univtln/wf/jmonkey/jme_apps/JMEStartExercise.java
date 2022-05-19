@@ -6,6 +6,7 @@ import fr.univtln.wf.jmonkey.SkeletonDisplayable;
 import fr.univtln.wf.ws_clients.WSData;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 /**
  * JME which manage the display of an exercise started
@@ -47,6 +48,7 @@ public class JMEStartExercise extends JMEGeneric
      * Update the Jmonkey components when is possible
      * @param tpf float that represent the time elapsed during one frame
      */
+    @SneakyThrows
     @Override
     public void simpleUpdate(float tpf)
     {
