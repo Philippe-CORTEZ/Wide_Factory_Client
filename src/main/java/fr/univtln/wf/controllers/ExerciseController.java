@@ -1,18 +1,11 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.jmonkey.Visualize;
-import fr.univtln.wf.jmonkey.jme_apps.JMEStartExercise;
-import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeExercise;
 import fr.univtln.wf.databases.daos.ExerciseDAO;
-import fr.univtln.wf.ws_clients.WSData;
-import fr.univtln.wf.ws_clients.WSState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-
 
 /**
  * Controller that manage pop up window options when an exercise is double clicked

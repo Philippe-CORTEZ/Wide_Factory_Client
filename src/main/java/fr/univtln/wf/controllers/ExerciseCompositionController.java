@@ -1,10 +1,7 @@
 package fr.univtln.wf.controllers;
 
 import fr.univtln.wf.jmonkey.Visualize;
-import fr.univtln.wf.jmonkey.jme_apps.JMEVisualizeMovement;
 import fr.univtln.wf.models.FragmentExercise;
-import fr.univtln.wf.models.Movement;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
