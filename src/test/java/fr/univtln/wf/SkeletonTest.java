@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import fr.univtln.wf.models.Joint;
 import fr.univtln.wf.models.JointEnum;
@@ -17,7 +17,7 @@ public class SkeletonTest {
     private Skeleton skeleton;
 
     public SkeletonTest() throws IOException {
-        firstMovement = new Movement("src/test/java/fr/utln/jsonTest/movement_1_skeleton.json", "first movement");
+        firstMovement = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "first movement");
         skeleton = firstMovement.getSkeletons().get(0);
     }
 

@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import fr.univtln.wf.models.Movement;
 import fr.univtln.wf.models.Skeleton;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MovementTest {
     @Setter
     @Getter
-    private Movement firstMovement = new Movement("src/test/java/fr/utln/jsonTest/movement_1_skeleton.json", "first movement");
+    private Movement firstMovement = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "first movement");
 
     public MovementTest() throws IOException {
     }
@@ -79,7 +79,7 @@ public class MovementTest {
 
     @Test
     void TestContructorWithJsonName() throws IOException {
-        Movement m = new Movement("src/test/java/fr/utln/jsonTest/movement_1_skeleton.json", "first movement");
+        Movement m = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "first movement");
         Assertions.assertEquals("first movement", m.getName());
         Assertions.assertEquals(1, m.getSkeletons().size());
         Assertions.assertEquals("", m.getDescription());

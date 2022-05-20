@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import fr.univtln.wf.models.Exercise;
 import fr.univtln.wf.models.FragmentExercise;
@@ -6,7 +6,8 @@ import fr.univtln.wf.models.Movement;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class FragmentExerciseTest {
+class FragmentExerciseTest
+{
     FragmentExercise fragmentTest = new FragmentExercise();
 
     @Test

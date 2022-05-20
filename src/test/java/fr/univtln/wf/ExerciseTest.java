@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import fr.univtln.wf.models.*;
 import lombok.Getter;
@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-public class ExerciseTest {
+class ExerciseTest
+{
     @Getter
     @Setter
     Exercise exerciseTest = new Exercise();
@@ -35,7 +36,7 @@ public class ExerciseTest {
 
     @Test
     void TestAddMovement() throws IOException {
-        Movement movementTest = new Movement("src/test/java/fr/utln/jsonTest/movement_1_skeleton.json", "movement test");
+        Movement movementTest = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "movement test");
         Exercise exercise = new Exercise();
         exercise.addMovement(movementTest);
         Assertions.assertEquals(1, exercise.getFragments().size());
@@ -47,7 +48,7 @@ public class ExerciseTest {
 
     @Test
     void TestAddMovementRep() throws IOException {
-        Movement movementTest = new Movement("src/test/java/fr/utln/jsonTest/movement_1_skeleton.json", "movement test");
+        Movement movementTest = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "movement test");
         Exercise exercise = new Exercise();
         exercise.addMovement(movementTest, 3);
 
@@ -61,7 +62,7 @@ public class ExerciseTest {
     @Test
     void TestMappingSkeletons() throws IOException {
         Exercise exercise = new Exercise();
-        Movement movement = new Movement("src/test/java/fr/utln/jsonTest/movement_1_skeleton.json", "movement test");
+        Movement movement = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "movement test");
         exercise.addMovement(movement);
         MovementTest movementTest = new MovementTest();
         for(FragmentExercise fragmentExercise : exercise.getFragments())

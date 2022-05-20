@@ -1,4 +1,4 @@
-package fr.utln;
+package fr.univtln.wf;
 
 import fr.univtln.wf.models.Joint;
 import org.junit.jupiter.api.Assertions;
