@@ -35,29 +35,25 @@ public class WSClient
     @OnMessage
     public void onMessage(String message, Session session)
     {
-        System.out.println("test" + message);
+        System.out.println("msg : " + message + " " + message.substring(0, 2));
         if (message.startsWith("OK"))
         {
             WSData.setKinectOn(!WSData.isKinectOn());
         }
-
-        // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
-        List<Skeleton> skeletons = Skeleton.newInstance(message);
-        if(!skeletons.isEmpty())
-        {
-            // When recording, skeletons are send in one block
-            if(WSData.getState().equals(WSState.RECORDING))
-            {
-                // Just add all skeletons in the final movement in JME class
-                WSData.getMovement().setSkeletons(skeletons);
-            }
-
-            else if (WSData.getState().equals(WSState.REAL_TIME))
-            {
-                // Set the skeleton displayable in the Jmonkey app to make an animation
-                // If it's a continuous displaying, in the list there is only one skeleton
-                WSData.setSkeleton(skeletons.get(0));
-                skeletons.clear();
+        else {
+            // Transform the string message (JSON formatted) into Skeleton list (one or more skeleton)
+            List<Skeleton> skeletons = Skeleton.newInstance(message);
+            if (!skeletons.isEmpty()) {
+                // When recording, skeletons are send in one block
+                if (WSData.getState().equals(WSState.RECORDING)) {
+                    // Just add all skeletons in the final movement in JME class
+                    WSData.getMovement().setSkeletons(skeletons);
+                } else if (WSData.getState().equals(WSState.REAL_TIME)) {
+                    // Set the skeleton displayable in the Jmonkey app to make an animation
+                    // If it's a continuous displaying, in the list there is only one skeleton
+                    WSData.setSkeleton(skeletons.get(0));
+                    skeletons.clear();
+                }
             }
         }
     }

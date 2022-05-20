@@ -65,6 +65,7 @@ public class RecordController
     {
         if (WSData.isKinectOn())
         {
+            System.out.println("sending");
             WSClient.sendMessage(EnumMessage.START_RECORD_BLOC);
 
             initializeProgressBar();
