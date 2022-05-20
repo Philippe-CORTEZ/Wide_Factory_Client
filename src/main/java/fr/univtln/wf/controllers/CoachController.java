@@ -77,8 +77,6 @@ public class CoachController extends MainController
             DataGUI.setMovementNameRecording(movementName.getText());
             DataGUI.setMovementDescriptionRecording(movementDescription.getText());
 
-            WSClient.sendMessage(EnumMessage.TURN_ON_KINECT);
-
             createPopup("/view/fxml/Record.fxml", "Recording", true);
         }
     }

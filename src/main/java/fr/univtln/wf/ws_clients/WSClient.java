@@ -35,7 +35,8 @@ public class WSClient
     @OnMessage
     public void onMessage(String message, Session session)
     {
-        if (message.startsWith("ok"))
+        System.out.println("test" + message);
+        if (message.startsWith("OK"))
         {
             WSData.setKinectOn(!WSData.isKinectOn());
         }

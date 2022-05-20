@@ -3,6 +3,8 @@ package fr.univtln.wf.controllers;
 import fr.univtln.wf.App;
 import fr.univtln.wf.models.Person;
 import fr.univtln.wf.models.RoleEnum;
+import fr.univtln.wf.ws_clients.EnumMessage;
+import fr.univtln.wf.ws_clients.WSClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -31,6 +33,7 @@ public class LoginController implements Controller
         // TODO : authentification + get the right user
         Person user = Person.builder().pseudo("Sketard").firstname("Zakk").lastname("Wide").roleEnum(RoleEnum.COACH).build();
         DataGUI.setCurrentUser(user);
+        WSClient.sendMessage(EnumMessage.TURN_ON_KINECT);
 
         // If the user is a coach
         if(user.getRoleEnum().equals(RoleEnum.COACH))

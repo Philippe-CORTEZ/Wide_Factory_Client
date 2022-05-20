@@ -17,8 +17,7 @@ import java.net.URI;
 @Slf4j
 public class Launcher
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         // Launch the WS client
         log.info("Client launched");
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
@@ -33,6 +32,7 @@ public class Launcher
             log.error("Error, cannot connect to the server ", ex);
         }
 
+        //WSData.getSession().getBasicRemote().sendText("coucou ws");
         // Launch the JavaFX app
         Application.launch(App.class);
     }

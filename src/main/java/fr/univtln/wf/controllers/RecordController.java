@@ -93,7 +93,7 @@ public class RecordController
         ((Stage)(cancelBtn.getScene().getWindow())).close();
         WSData.getMovement().clear();
         WSData.setState(WSState.STANDBY);
-        WSClient.sendMessage(EnumMessage.TURN_OFF_KINECT);
+        //WSClient.sendMessage(EnumMessage.TURN_OFF_KINECT);
     }
 
     /** restart the record */
