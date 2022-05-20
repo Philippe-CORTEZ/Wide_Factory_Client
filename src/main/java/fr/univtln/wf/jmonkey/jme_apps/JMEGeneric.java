@@ -27,6 +27,9 @@ public abstract class JMEGeneric extends SimpleApplication
 
         this.setShowSettings(false);
         this.setSettings(customSettings);
+        this.setDisplayFps(false);
+
+        this.setDisplayStatView(false);
     }
 
     /** Constructor with default jmonkey app */
