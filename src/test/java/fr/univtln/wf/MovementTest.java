@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MovementTest {
+class MovementTest {
     @Setter
     @Getter
     private Movement firstMovement = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "first movement");

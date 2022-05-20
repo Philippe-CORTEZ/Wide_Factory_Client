@@ -21,7 +21,7 @@ class ExerciseTest
         Assertions.assertEquals(0, exercise.getFragments().size());
         Assertions.assertEquals("", exercise.getDescription());
         Assertions.assertEquals("", exercise.getName());
-        Assertions.assertEquals(null, exercise.getCreator().getPseudo());
+        Assertions.assertNull(exercise.getCreator().getPseudo());
     }
 
     @Test
@@ -31,7 +31,7 @@ class ExerciseTest
         Assertions.assertEquals(0, exercise.getFragments().size());
         Assertions.assertEquals("", exercise.getDescription());
         Assertions.assertEquals("", exercise.getName());
-        Assertions.assertEquals(null, exercise.getCreator().getPseudo());
+        Assertions.assertNull(exercise.getCreator().getPseudo());
     }
 
     @Test
@@ -60,7 +60,8 @@ class ExerciseTest
     }
 
     @Test
-    void TestMappingSkeletons() throws IOException {
+    void TestMappingSkeletons() throws IOException
+    {
         Exercise exercise = new Exercise();
         Movement movement = new Movement("src/test/java/fr/univtln/wf/jsonTest/movement_1_skeleton.json", "movement test");
         exercise.addMovement(movement);

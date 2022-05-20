@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.util.List;
 
 @Setter
-public class SkeletonTest {
+class SkeletonTest
+{
     private Movement firstMovement;
     private Skeleton skeleton;
 
