@@ -2,6 +2,8 @@ package fr.utln;
 
 import fr.univtln.wf.models.Movement;
 import fr.univtln.wf.models.Skeleton;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MovementTest {
+    @Setter
+    @Getter
     private Movement firstMovement = new Movement("src/test/java/fr/utln/jsonTest/movement_1_skeleton.json", "first movement");
 
     public MovementTest() throws IOException {
