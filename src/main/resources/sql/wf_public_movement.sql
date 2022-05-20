@@ -1,0 +1,15 @@
+insert into public.movement (name, description)
+values  ('curl', 'bicep curl '),
+        ('squat', 'crouch then stand'),
+        ('streching arms', 'rest for arms'),
+        ('streching backbones', 'rest backbones'),
+        ('knee raise', 'used during warm up'),
+        ('stretching lumbar', 'lumbar warmup'),
+        ('abs', 'standard abs'),
+        ('push up', 'standard push up'),
+        ('jumping jack', 'used during warmup'),
+        ('squat extension', 'squat followed by jump'),
+        ('sheathing', 'stay still'),
+        ('right arm curl', 'contract your right arm'),
+        ('left arm curl', 'contract your left arm'),
+        ('alternate arm curl', 'contract both arm alternatively');
