@@ -2,9 +2,11 @@
 
 **Become a greek god**
 
+![Logo Wide Factory](.github/logo.png)
+
 ## Wide Factory Team
-* Zack DE SAINT PERN
 * Philippe CORTEZ
+* Zack DE SAINT PERN
 * Léo BLANC
 * Youness ACHOUR
 * Kévin-Xavier TOUKAM
@@ -49,7 +51,7 @@ See user manual : <a href=#>here</a>
 
 1. Fully dockerized server (Need to resolve GPU issue)
 2. Better handling error
-3. Better body tracking error during exercise
+3. Better body tracking error during exercise (Finish thread in websocket server)
 4. Login
 5. See yourself in real time during exercise (Need to resolve lag issue server side)
 6. Command application with movement
