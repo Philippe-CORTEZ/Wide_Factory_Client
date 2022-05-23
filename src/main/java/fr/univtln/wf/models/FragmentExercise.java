@@ -28,12 +28,14 @@ public class FragmentExercise
     /** An exercise that refers to */
     @ManyToOne
     @JoinColumn(name = "NAME_EXERCISE")
-    private Exercise exercise;
+    @Builder.Default
+    private Exercise exercise = new Exercise();
 
     /** A movement which is a part of an exercise */
     @ManyToOne
     @JoinColumn(name = "NAME_MOVEMENT")
-    private Movement movement;
+    @Builder.Default
+    private Movement movement = new Movement();
 
     /** Position of the movement in the exercise */
     private int position;
@@ -45,10 +47,9 @@ public class FragmentExercise
 
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FragmentExercise)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         FragmentExercise that = (FragmentExercise) o;
 

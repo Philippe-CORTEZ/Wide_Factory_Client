@@ -100,4 +100,12 @@ public class Movement
         return name != null ? name.hashCode() : 0;
     }
 
+    @Override
+    public String toString() {
+        return "Movement{" +
+                "name='" + name + '\'' +
+                ", skeletons=" + skeletons.toString() +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
