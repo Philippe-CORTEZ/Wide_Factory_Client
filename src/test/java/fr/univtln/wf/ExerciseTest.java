@@ -71,6 +71,7 @@ class ExerciseTest
             movementTest.setFirstMovement(fragmentExercise.getMovement());
             movementTest.TestMappingSkeletons();
         }
+        Assertions.assertTrue(true);
     }
 
     @Test

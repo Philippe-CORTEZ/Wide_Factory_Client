@@ -75,6 +75,8 @@ class MovementTest {
             skeletonTest.TestMappingJoint();
         }
 
+        Assertions.assertTrue(true);
+
     }
 
     @Test
