@@ -44,7 +44,7 @@ And execute script
 
 ## User Manual
 
-See user manual : <a href=#>here</a>    
+See user manual : <a href=https://github.com/Philippe-CORTEZ/Wide_Factory_Client/blob/develop/manuel_utilisateur.pdf>here</a>    
 
 
 ## Next steps
