@@ -35,8 +35,9 @@ If you just want to see/create exercise the server is not necessary
 Nevertheless an error will prompt but it doesn't impact client application beside record    
 
 
-Whatever you must download the binary : <a href=#>here</a>  
-And execute script  
+Whatever you must download the binary : <a href=https://github.com/Philippe-CORTEZ/Wide_Factory_Client/releases>here</a>  
+Take the latest release and download the Wide_Factory zip directory  
+And execute scripts inside  
 
 *launch_server.sh* to launch server  
 *launch_client.sh* to launch client
