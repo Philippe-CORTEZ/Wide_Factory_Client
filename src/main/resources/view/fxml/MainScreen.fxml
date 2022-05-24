@@ -16,7 +16,7 @@
    <left>
       <AnchorPane prefHeight="782.0" prefWidth="329.0" style="-fx-background-color: grey;" stylesheets="@styes.css" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="98.0" fitWidth="97.0" layoutX="107.0" AnchorPane.leftAnchor="107.0">
+            <ImageView fitHeight="98.0" fitWidth="159.0" layoutX="81.0" layoutY="7.0" AnchorPane.leftAnchor="81.0">
                <image>
                   <Image url="@../images/2.png" />
                </image>

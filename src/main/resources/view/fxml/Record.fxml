@@ -15,17 +15,17 @@
          <left>
             <AnchorPane prefHeight="282.0" prefWidth="169.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="31.0" prefHeight="30.0" prefWidth="62.0" text="Wide" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="50.0" prefHeight="30.0" prefWidth="62.0" text="Wide" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Yrsa SemiBold" size="26.0" />
                      </font>
                   </Label>
-                  <Label layoutX="76.0" layoutY="32.0" prefHeight="37.0" prefWidth="76.0" text="Factory" textAlignment="CENTER" textFill="GOLD">
+                  <Label layoutX="71.0" layoutY="50.0" prefHeight="37.0" prefWidth="76.0" text="Factory" textAlignment="CENTER" textFill="GOLD">
                      <font>
                         <Font name="Yrsa SemiBold" size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="33.0" fitWidth="37.0">
+                  <ImageView fitHeight="49.0" fitWidth="105.0" layoutX="32.0" layoutY="7.0">
                      <image>
                         <Image url="@../images/2.png" />
                      </image>
@@ -36,7 +36,7 @@
          <center>
             <AnchorPane prefHeight="282.0" prefWidth="498.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="cancelBtn" layoutX="337.0" layoutY="219.0" mnemonicParsing="false" onAction="#cancelRecording" prefHeight="24.0" prefWidth="64.0" style="-fx-background-color: red;" text="Cancel"  />
+                  <Button fx:id="cancelBtn" layoutX="337.0" layoutY="219.0" mnemonicParsing="false" onAction="#cancelRecording" prefHeight="24.0" prefWidth="64.0" style="-fx-background-color: red;" text="Cancel" />
                   <Button fx:id="visualizeBtn" disable="true" layoutX="124.0" layoutY="219.0" mnemonicParsing="false" onAction="#visualizeRecording" prefHeight="24.0" prefWidth="79.0" style="-fx-background-color: gold;" text="Visualize" />
                   <Button fx:id="restartBtn" disable="true" layoutX="234.0" layoutY="219.0" mnemonicParsing="false" onAction="#restartRecording" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: gold;" text="Restart" />
                   <Button fx:id="validateBtn" disable="true" layoutX="23.0" layoutY="219.0" mnemonicParsing="false" onAction="#uploadRecording" prefHeight="24.0" prefWidth="76.0" style="-fx-background-color: #60CF15;" text="Validate" />

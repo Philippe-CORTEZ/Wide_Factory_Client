@@ -39,7 +39,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ImageView fitHeight="68.0" fitWidth="76.0" layoutX="75.0">
+            <ImageView fitHeight="68.0" fitWidth="127.0" layoutX="50.0" layoutY="14.0">
                <image>
                   <Image url="@../images/2.png" />
                </image>
@@ -60,7 +60,7 @@
                   <Button layoutX="109.0" layoutY="252.0" mnemonicParsing="false" onAction="#login" prefHeight="24.0" prefWidth="158.0" stylesheets="@styes.css" text="Login" textFill="WHITE" AnchorPane.leftAnchor="109.0" AnchorPane.rightAnchor="108.0" />
                   <TextField fx:id="username" layoutX="101.0" layoutY="129.0" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="101.0" />
                   <PasswordField fx:id="password" layoutX="103.0" layoutY="188.0" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="99.0" />
-                  <ImageView fitHeight="68.0" fitWidth="76.0" layoutX="150.0" layoutY="42.0">
+                  <ImageView fitHeight="68.0" fitWidth="116.0" layoutX="129.0" layoutY="40.0">
                      <image>
                         <Image url="@../images/2.png" />
                      </image>
