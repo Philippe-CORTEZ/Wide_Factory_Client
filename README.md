@@ -58,3 +58,7 @@ See user manual : <a href=https://github.com/Philippe-CORTEZ/Wide_Factory_Client
 6. Command application with movement
 7. Distant server
 8. Exercise statistic
+
+
+## Trello
+See <a href="https://trello.com/invite/b/uda7JHcf/9abdeb457a95c56048c30d9d8544ddd8/product-backlog">Product backlog</a>  
